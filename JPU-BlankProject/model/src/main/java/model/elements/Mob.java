@@ -1,8 +1,8 @@
 package model.elements;
 
-public class Mob extends Element {
+public abstract class Mob extends Element {
 
-	Mob(int id) {
+	public Mob(int id) {
 		super(id);
 	}
 	

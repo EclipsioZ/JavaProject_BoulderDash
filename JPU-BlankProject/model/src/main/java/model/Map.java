@@ -13,7 +13,7 @@ import model.elements.Wall;
 
 public class Map {
 
-	private Element[][] map;
+	public static Element[][] map;
 	
 	// Size of the map
 	private int height;
@@ -30,7 +30,7 @@ public class Map {
 	public void setMapFromString(String Contents) {
 
 		// Setting size of the map
-		this.map = new Element[this.height][this.width];
+		Map.map = new Element[this.height][this.width];
 
 		// Cut the map for the width
 		String[] mapString2D = Contents.split("\\r\\n");
@@ -48,34 +48,34 @@ public class Map {
 				// Convert char to element
 				switch (element) {
 				case 0:
-					this.map[x][y] = new Air();
+					Map.map[x][y] = new Air(0);
 					break;
 				case 1:
-					this.map[x][y] = new Player();
+					Map.map[x][y] = new Player(1);
 					break;
 				case 2:
-					this.map[x][y] = new Wall();
+					Map.map[x][y] = new Wall(2);
 					break;
 				case 3:
-					this.map[x][y] = new Dirt();
+					Map.map[x][y] = new Dirt(3);
 					break;
 				case 4:
-					this.map[x][y] = new Rock();
+					Map.map[x][y] = new Rock(4);
 					break;
 				case 5:
-					this.map[x][y] = new Diamond();
+					Map.map[x][y] = new Diamond(5);
 					break;
 				case 6:
-					this.map[x][y] = new Mob1();
+					Map.map[x][y] = new Mob1(6);
 					break;
 				case 7:
-					this.map[x][y] = new Mob2();
+					Map.map[x][y] = new Mob2(7);
 					break;
 				case 8:
-					this.map[x][y] = new EndBlock();
+					Map.map[x][y] = new EndBlock(8);
 					break;
 				default:
-					this.map[x][y] = new Air();
+					Map.map[x][y] = new Air(0);
 					break;
 				}
 			}
@@ -86,12 +86,12 @@ public class Map {
 	}
 
 	private void setMap(Element[][] map) {
-		this.map = map;
+		Map.map = map;
 
 	}
 
 	public Element[][] getMap() {
-		return this.map;
+		return Map.map;
 	}
 
 	public int getWidth() {
@@ -117,5 +117,13 @@ public class Map {
 	public void setPosEndBlock(int[][] endblock) {
 		this.endblock = endblock;
 	}
-
+	
+	public Element getElementAt(int x, int y) {
+		// If the asked position is in the map
+		if(x >= 0 && x <= this.width && y >= 0 && y <= this.height) {
+			return map[x][y];
+		}
+		return null;
+	}
+	
 }

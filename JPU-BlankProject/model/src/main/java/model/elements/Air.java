@@ -2,7 +2,7 @@ package model.elements;
 
 public class Air extends Block {
 
-	Air(int id) {
+	public Air(int id) {
 		super(id);
 		this.setSprites(null);
 	}

@@ -13,11 +13,13 @@ public class Element {
 	}
 	
 	public void move(int x, int y) {
-		
+		if(this.canMove(x, y)) {
+			
+		}
 	}
 	
 	public Boolean canMove(int x, int y) {
-		return true;
+		return false;
 	}
 
 	public int getIdElement() {

@@ -2,7 +2,7 @@ package model.elements;
 
 public class Rock extends PhysicElement {
 
-	Rock(int id) {
+	public Rock(int id) {
 		super(id);
 	}
 
