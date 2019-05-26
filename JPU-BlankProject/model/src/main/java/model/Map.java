@@ -1,7 +1,5 @@
 package model;
 
-import java.awt.Graphics;
-
 import model.elements.Air;
 import model.elements.Diamond;
 import model.elements.Dirt;
@@ -11,7 +9,7 @@ import model.elements.Mob1;
 import model.elements.Mob2;
 import model.elements.Player;
 import model.elements.Rock;
-import model.elements.Wall;;
+import model.elements.Wall;
 
 public class Map {
 
