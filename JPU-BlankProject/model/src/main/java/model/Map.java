@@ -16,8 +16,12 @@ import model.elements.Wall;;
 public class Map {
 
 	private Element[][] map;
+	
+	// Size of the map
 	private int height;
 	private int width;
+	
+	// Position of the end block
 	private int[][] endblock;
 
 	public void map(Element[][] existingMap) {
@@ -27,55 +31,60 @@ public class Map {
 
 	public void setMapFromString(String Contents) {
 
-		String[] mapString = Contents.split("\\r\\n");
-		char[][] mapString2 = new char[this.width][this.height];
+		// Setting size of the map
+		this.map = new Element[this.height][this.width];
+
+		// Cut the map for the width
+		String[] mapString2D = Contents.split("\\r\\n");
+				
+		// Cut the map for the height
+		char[][] mapString3D = new char[this.width][this.height];
+		
 		int y = 0;
-		for (String ligneTableau : mapString) {
-			for (int x = 0; x < ligneTableau.toCharArray().length; x++) {
-				char element = ligneTableau.toCharArray()[x];
+		for (String lineTable : mapString2D) {
+			for (int x = 0; x < lineTable.toCharArray().length; x++) {
+				
+				// Get the element at current x and y
+				int element = Character.getNumericValue(lineTable.toCharArray()[x]);
+				
+				// Convert char to element
 				switch (element) {
 				case 0:
-					map[x][y] = new Air();
+					this.map[x][y] = new Air();
 					break;
 				case 1:
-					map[x][y] = new Player();
+					this.map[x][y] = new Player();
 					break;
 				case 2:
-					map[x][y] = new Wall();
+					this.map[x][y] = new Wall();
 					break;
 				case 3:
-					map[x][y] = new Dirt();
+					this.map[x][y] = new Dirt();
 					break;
 				case 4:
-					map[x][y] = new Rock();
+					this.map[x][y] = new Rock();
 					break;
 				case 5:
-					map[x][y] = new Diamond();
+					this.map[x][y] = new Diamond();
 					break;
 				case 6:
-					map[x][y] = new Mob1();
+					this.map[x][y] = new Mob1();
 					break;
 				case 7:
-					map[x][y] = new Mob2();
+					this.map[x][y] = new Mob2();
 					break;
 				case 8:
-					map[x][y] = new EndBlock();
+					this.map[x][y] = new EndBlock();
 					break;
 				default:
-					map[x][y] = new Air();
+					this.map[x][y] = new Air();
 					break;
 				}
 			}
 			y++;
 		}
-		
-		System.out.println(mapString2[1][2]);
 
-//		for(int x = 0; x < this.height; x++) {
-//			for(int y = 0; y < this.width; y++) {
-//				map[x][y] = new Element();
-//			}
-//		}
+		System.out.println(mapString3D[1][2]);
 	}
 
 	private void setMap(Element[][] map) {
@@ -86,7 +95,6 @@ public class Map {
 	public Element[][] getMap() {
 		return this.map;
 	}
-
 
 	public int getWidth() {
 		return width;
