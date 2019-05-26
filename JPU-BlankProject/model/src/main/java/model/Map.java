@@ -2,8 +2,16 @@ package model;
 
 import java.awt.Graphics;
 
+import model.elements.Air;
+import model.elements.Diamond;
+import model.elements.Dirt;
 import model.elements.Element;
-import model.elements.Player;;
+import model.elements.EndBlock;
+import model.elements.Mob1;
+import model.elements.Mob2;
+import model.elements.Player;
+import model.elements.Rock;
+import model.elements.Wall;;
 
 public class Map {
 
@@ -26,11 +34,35 @@ public class Map {
 			for (int x = 0; x < ligneTableau.toCharArray().length; x++) {
 				char element = ligneTableau.toCharArray()[x];
 				switch (element) {
+				case 0:
+					map[x][y] = new Air();
+					break;
 				case 1:
 					map[x][y] = new Player();
 					break;
-
+				case 2:
+					map[x][y] = new Wall();
+					break;
+				case 3:
+					map[x][y] = new Dirt();
+					break;
+				case 4:
+					map[x][y] = new Rock();
+					break;
+				case 5:
+					map[x][y] = new Diamond();
+					break;
+				case 6:
+					map[x][y] = new Mob1();
+					break;
+				case 7:
+					map[x][y] = new Mob2();
+					break;
+				case 8:
+					map[x][y] = new EndBlock();
+					break;
 				default:
+					map[x][y] = new Air();
 					break;
 				}
 			}
