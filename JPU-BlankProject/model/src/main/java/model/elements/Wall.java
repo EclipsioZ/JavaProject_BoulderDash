@@ -1,5 +1,5 @@
 package model.elements;
 
-public class Wall {
+public class Wall extends Block {
 
 }

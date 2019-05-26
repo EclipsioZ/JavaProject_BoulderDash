@@ -1,5 +1,5 @@
 package model.elements;
 
-public class Dirt {
+public class Dirt extends Block {
 
 }

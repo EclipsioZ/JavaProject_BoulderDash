@@ -1,5 +1,5 @@
 package model.elements;
 
-public class EndBlock {
+public class EndBlock extends Block {
 
 }

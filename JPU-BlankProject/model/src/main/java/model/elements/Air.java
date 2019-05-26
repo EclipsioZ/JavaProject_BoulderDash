@@ -1,5 +1,5 @@
 package model.elements;
 
-public class Air {
+public class Air extends Block {
 
 }

@@ -1,5 +1,5 @@
 package model.elements;
 
-public class Rock {
+public class Rock extends PhysicElement {
 
 }

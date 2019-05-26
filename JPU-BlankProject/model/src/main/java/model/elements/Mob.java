@@ -1,5 +1,5 @@
 package model.elements;
 
-public class Mob {
+public class Mob extends Element {
 
 }
