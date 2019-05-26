@@ -34,10 +34,17 @@ public class BDDGetData {
 				System.out.println("height: " + result.getString("height"));
 				System.out.println("width: " + result.getString("width"));
 				System.out.println("id: " + result.getString("id"));
+				System.out.println("endBlockX: " + result.getString("endBlock").split(";")[0]);
+				System.out.println("endBlockY: " + result.getString("endBlock").split(";")[1]);
+				
+				String endBlockX = result.getString("endBlock").split(";")[0];
+				String endBlockY = result.getString("endBlock").split(";")[1];
+				
 				
 				// map.setHeight(result.getString("height"));
 				// map.setWidth(result.getString("width"));
 				// map.setMapFromString(result.getString("content"));
+				// map.setPosEndBlock(new int[Integer.parseInt(endBlockX)][Integer.parseInt(endBlockY)]);
 			}
 			result.close();
 			state.close();

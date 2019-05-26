@@ -24,6 +24,7 @@ public class BDDConnector {
 		return INSTANCE;
 	}
 
+	// Open database with given parameters
 	public void openBDD() {
 		try {
 			connection = DriverManager.getConnection(URL, USER, PASSWORD);

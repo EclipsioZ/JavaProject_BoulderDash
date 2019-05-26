@@ -35,6 +35,6 @@ public abstract class Main {
         System.out.println("bouh");
         
         BDDGetData bdd = new BDDGetData();
-        bdd.loadLevel("1");
+        bdd.loadLevel("2");
     }
 }
