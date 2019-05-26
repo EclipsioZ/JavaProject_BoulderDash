@@ -7,6 +7,8 @@ package main;
 import contract.ControllerOrder;
 import controller.Controller;
 import model.Model;
+import model.bdd.BDDConnector;
+import model.bdd.BDDGetData;
 import view.View;
 
 /**
@@ -31,5 +33,8 @@ public abstract class Main {
         controller.control();
         controller.orderPerform(ControllerOrder.English);
         System.out.println("bouh");
+        
+        BDDGetData bdd = new BDDGetData();
+        bdd.loadLevel("2");
     }
 }
