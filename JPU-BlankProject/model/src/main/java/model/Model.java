@@ -50,26 +50,6 @@ public final class Model extends Observable implements IModel {
 	}
 
 	/**
-     * Load hello world.
-     *
-     * @param code
-     *            the code
-     */
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IModel#getMessage(java.lang.String)
-	 */
-	public void loadHelloWorld(final String code) {
-		try {
-			final DAOHelloWorld daoHelloWorld = new DAOHelloWorld(DBConnection.getInstance().getConnection());
-			this.setHelloWorld(daoHelloWorld.find(code));
-		} catch (final SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
      * Gets the observable.
      *
      * @return the observable
@@ -81,5 +61,11 @@ public final class Model extends Observable implements IModel {
 	 */
 	public Observable getObservable() {
 		return this;
+	}
+
+	@Override
+	public void loadHelloWorld(String code) {
+		// TODO Auto-generated method stub
+		
 	}
 }
