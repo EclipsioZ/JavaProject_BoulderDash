@@ -2,7 +2,8 @@ package model;
 
 import java.awt.Graphics;
 
-import model.elements.Element;;
+import model.elements.Element;
+import model.elements.Player;;
 
 public class Map {
 
@@ -19,18 +20,28 @@ public class Map {
 	public void setMapFromString(String Contents) {
 
 		String[] mapString = Contents.split("\\r\\n");
-		char[][] mapString2 = null;
+		char[][] mapString2 = new char[this.width][this.height];
 		int y = 0;
 		for (String ligneTableau : mapString) {
 			for (int x = 0; x < ligneTableau.toCharArray().length; x++) {
-				mapString2[x][y] = ligneTableau.toCharArray()[x];
+				char element = ligneTableau.toCharArray()[x];
+				switch (element) {
+				case 1:
+					map[x][y] = new Player();
+					break;
+
+				default:
+					break;
+				}
 			}
 			y++;
 		}
+		
+		System.out.println(mapString2[1][2]);
 
 //		for(int x = 0; x < this.height; x++) {
 //			for(int y = 0; y < this.width; y++) {
-//				map[x][y] = new Element(mapString2[x][y]);
+//				map[x][y] = new Element();
 //			}
 //		}
 	}
@@ -65,7 +76,7 @@ public class Map {
 		return endblock;
 	}
 
-	public void setPosEndblock(int[][] endblock) {
+	public void setPosEndBlock(int[][] endblock) {
 		this.endblock = endblock;
 	}
 

@@ -4,6 +4,8 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import model.Map;
+
 public class BDDGetData {
 	private BDDConnector bddConnector;
 	CallableStatement state;
@@ -13,7 +15,7 @@ public class BDDGetData {
 		this.bddConnector.openBDD();
 	}
 
-	public void loadLevel(String id) { // ,Map map
+	public void loadLevel(String id, Map map) {
 
 		try {
 			
@@ -41,10 +43,10 @@ public class BDDGetData {
 				String endBlockY = result.getString("endBlock").split(";")[1];
 				
 				
-				// map.setHeight(result.getString("height"));
-				// map.setWidth(result.getString("width"));
-				// map.setMapFromString(result.getString("content"));
-				// map.setPosEndBlock(new int[Integer.parseInt(endBlockX)][Integer.parseInt(endBlockY)]);
+				map.setHeight(Integer.parseInt(result.getString("height")));
+				map.setWidth(Integer.parseInt(result.getString("width")));
+				map.setMapFromString(result.getString("content"));
+				map.setPosEndBlock(new int[Integer.parseInt(endBlockX)][Integer.parseInt(endBlockY)]);
 			}
 			result.close();
 			state.close();

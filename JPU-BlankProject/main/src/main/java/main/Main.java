@@ -6,6 +6,7 @@ package main;
 
 import contract.ControllerOrder;
 import controller.Controller;
+import model.Map;
 import model.Model;
 import model.bdd.BDDConnector;
 import model.bdd.BDDGetData;
@@ -34,7 +35,8 @@ public abstract class Main {
         controller.orderPerform(ControllerOrder.English);
         System.out.println("bouh");
         
+        Map map = new Map();
         BDDGetData bdd = new BDDGetData();
-        bdd.loadLevel("2");
+        bdd.loadLevel("2", map);
     }
 }
