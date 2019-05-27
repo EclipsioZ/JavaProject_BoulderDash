@@ -74,6 +74,7 @@ public class Texture {
 		wall[0] = bs.grabImage(1, 1, width, height);
 		dirt[0] = bs.grabImage(2, 1, width, height);
 		
+		//Animations with 4 frames
 		for(int x = 0; x < 4; x++) {
 			rock[x] = bs.grabImage(4, x+1, width, height);
 			diamond[x] = bs.grabImage(5, x+1, width, height);
@@ -89,28 +90,28 @@ public class Texture {
 		playerrightrest[0] = ps.grabImage(2, 6, width, height);
 		playerleftrest[0] = ps.grabImage(4, 6, width, height);
 		
-		//Animation with 2 frames
+		//Animations with 2 frames
 		for(int x = 0; x < 2; x++) {
-		playerrest[x] = ps.grabImage(x+1, 1, width, height);
-		playerwinlevel[x] = ps.grabImage(x+3, 1, width, height);
-		playerdierock[x] = ps.grabImage(x+5, 1, width, height);
+			playerrest[x] = ps.grabImage(x+1, 1, width, height);
+			playerwinlevel[x] = ps.grabImage(x+3, 1, width, height);
+			playerdierock[x] = ps.grabImage(x+5, 1, width, height);
 		}
 		
-		//Animation with 3 frames
+		//Animations with 3 frames
 		for(int x = 0; x < 3; x++) {
-		playerright[x] = ps.grabImage(x+1, 4, width, height);
-		playerleft[x] = ps.grabImage(x+1, 2, width, height);
+			playerright[x] = ps.grabImage(x+1, 4, width, height);
+			playerleft[x] = ps.grabImage(x+1, 2, width, height);
 		}
 		
-		//Animation with 4 frames
+		//Animations with 4 frames
 		for(int x = 0; x < 4; x++) {
-		playerlowers[x] = ps.grabImage(x+1, 5, width, height);
-		playerup[x] = ps.grabImage(x+1, 3, width, height);
+			playerlowers[x] = ps.grabImage(x+1, 5, width, height);
+			playerup[x] = ps.grabImage(x+1, 3, width, height);
 		}
 		
-		//Animation with 4 frames
+		//Animations with 4 frames
 		for(int x = 0; x < 5; x++) {
-		playerdietime[x] = ps.grabImage(x+1, 6, width, height);
+			playerdietime[x] = ps.grabImage(x+1, 6, width, height);
 		}
 	}
 }
