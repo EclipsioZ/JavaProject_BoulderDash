@@ -133,7 +133,7 @@ public class Map {
 	
 	public Element getElementAt(int x, int y) {
 		// If the asked position is in the map
-		if(x >= 0 && x <= this.width && y >= 0 && y <= this.height) {
+		if(x >= 0 && x < this.width && y >= 0 && y < this.height) {
 			return map[x][y];
 		}
 		return null;
@@ -154,7 +154,6 @@ public class Map {
 			}
 			System.out.println();
 		}
-
 	}
 	
 }
