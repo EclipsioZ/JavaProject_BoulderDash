@@ -52,13 +52,11 @@ class ViewFrame extends JFrame implements KeyListener {
 		this.setResizable(false);
 		this.addKeyListener(this);
 		this.setContentPane(new ViewPanel(new GraphicBuilder(), model));
-		this.setSize(800, 600);
+		this.setSize(48*80, 24*80);
 		this.setLocationRelativeTo(null);
+		
 	}
 
-	public void printMessage(final String message) {
-		JOptionPane.showMessageDialog(null, message);
-	}
 
 	public void keyTyped(final KeyEvent e) {
 

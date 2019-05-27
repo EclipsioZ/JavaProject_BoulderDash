@@ -13,6 +13,7 @@ import model.elements.Dirt;
 import model.elements.Element;
 import model.elements.Player;
 import model.elements.Rock;
+import model.elements.Wall;
 
 public class GraphicBuilder {
 	
@@ -33,32 +34,49 @@ public class GraphicBuilder {
 //		map.setWidth(15);
 //		String content = "433111111111111\r\n141111111111111\r\n415111111111111\r\n141111111111111\r\n415111111111111\r\n141111111111111\r\n415111111111111\r\n141111111111111\r\n415111111111111\r\n415111111111111";
 //		map.setMapFromString(content);
-
-		graphics.setColor(Color.BLACK);
-		graphics.drawRect(10, 10, 50, 200);
-
+		
+		
 		for (int y = 0; y < map.getHeight(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
-								
+				
 				Element element = map.getElementAt(x, y);
+				
 				if(element instanceof Player) {
-					System.out.println(x + " ; " + y);
-					graphics.drawImage(Texture.playerrest[0], x * 16, y * 16, null);
+					//Background
+					graphics.drawImage(Texture.background[0], x * 80, y * 80, 80, 80, null);
+					//Texture for Player
+					graphics.drawImage(Texture.playerdietime[4], x * 80, y * 80, 80, 80, null);
 				}
 				
 				if(element instanceof Rock) {
-					System.out.println("test");
-					graphics.drawImage(Texture.rock[0], x *16, y *16, null);
+					//Background
+					graphics.drawImage(Texture.background[0], x * 80, y * 80, 80, 80, null);
+					//Texture for Rock
+					graphics.drawImage(Texture.rock[0], x * 80, y * 80, 80, 80, null);
 				}
 				
 				if(element instanceof Dirt) {
-					System.out.println("test");
-					graphics.drawImage(Texture.dirt[0], x *16, y *16, null);
+					//Texture for Dirt
+					graphics.drawImage(Texture.dirt[0], x * 80, y * 80, 80, 80, null);
 				}
 				
 				if(element instanceof Diamond) {
-					System.out.println("test");
-					graphics.drawImage(Texture.diamond[0], x *16, y *16, null);
+					//Background
+					graphics.drawImage(Texture.background[0], x * 80, y * 80, 80, 80, null);
+					//Texture for Diamond
+					graphics.drawImage(Texture.diamond[0], x * 80, y * 80, 80, 80, null);
+				}
+				
+				if(element instanceof Wall) {
+					
+					//Texture for Wall
+					graphics.drawImage(Texture.wall[0], x * 80, y * 80, 80, 80, null);
+				}
+				if(element instanceof Air) {
+					//Background
+					graphics.drawImage(Texture.background[0], x * 80, y * 80, 80, 80, null);
+					//Texture for Air
+					graphics.drawImage(Texture.air[0], x * 80, y * 80, 80, 80, null);
 				}
 			}
 		}
