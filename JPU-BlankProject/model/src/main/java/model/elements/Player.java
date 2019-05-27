@@ -9,6 +9,7 @@ public class Player extends Element {
 	public Player() {
 		super();
 		this.diamonds = 0;
+		this.figure = "1";
 	}
 
 	public int getDiamonds() {
@@ -25,13 +26,17 @@ public class Player extends Element {
 
 	@Override
 	public Boolean canMove(int x, int y) {
+		
+		int movementDirectionX = x - this.getX();
+		int movementDirectionY = y - this.getY();
+		
 		Element el = this.getMap().getElementAt(x, y);
 		if (el instanceof Air || el instanceof Dirt) {
 			return true;
 		}
 		if (el instanceof Rock) {
-			if (el.canMove(el.getX() + 1, el.getY())) {
-				el.move(x, y);
+			if (el.canMove(el.getX() + movementDirectionX, el.getY())) {
+				el.move(x + movementDirectionX, y);
 				return true;
 			}
 		}

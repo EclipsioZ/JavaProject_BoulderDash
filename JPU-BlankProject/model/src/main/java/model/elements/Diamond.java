@@ -4,6 +4,7 @@ public class Diamond extends PhysicElement {
 
 	public Diamond() {
 		super();
+		this.figure = "5";
 	}
 
 }

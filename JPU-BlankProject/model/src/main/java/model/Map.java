@@ -46,6 +46,7 @@ public class Map {
 				int element = Character.getNumericValue(lineTable.toCharArray()[x]);
 				
 				// Convert char to element
+				// TODO: factory: map[x][y] = Factory.createElement("air");
 				switch (element) {
 				case 0:
 					this.map[x][y] = new Air();
@@ -132,10 +133,27 @@ public class Map {
 	
 	public Element getElementAt(int x, int y) {
 		// If the asked position is in the map
-		if(x >= 0 && x <= this.width && y >= 0 && y <= this.height) {
+		if(x >= 0 && x < this.width && y >= 0 && y < this.height) {
 			return map[x][y];
 		}
 		return null;
+	}
+	
+	public Element setElementAt(int x, int y, Element element) {
+		// If the asked position is in the map
+		if(x >= 0 && x <= this.width && y >= 0 && y <= this.height) {
+			map[x][y] = element;
+		}
+		return null;
+	}
+	
+	public void printConsole() {
+		for (int i = 0; i < this.height; i++) {
+			for (int j = 0; j < this.width; j++) {
+				System.out.print(map[j][i].figure);
+			}
+			System.out.println();
+		}
 	}
 	
 }
