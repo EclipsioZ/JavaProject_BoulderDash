@@ -13,7 +13,7 @@ import model.elements.Wall;
 
 public class Map {
 
-	public static Element[][] map;
+	public Element[][] map;
 	
 	// Size of the map
 	private int height;
@@ -21,6 +21,9 @@ public class Map {
 	
 	// Position of the end block
 	private int[][] endblock;
+	
+	// The player element
+	Player player;
 
 	public void map(Element[][] existingMap) {
 		this.height = 0;
@@ -30,13 +33,10 @@ public class Map {
 	public void setMapFromString(String Contents) {
 
 		// Setting size of the map
-		Map.map = new Element[this.height][this.width];
+		this.map = new Element[this.width][this.height];
 
 		// Cut the map for the width
 		String[] mapString2D = Contents.split("\\r\\n");
-				
-		// Cut the map for the height
-		char[][] mapString3D = new char[this.width][this.height];
 		
 		int y = 0;
 		for (String lineTable : mapString2D) {
@@ -48,50 +48,62 @@ public class Map {
 				// Convert char to element
 				switch (element) {
 				case 0:
-					Map.map[x][y] = new Air(0);
+					this.map[x][y] = new Air();
 					break;
 				case 1:
-					Map.map[x][y] = new Player(1);
+					this.map[x][y] = new Player();
+					this.player = (Player) this.map[x][y]; // Add the player
 					break;
 				case 2:
-					Map.map[x][y] = new Wall(2);
+					this.map[x][y] = new Wall();
 					break;
 				case 3:
-					Map.map[x][y] = new Dirt(3);
+					this.map[x][y] = new Dirt();
 					break;
 				case 4:
-					Map.map[x][y] = new Rock(4);
+					this.map[x][y] = new Rock();
 					break;
 				case 5:
-					Map.map[x][y] = new Diamond(5);
+					this.map[x][y] = new Diamond();
 					break;
 				case 6:
-					Map.map[x][y] = new Mob1(6);
+					this.map[x][y] = new Mob1();
 					break;
 				case 7:
-					Map.map[x][y] = new Mob2(7);
+					this.map[x][y] = new Mob2();
 					break;
 				case 8:
-					Map.map[x][y] = new EndBlock(8);
+					this.map[x][y] = new EndBlock();
 					break;
 				default:
-					Map.map[x][y] = new Air(0);
+					this.map[x][y] = new Air();
 					break;
 				}
 			}
 			y++;
 		}
+		
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[i].length; j++) {
+				map[i][j].setMap(this);
+				map[i][j].setX(i);
+				map[i][j].setY(j);
+			}
+		}
+		
+	}
 
-		System.out.println(mapString3D[1][2]);
+	public Player getPlayer() {
+		return player;
 	}
 
 	private void setMap(Element[][] map) {
-		Map.map = map;
+		this.map = map;
 
 	}
 
 	public Element[][] getMap() {
-		return Map.map;
+		return this.map;
 	}
 
 	public int getWidth() {
