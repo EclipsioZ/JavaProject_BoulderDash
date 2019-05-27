@@ -42,8 +42,8 @@ public class Texture {
 	
 	
 	public Texture() {
-		playerpng = new File("/Player.png");
-		blockpng = new File("/Blocks.png");
+		playerpng = new File("C:\\Users\\Baptiste\\Desktop\\Player.png");
+		blockpng = new File("C:\\Users\\Baptiste\\Desktop\\Blocks.png");
 		try {
 			player_sheet = ImageIO.read(playerpng);
 		} catch (IOException e) {
@@ -57,6 +57,8 @@ public class Texture {
 		
 		ps = new Spritesheet(player_sheet);
 		bs = new Spritesheet(block_sheet);
+		
+		this.background = new BufferedImage[1];
 	}
 	
 	// Classe élément pour créer l'instance
@@ -66,7 +68,7 @@ public class Texture {
 	// return tex;
 	// }
 	
-	private void getTexture() {
+	public void getTexture() {
 		
 		//Texture for Blocks
 		background[0] = bs.grabImage(3, 1, width, height);

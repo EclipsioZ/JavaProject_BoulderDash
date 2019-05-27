@@ -8,6 +8,7 @@ import contract.ControllerOrder;
 import controller.Controller;
 import model.Map;
 import model.Model;
+import model.Texture;
 import model.bdd.BDDConnector;
 import model.bdd.BDDGetData;
 import view.View;
@@ -38,5 +39,10 @@ public abstract class Main {
         Map map = new Map();
         BDDGetData bdd = new BDDGetData();
         bdd.loadLevel("2", map);
+        
+        Texture texture = new Texture();
+        texture.getTexture();
+        
+        
     }
 }
