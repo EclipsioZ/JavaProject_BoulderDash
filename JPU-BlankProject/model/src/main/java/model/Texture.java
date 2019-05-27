@@ -13,23 +13,30 @@ public class Texture {
 	private static int width = 16;
 	
 	//Creating block objects for different animations
-	public BufferedImage[] background, air, wall, dirt = new BufferedImage[0]; //ID = 9
-// BufferedImage[] air = new BufferedImage[0]; // ID = 0
-//	BufferedImage[] wall = new BufferedImage[0]; // ID = 2
-//	BufferedImage[] dirt = new BufferedImage[0]; // ID = 3
-	public BufferedImage[] rock, diamond, mob1, mob2, endblock, explode = new BufferedImage[3]; // ID = 4
-//	BufferedImage[] diamond = new BufferedImage[3]; // ID = 5
-//	BufferedImage[] mob1 = new BufferedImage[3]; // ID = 6
-//	BufferedImage[] mob2 = new BufferedImage[3]; // ID = 7
-//	BufferedImage[] endblock = new BufferedImage[3]; // ID = 8
-//	BufferedImage[] explode = new BufferedImage[3]; // ID = 10
+	public static BufferedImage[] background = new BufferedImage[1]; //ID = 9
+	public static BufferedImage[] air = new BufferedImage[1]; // ID = 0
+	public static BufferedImage[] wall = new BufferedImage[1]; // ID = 2
+	public static BufferedImage[] dirt = new BufferedImage[1]; // ID = 3
+	public static BufferedImage[] rock = new BufferedImage[4]; // ID = 4
+	public static BufferedImage[] diamond = new BufferedImage[4]; // ID = 5
+	public static BufferedImage[] mob1 = new BufferedImage[4]; // ID = 6
+	public static BufferedImage[] mob2 = new BufferedImage[4]; // ID = 7
+	public static BufferedImage[] endblock = new BufferedImage[4]; // ID = 8
+	public static BufferedImage[] explode = new BufferedImage[4]; // ID = 10
 	
 	//Creating player objects for different animations
-	public BufferedImage[] playerlowersrest, playeruprest, playerrightrest, playerleftrest = new BufferedImage[0];
-	public BufferedImage[] playerlowers, playerup = new BufferedImage[3];
-	public BufferedImage[] playerrest, playerwinlevel, playerdierock  = new BufferedImage[1];
-	public BufferedImage[] playerright, playerleft = new BufferedImage[2];
-	public BufferedImage[] playerdietime = new BufferedImage[5];
+	public static BufferedImage[] playerlowersrest = new BufferedImage[1];
+	public static BufferedImage[] playeruprest = new BufferedImage[1];
+	public static BufferedImage[] playerrightrest = new BufferedImage[1];
+	public static BufferedImage[] playerleftrest = new BufferedImage[1];
+	public static BufferedImage[] playerrest  = new BufferedImage[2];
+	public static BufferedImage[] playerwinlevel  = new BufferedImage[2];
+	public static BufferedImage[] playerdierock  = new BufferedImage[2];
+	public static BufferedImage[] playerright = new BufferedImage[3];
+	public static BufferedImage[] playerleft = new BufferedImage[3];
+	public static BufferedImage[] playerlowers = new BufferedImage[4];
+	public static BufferedImage[] playerup = new BufferedImage[4];
+	public static BufferedImage[] playerdietime = new BufferedImage[6];
 	
 	
 	
@@ -42,8 +49,8 @@ public class Texture {
 	
 	
 	public Texture() {
-		playerpng = new File("C:\\Users\\Baptiste\\Desktop\\Player.png");
-		blockpng = new File("C:\\Users\\Baptiste\\Desktop\\Blocks.png");
+		playerpng = new File("C:\\Users\\Florian\\Desktop\\Player.png");
+		blockpng = new File("C:\\Users\\Florian\\Desktop\\Blocks.png");
 		try {
 			player_sheet = ImageIO.read(playerpng);
 		} catch (IOException e) {
@@ -58,7 +65,6 @@ public class Texture {
 		ps = new Spritesheet(player_sheet);
 		bs = new Spritesheet(block_sheet);
 		
-		this.background = new BufferedImage[1];
 	}
 	
 	// Classe élément pour créer l'instance

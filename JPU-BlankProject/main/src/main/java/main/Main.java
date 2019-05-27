@@ -31,7 +31,7 @@ public abstract class Main {
         final View view = new View(model);
         final Controller controller = new Controller(view, model);
         view.setController(controller);
-
+        
         controller.control();
         controller.orderPerform(ControllerOrder.English);
         System.out.println("bouh");
@@ -39,9 +39,6 @@ public abstract class Main {
         Map map = new Map();
         BDDGetData bdd = new BDDGetData();
         bdd.loadLevel("2", map);
-        
-        Texture texture = new Texture();
-        texture.getTexture();
         
         
     }

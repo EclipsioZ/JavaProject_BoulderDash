@@ -15,11 +15,14 @@ public final class Model extends Observable implements IModel {
 
 	/** The helloWorld. */
 	private HelloWorld helloWorld;
-
+	
+	Texture tex = new Texture();	
 	/**
 	 * Instantiates a new model.
 	 */
+	
 	public Model() {
+        tex.getTexture();
 		this.helloWorld = new HelloWorld();
 	}
 
@@ -67,5 +70,9 @@ public final class Model extends Observable implements IModel {
 	public void loadHelloWorld(String code) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public Texture getInstanceTexture() {
+		return tex;
 	}
 }
