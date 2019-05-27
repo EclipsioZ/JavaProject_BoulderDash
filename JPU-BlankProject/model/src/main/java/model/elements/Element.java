@@ -11,6 +11,8 @@ public class Element {
 	private Map map;
 	private int x;
 	private int y;
+	
+	public String figure;
 
 	public int getX() {
 		return x;
@@ -38,7 +40,10 @@ public class Element {
 	
 	public void move(int x, int y) {
 		if(this.canMove(x, y)) {
-			
+			map.setElementAt(x, y, this);
+			map.setElementAt(this.getX(), this.getY(), new Air());
+			this.setX(x);
+			this.setY(y);
 		}
 	}
 	

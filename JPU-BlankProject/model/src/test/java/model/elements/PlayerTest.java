@@ -62,6 +62,71 @@ public class PlayerTest {
 		Assert.assertEquals(false, player.canMove(player.getX(), player.getY() - 1));
 		Assert.assertEquals(true, player.canMove(player.getX(), player.getY() + 1));
 		
+	}
+	
+	@Test
+	public void testMove() {
+		Map map = new Map();
+		map.setHeight(3);
+		map.setWidth(4);
+		String content = "2222\r\n2133\r\n2333";
+		
+		/* Map:
+		 * 
+		 * 2222
+		 * 2133
+		 * 2333
+		 * 
+		 */
+		
+		map.setMapFromString(content);
+		Player player = map.getPlayer();
+		
+		// Move the player to the right bottom
+		player.move(player.getX() + 1, player.getY());
+		player.move(player.getX(), player.getY() - 1); // The player will not move because there is a wall
+		player.move(player.getX(), player.getY() + 1);
+		player.move(player.getX() + 1, player.getY());
+		
+		Assert.assertEquals(true, map.getElementAt(3, 2) instanceof Player);
+		
+	}
+	
+	@Test
+	public void testMoveWithRocks() {
+		Map map = new Map();
+		map.setHeight(3);
+		map.setWidth(4);
+		String content = "0000\r\n1400\r\n3333";
+		
+		/* Map:
+		 * 
+		 * 0000
+		 * 1400
+		 * 3333
+		 * 
+		 */
+		
+		map.setMapFromString(content);
+		Player player = map.getPlayer();
+		
+		// Push the rock once to the right
+		player.move(player.getX() + 1, player.getY());
+
+		// Move behind the rock
+		player.move(player.getX(), player.getY() - 1);
+		player.move(player.getX() + 1, player.getY());
+		player.move(player.getX() + 1, player.getY());
+		player.move(player.getX(), player.getY() + 1);
+
+		// Push the rock even if it's on a wall
+		player.move(player.getX() - 1, player.getY());
+		player.move(player.getX() - 1, player.getY());
+		player.move(player.getX() - 1, player.getY());
+		player.move(player.getX() - 1, player.getY());
+
+		Assert.assertEquals(true, map.getElementAt(0, 1) instanceof Rock);
+		Assert.assertEquals(true, map.getElementAt(1, 1) instanceof Player);
 		
 	}
 
