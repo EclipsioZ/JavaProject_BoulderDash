@@ -9,6 +9,7 @@ public class Player extends Element {
 	public Player() {
 		super();
 		this.diamonds = 0;
+		this.figure = "1";
 	}
 
 	public int getDiamonds() {

@@ -5,6 +5,7 @@ public class Air extends Block {
 	public Air() {
 		super();
 		this.setSprites(null);
+		this.figure = "0";
 	}
 
 }

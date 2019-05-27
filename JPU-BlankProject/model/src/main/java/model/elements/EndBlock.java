@@ -4,6 +4,7 @@ public class EndBlock extends Block {
 
 	public EndBlock() {
 		super();
+		this.figure = "8";
 	}
 
 }

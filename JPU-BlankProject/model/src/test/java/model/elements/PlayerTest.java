@@ -62,6 +62,38 @@ public class PlayerTest {
 		Assert.assertEquals(false, player.canMove(player.getX(), player.getY() - 1));
 		Assert.assertEquals(true, player.canMove(player.getX(), player.getY() + 1));
 		
+	}
+	
+	@Test
+	public void testMove() {
+		Map map = new Map();
+		map.setHeight(3);
+		map.setWidth(4);
+		String content = "2222\r\n2133\r\n2333";
+		
+		/* Map:
+		 * 
+		 * 2222
+		 * 2133
+		 * 2333
+		 * 
+		 */
+		
+		map.setMapFromString(content);
+		Player player = map.getPlayer();
+		
+		map.printConsole();
+
+		System.out.println();
+		
+		player.move(player.getX() + 1, player.getY());
+		player.move(player.getX(), player.getY() - 1);
+		player.move(player.getX(), player.getY() + 1);
+		player.move(player.getX() + 1, player.getY());
+		
+		map.printConsole();
+
+		Assert.assertEquals(true, map.getElementAt(3, 2).equals(player));
 		
 	}
 
