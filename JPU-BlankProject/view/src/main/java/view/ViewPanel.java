@@ -6,6 +6,9 @@ import java.util.Observer;
 
 import javax.swing.JPanel;
 
+import model.IModel;
+import model.Map;
+
 /**
  * The Class ViewPanel.
  *
@@ -18,8 +21,9 @@ class ViewPanel extends JPanel implements Observer {
 	
 	private static final long	serialVersionUID	= -998294702363713521L;
 
-	public ViewPanel(final GraphicBuilder graphicBuilder) {
+	public ViewPanel(final GraphicBuilder graphicBuilder, IModel iModel) {
 		this.graphicBuilder = graphicBuilder;
+		this.graphicBuilder.setMap(iModel);
 	}
 
 	public void update(final Observable arg0, final Object arg1) {

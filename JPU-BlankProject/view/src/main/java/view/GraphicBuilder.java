@@ -3,7 +3,7 @@ package view;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.TexturePaint;
-import contract.IModel;
+import model.IModel;
 import model.Map;
 import model.Model;
 import model.Texture;
@@ -15,13 +15,24 @@ import model.elements.Player;
 import model.elements.Rock;
 
 public class GraphicBuilder {
+	
+	Map map;
+	
+	public void setMap(IModel iModel) {
+		this.map = iModel.getMap();
+	}
+	
+	public Map getMap() {
+		return this.map;
+	}
+	
 	public void applyModelToGraphic(Graphics graphics) {
 
-		Map map = new Map();
-		map.setHeight(10);
-		map.setWidth(15);
-		String content = "433111111111111\r\n141111111111111\r\n415111111111111\r\n141111111111111\r\n415111111111111\r\n141111111111111\r\n415111111111111\r\n141111111111111\r\n415111111111111\r\n415111111111111";
-		map.setMapFromString(content);
+//		Map map = new Map();
+//		map.setHeight(10);
+//		map.setWidth(15);
+//		String content = "433111111111111\r\n141111111111111\r\n415111111111111\r\n141111111111111\r\n415111111111111\r\n141111111111111\r\n415111111111111\r\n141111111111111\r\n415111111111111\r\n415111111111111";
+//		map.setMapFromString(content);
 
 		graphics.setColor(Color.BLACK);
 		graphics.drawRect(10, 10, 50, 200);

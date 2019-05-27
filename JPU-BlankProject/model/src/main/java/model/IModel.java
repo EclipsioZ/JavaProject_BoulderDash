@@ -1,4 +1,4 @@
-package contract;
+package model;
 
 import java.util.Observable;
 
@@ -32,6 +32,8 @@ public interface IModel {
 	 * @return the observable
 	 */
 	Observable getObservable();
+	
+	Map getMap();
 
 }
 

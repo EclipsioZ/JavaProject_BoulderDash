@@ -3,8 +3,9 @@ package model;
 import java.sql.SQLException;
 import java.util.Observable;
 
-import contract.IModel;
+import model.IModel;
 import entity.HelloWorld;
+import model.bdd.BDDGetData;
 
 /**
  * The Class Model.
@@ -15,53 +16,29 @@ public final class Model extends Observable implements IModel {
 
 	/** The helloWorld. */
 	private HelloWorld helloWorld;
+	Map map;
+	BDDGetData bdd;
 	
 	Texture tex = new Texture();	
-	/**
-	 * Instantiates a new model.
-	 */
-	
+
 	public Model() {
         tex.getTexture();
 		this.helloWorld = new HelloWorld();
+		this.map = new Map();
+		bdd = new BDDGetData();
+        bdd.loadLevel("1", map);
 	}
 
-	/**
-     * Gets the hello world.
-     *
-     * @return the hello world
-     */
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IModel#getMessage()
-	 */
 	public HelloWorld getHelloWorld() {
 		return this.helloWorld;
 	}
 
-	/**
-     * Sets the hello world.
-     *
-     * @param helloWorld
-     *            the new hello world
-     */
 	private void setHelloWorld(final HelloWorld helloWorld) {
 		this.helloWorld = helloWorld;
 		this.setChanged();
 		this.notifyObservers();
 	}
 
-	/**
-     * Gets the observable.
-     *
-     * @return the observable
-     */
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IModel#getObservable()
-	 */
 	public Observable getObservable() {
 		return this;
 	}
@@ -74,5 +51,10 @@ public final class Model extends Observable implements IModel {
 	
 	public Texture getInstanceTexture() {
 		return tex;
+	}
+
+	@Override
+	public Map getMap() {
+		return this.map;
 	}
 }

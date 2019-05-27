@@ -34,11 +34,6 @@ public abstract class Main {
         
         controller.control();
         controller.orderPerform(ControllerOrder.English);
-        System.out.println("bouh");
-        
-        Map map = new Map();
-        BDDGetData bdd = new BDDGetData();
-        bdd.loadLevel("2", map);
         
         
     }

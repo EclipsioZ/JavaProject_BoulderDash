@@ -9,7 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import contract.IController;
-import contract.IModel;
+import model.IModel;
+import model.Map;
 
 /**
  * The Class ViewFrame.
@@ -50,7 +51,7 @@ class ViewFrame extends JFrame implements KeyListener {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.addKeyListener(this);
-		this.setContentPane(new ViewPanel(new GraphicBuilder())); // map
+		this.setContentPane(new ViewPanel(new GraphicBuilder(), model));
 		this.setSize(800, 600);
 		this.setLocationRelativeTo(null);
 	}
