@@ -23,8 +23,6 @@ class ViewFrame extends JFrame implements KeyListener {
 
 	private IController controller;
 
-	MovementThread movementThread;
-
 	long lastShoot = System.currentTimeMillis();
 	final long threshold = 200;
 
@@ -33,10 +31,6 @@ class ViewFrame extends JFrame implements KeyListener {
 	public ViewFrame(final IModel model, final String title) throws HeadlessException {
 		super(title);
 		this.buildViewFrame(model);
-
-		movementThread = new MovementThread(this);
-		Thread thread = new Thread(movementThread);
-		thread.start();
 	}
 
 	private IController getController() {
@@ -82,14 +76,10 @@ class ViewFrame extends JFrame implements KeyListener {
 			}
 	    	 lastShoot = now;
 	     }
-//		this.movementThread.setCanApplyMovement(true);
-//		this.movementThread.setKey(e.getKeyCode());
 	}
 
 	public void keyReleased(final KeyEvent e) {
-		if(!this.movementThread.getHasAppliedMovement()) {
-			this.movementThread.setCanApplyMovement(false);
-		}
+		
 	}
 
 	public void applyOrderPerform(int keyCode) throws InterruptedException {
