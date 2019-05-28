@@ -31,11 +31,12 @@ public class Element {
 	}
 
 	Element() {
-		
+		this.sprites = new ArrayList<Image>();
 	}
 	
 	Element(Map map) {
 		this.map = map;
+		this.sprites = new ArrayList<Image>();
 	}
 	
 	public void move(int x, int y) {

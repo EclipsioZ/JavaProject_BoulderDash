@@ -18,7 +18,7 @@ public final class Model extends Observable implements IModel {
 	private HelloWorld helloWorld;
 	Map map;
 	BDDGetData bdd;
-	
+		
 	Texture tex = new Texture();	
 
 	public Model() {
@@ -27,7 +27,7 @@ public final class Model extends Observable implements IModel {
 		this.map = new Map();
 		bdd = new BDDGetData();
         bdd.loadLevel("3", map);
-	}
+     }
 
 	public HelloWorld getHelloWorld() {
 		return this.helloWorld;

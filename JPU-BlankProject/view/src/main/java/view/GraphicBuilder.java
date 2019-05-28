@@ -3,6 +3,8 @@ package view;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.TexturePaint;
+
+import model.Animation;
 import model.IModel;
 import model.Map;
 import model.Model;
@@ -18,9 +20,14 @@ import model.elements.Wall;
 public class GraphicBuilder {
 	
 	Map map;
+	Animation animation;
 	
 	public void setMap(IModel iModel) {
 		this.map = iModel.getMap();
+	}
+	
+	public void setAnimation(Animation animation) {
+		this.animation = animation;
 	}
 	
 	public Map getMap() {
@@ -81,5 +88,55 @@ public class GraphicBuilder {
 			}
 		}
 	}
-
+	
+		public void loadAnimation(){
+			
+			for (int y = 0; y < map.getHeight(); y++) {
+				for (int x = 0; x < map.getWidth(); x++) {
+					Element element = map.getElementAt(x, y);
+					
+					if(element instanceof Rock) {	
+						for(int j=0; j < Texture.rock.length; j++) {
+							
+						element.getSprites().add(Texture.rock[j]);
+						}
+					}
+					
+					if(element instanceof Diamond) {	
+						
+						for(int j=0; j < Texture.diamond.length; j++) {
+						element.getSprites().add(Texture.diamond[j]);
+						}
+					}
+				}
+			}
+		}
+	
+	public void graphicsAnimation(Graphics graphics) {
+		
+		loadAnimation();
+//		while(true) {
+		
+			
+			
+		int a = 0;
+			
+		for (int y = 0; y < map.getHeight(); y++) {
+			for (int x = 0; x < map.getWidth(); x++) {
+				
+				Element element = map.getElementAt(x, y);
+			if(element instanceof Rock) {
+				graphics.drawImage(Texture.background[0], x * 80, y * 80, 80, 80, null);
+				//Texture for Rock
+				graphics.drawImage(element.getSprites().get(a), x * 80, y * 80, 80, 80, null);
+				
+			}
+		}
+		}
+		a++;
+		if(a > Texture.rock.length) {
+			a = 0;
+		}
+		}
+//	}
 }
