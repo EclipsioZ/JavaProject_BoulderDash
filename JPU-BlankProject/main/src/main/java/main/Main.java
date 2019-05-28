@@ -4,8 +4,12 @@
  */
 package main;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
 import contract.ControllerOrder;
 import controller.Controller;
+import controller.Sound;
 import model.Map;
 import model.Model;
 import model.Texture;
@@ -33,6 +37,8 @@ public abstract class Main {
         final Controller controller = new Controller(view, model);
         view.setController(controller);
         controller.control();
+        Sound.Sound("C:\\Users\\Florian\\Desktop\\ProjetJava.wav");
+        
         
     }
 }
