@@ -47,7 +47,8 @@ public class Player extends Element {
 			return true;
 		}
 		if (el instanceof Mob) {
-			this.die();
+//			this.die();
+			((Mob) el).explode();
 			return true;
 		}
 		if (el instanceof EndBlock) {
