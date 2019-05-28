@@ -1,4 +1,4 @@
-package contract;
+package view;
 
 /**
  * The Interface IView.

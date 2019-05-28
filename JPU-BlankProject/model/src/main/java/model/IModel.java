@@ -34,6 +34,8 @@ public interface IModel {
 	Observable getObservable();
 	
 	Map getMap();
+	
+	void updateMap(Map map);
 
 }
 

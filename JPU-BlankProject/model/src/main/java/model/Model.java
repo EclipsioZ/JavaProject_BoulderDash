@@ -26,17 +26,20 @@ public final class Model extends Observable implements IModel {
 		this.helloWorld = new HelloWorld();
 		this.map = new Map();
 		bdd = new BDDGetData();
+<<<<<<< HEAD
         bdd.loadLevel("3", map);
      }
+=======
+        bdd.loadLevel("13", map);
+	}
+>>>>>>> branch 'master' of https://github.com/EclipsioZ/JavaProject_BoulderDash.git
 
 	public HelloWorld getHelloWorld() {
 		return this.helloWorld;
 	}
 
-	private void setHelloWorld(final HelloWorld helloWorld) {
-		this.helloWorld = helloWorld;
-		this.setChanged();
-		this.notifyObservers();
+	public void updateMap(Map map) {
+		this.getMap().setMapHasChanged(map.map);
 	}
 
 	public Observable getObservable() {

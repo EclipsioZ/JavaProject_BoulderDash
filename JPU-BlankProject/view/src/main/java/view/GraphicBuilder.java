@@ -35,12 +35,14 @@ public class GraphicBuilder {
 	}
 	
 	public void applyModelToGraphic(Graphics graphics) {
-
+		
 //		Map map = new Map();
 //		map.setHeight(10);
 //		map.setWidth(15);
 //		String content = "433111111111111\r\n141111111111111\r\n415111111111111\r\n141111111111111\r\n415111111111111\r\n141111111111111\r\n415111111111111\r\n141111111111111\r\n415111111111111\r\n415111111111111";
 //		map.setMapFromString(content);
+		
+		int spriteSize = 50;
 		
 		
 		for (int y = 0; y < map.getHeight(); y++) {
@@ -50,40 +52,40 @@ public class GraphicBuilder {
 				
 				if(element instanceof Player) {
 					//Background
-					graphics.drawImage(Texture.background[0], x * 80, y * 80, 80, 80, null);
+					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 					//Texture for Player
-					graphics.drawImage(Texture.playerdietime[4], x * 80, y * 80, 80, 80, null);
+					graphics.drawImage(Texture.playerdietime[4], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				
 				if(element instanceof Rock) {
 					//Background
-					graphics.drawImage(Texture.background[0], x * 80, y * 80, 80, 80, null);
+					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 					//Texture for Rock
-					graphics.drawImage(Texture.rock[0], x * 80, y * 80, 80, 80, null);
+					graphics.drawImage(Texture.rock[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				
 				if(element instanceof Dirt) {
 					//Texture for Dirt
-					graphics.drawImage(Texture.dirt[0], x * 80, y * 80, 80, 80, null);
+					graphics.drawImage(Texture.dirt[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				
 				if(element instanceof Diamond) {
 					//Background
-					graphics.drawImage(Texture.background[0], x * 80, y * 80, 80, 80, null);
+					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 					//Texture for Diamond
-					graphics.drawImage(Texture.diamond[0], x * 80, y * 80, 80, 80, null);
+					graphics.drawImage(Texture.diamond[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				
 				if(element instanceof Wall) {
 					
 					//Texture for Wall
-					graphics.drawImage(Texture.wall[0], x * 80, y * 80, 80, 80, null);
+					graphics.drawImage(Texture.wall[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				if(element instanceof Air) {
 					//Background
-					graphics.drawImage(Texture.background[0], x * 80, y * 80, 80, 80, null);
+					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 					//Texture for Air
-					graphics.drawImage(Texture.air[0], x * 80, y * 80, 80, 80, null);
+					graphics.drawImage(Texture.air[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 			}
 		}
