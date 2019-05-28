@@ -18,13 +18,26 @@ public class BlocksThread implements Runnable {
 		this.indexAnimation = 0;
 	}
 
+	public int getIndexAnimation() {
+		return indexAnimation;
+	}
+
+	public void setIndexAnimation(int indexAnimation) {
+		this.indexAnimation = indexAnimation;
+	}
+
 	@Override
 	public void run() {
 		while(true) {
 			try {
-				Thread.sleep(200);
+				Thread.sleep(160);
+				this.indexAnimation++;
+				if(this.indexAnimation > 3) {
+					this.indexAnimation = 0;
+				}
 				for (PhysicElement physicElement : physicElements) {
 					physicElement.gravity();
+					physicElement.setIndexAnimation(this.indexAnimation);
 				}
 				map.setMapHasChanged(this.map.getMap());
 			} catch (InterruptedException e) {

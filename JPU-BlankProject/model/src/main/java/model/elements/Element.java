@@ -12,6 +12,8 @@ public class Element {
 	private int x;
 	private int y;
 	
+	private int indexAnimation;
+	
 	public String figure;
 
 	public int getX() {
@@ -32,13 +34,23 @@ public class Element {
 
 	Element() {
 		this.sprites = new ArrayList<Image>();
+		this.indexAnimation = 0;
 	}
 	
 	Element(Map map) {
 		this.map = map;
 		this.sprites = new ArrayList<Image>();
+		this.indexAnimation = 0;
 	}
 	
+	public int getIndexAnimation() {
+		return indexAnimation;
+	}
+
+	public void setIndexAnimation(int indexAnimation) {
+		this.indexAnimation = indexAnimation;
+	}
+
 	public void move(int x, int y) {
 		if(this.canMove(x, y)) {
 			map.setElementAt(x, y, this);

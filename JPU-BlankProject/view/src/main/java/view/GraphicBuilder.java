@@ -61,7 +61,7 @@ public class GraphicBuilder {
 					//Background
 					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 					//Texture for Rock
-					graphics.drawImage(Texture.rock[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+					graphics.drawImage(Texture.rock[element.getIndexAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				
 				if(element instanceof Dirt) {
@@ -73,7 +73,7 @@ public class GraphicBuilder {
 					//Background
 					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 					//Texture for Diamond
-					graphics.drawImage(Texture.diamond[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+					graphics.drawImage(Texture.diamond[element.getIndexAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				
 				if(element instanceof Wall) {
