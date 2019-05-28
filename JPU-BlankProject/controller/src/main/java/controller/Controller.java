@@ -66,6 +66,7 @@ public final class Controller implements IController {
 	 * Order perform.
 	 *
 	 * @param controllerOrder the controller order
+	 * @throws InterruptedException 
 	 */
 	/*
 	 * (non-Javadoc)
@@ -73,7 +74,7 @@ public final class Controller implements IController {
 	 * @see contract.IController#orderPerform(contract.ControllerOrder)
 	 */
 	public void orderPerform(final ControllerOrder controllerOrder) {
-
+		
 		switch (controllerOrder) {
 		case UP:
 			if (this.state == 1) {
@@ -102,8 +103,9 @@ public final class Controller implements IController {
 		default:
 			break;
 		}
-		model.getMap().printConsole();
+//		model.getMap().printConsole();
 		model.updateMap(model.getMap());
+		
 	}
-
+	
 }

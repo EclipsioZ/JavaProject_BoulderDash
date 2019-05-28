@@ -23,11 +23,20 @@ class ViewFrame extends JFrame implements KeyListener {
 
 	private IController controller;
 
+	MovementThread movementThread;
+
+	long lastShoot = System.currentTimeMillis();
+	final long threshold = 200;
+
 	private static final long serialVersionUID = -697358409737458175L;
 
 	public ViewFrame(final IModel model, final String title) throws HeadlessException {
 		super(title);
 		this.buildViewFrame(model);
+
+		movementThread = new MovementThread(this);
+		Thread thread = new Thread(movementThread);
+		thread.start();
 	}
 
 	private IController getController() {
@@ -53,22 +62,38 @@ class ViewFrame extends JFrame implements KeyListener {
 		this.addKeyListener(this);
 		final ViewPanel panel = new ViewPanel(new GraphicBuilder(), model);
 		this.setContentPane(panel);
-		this.setSize(20*80, 20*80);
+		this.setSize(20 * 80, 20 * 80);
 		this.setLocationRelativeTo(null);
 		model.getMap().addObserver(panel);
-		
-	}
 
+	}
 
 	public void keyTyped(final KeyEvent e) {
 
 	}
 
 	public void keyPressed(final KeyEvent e) {
-		this.getController().orderPerform(View.keyCodeToControllerOrder(e.getKeyCode()));
+	     long now = System.currentTimeMillis();
+	     if (now - lastShoot > threshold) {
+	    	 try {
+				this.getController().orderPerform(View.keyCodeToControllerOrder(e.getKeyCode()));
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+	    	 lastShoot = now;
+	     }
+//		this.movementThread.setCanApplyMovement(true);
+//		this.movementThread.setKey(e.getKeyCode());
 	}
 
 	public void keyReleased(final KeyEvent e) {
-
+		if(!this.movementThread.getHasAppliedMovement()) {
+			this.movementThread.setCanApplyMovement(false);
+		}
 	}
+
+	public void applyOrderPerform(int keyCode) throws InterruptedException {
+		this.getController().orderPerform(View.keyCodeToControllerOrder(keyCode));
+	}
+
 }
