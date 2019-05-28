@@ -54,7 +54,7 @@ public class GraphicBuilder {
 					//Background
 					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 					//Texture for Player
-					graphics.drawImage(Texture.playerdietime[4], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+					graphics.drawImage(Texture.playerdietime[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				
 				if(element instanceof Rock) {

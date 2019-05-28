@@ -42,7 +42,8 @@ public class Player extends Element {
 		}
 		if (el instanceof Diamond) {
 			this.setDiamonds(this.getDiamonds() + 1);
-			// TODO: Add check for last diamond picked up
+			this.getMap().setElementAt(x, y, new Air());
+			this.getMap().getPhysicElements().remove(el);
 			return true;
 		}
 		if (el instanceof Mob) {
