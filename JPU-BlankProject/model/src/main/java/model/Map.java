@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 import model.elements.Air;
@@ -16,9 +17,18 @@ import model.elements.Wall;
 public class Map extends Observable {
 
 	public Element[][] map;
+	public ArrayList<Rock> rocks;
+	
+	public Map() {
+		this.rocks = new ArrayList<Rock>();
+	}
 	
 	// Size of the map
 	private int height;
+	public ArrayList<Rock> getRocks() {
+		return rocks;
+	}
+
 	private int width;
 	
 	// Position of the end block
@@ -65,6 +75,7 @@ public class Map extends Observable {
 					break;
 				case 4:
 					this.map[x][y] = new Rock();
+					this.rocks.add((Rock) this.map[x][y]);
 					break;
 				case 5:
 					this.map[x][y] = new Diamond();

@@ -26,7 +26,7 @@ public final class Model extends Observable implements IModel {
 		this.helloWorld = new HelloWorld();
 		this.map = new Map();
 		bdd = new BDDGetData();
-        bdd.loadLevel("13", map);
+        bdd.loadLevel("14", map);
 	}
 
 	public HelloWorld getHelloWorld() {

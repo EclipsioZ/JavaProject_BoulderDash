@@ -18,6 +18,8 @@ public final class Controller implements IController {
 
 	// State of the game: 0 = in menu, 1 = in game
 	private int state;
+	
+	BlocksThread blocksThread;
 
 	/**
 	 * Instantiates a new controller.
@@ -29,6 +31,10 @@ public final class Controller implements IController {
 		this.setView(view);
 		this.setModel(model);
 		this.state = 1;
+		
+		this.blocksThread = new BlocksThread(model.getMap());
+		Thread bThread = new Thread(this.blocksThread);
+		bThread.start();
 	}
 
 	/**
