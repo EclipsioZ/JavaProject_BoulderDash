@@ -27,7 +27,7 @@ public abstract class Mob extends Element {
 					if (element != null) {
 						if (!(element instanceof Player) && !(element instanceof Wall)) {
 							try {
-								this.getMap().getElements().remove(element);
+								this.getMap().getAnimatedElements().remove(element);
 							} catch (Exception e) {
 							}
 							try {
@@ -114,6 +114,15 @@ public abstract class Mob extends Element {
 		} else {
 			direction = "";
 		}
+	}
+	
+	@Override
+	public Boolean handleCollision(Element element) {
+		System.out.println("I'm gonna explode!!!!");
+		if(element instanceof Rock) {
+			this.explode();
+		}
+		return true;
 	}
 
 }

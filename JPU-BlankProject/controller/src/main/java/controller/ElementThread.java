@@ -3,21 +3,24 @@ package controller;
 import java.util.ArrayList;
 
 import model.Map;
+import model.elements.Block;
 import model.elements.Element;
 import model.elements.Mob;
 import model.elements.PhysicElement;
 
 public class ElementThread implements Runnable {
 
-	ArrayList<Element> Elements;
+	ArrayList<Element> animatedElements;
 	ArrayList<Mob> mobs;
+	ArrayList<PhysicElement> physicElements;
 	Map map;
 	int indexElementAnimation;
 
 	public ElementThread(Map map) {
 		this.map = map;
-		this.Elements = map.getElements();
+		this.animatedElements = map.getAnimatedElements();
 		this.mobs = map.getMobs();
+		this.physicElements = map.getPhysicElements();
 		this.indexElementAnimation = 0;
 	}
 
@@ -38,11 +41,15 @@ public class ElementThread implements Runnable {
 					mob.iaMove();
 				}
 
+				for (PhysicElement physicElement : physicElements) {
+					physicElement.gravity();
+				}
+
 				this.indexElementAnimation++;
 				if (this.indexElementAnimation > 3) {
 					this.indexElementAnimation = 0;
 				}
-				for (Element Element : Elements) {
+				for (Element Element : animatedElements) {
 					Element.setIndexElementAnimation(this.indexElementAnimation);
 				}
 

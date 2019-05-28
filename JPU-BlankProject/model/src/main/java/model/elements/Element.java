@@ -70,6 +70,10 @@ public class Element {
 		}
 	}
 	
+	public Boolean handleCollision(Element element) {
+		return false;
+	}
+	
 	public Map getMap() {
 		return map;
 	}
