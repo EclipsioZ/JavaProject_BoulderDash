@@ -13,6 +13,9 @@ import model.elements.Air;
 import model.elements.Diamond;
 import model.elements.Dirt;
 import model.elements.Element;
+import model.elements.EndBlock;
+import model.elements.Mob1;
+import model.elements.Mob2;
 import model.elements.Player;
 import model.elements.Rock;
 import model.elements.Wall;
@@ -54,7 +57,8 @@ public class GraphicBuilder {
 					//Background
 					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 					//Texture for Player
-					graphics.drawImage(Texture.playerdietime[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+					System.out.println(element.getIndexElementAnimation());
+					graphics.drawImage(Texture.playerrest[element.getIndexElementAnimation()%2], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				
 				if(element instanceof Rock) {
@@ -81,6 +85,28 @@ public class GraphicBuilder {
 					//Texture for Wall
 					graphics.drawImage(Texture.wall[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
+				
+				if(element instanceof EndBlock) {
+					//Background
+					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+					//Texture for Wall
+					graphics.drawImage(Texture.endblock[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+				}
+				
+				if(element instanceof Mob1) {
+					//Background
+					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+					//Texture for Wall
+					graphics.drawImage(Texture.mob1[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+				}
+				
+				if(element instanceof Mob2) {
+					//Background
+					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+					//Texture for Wall
+					graphics.drawImage(Texture.mob2[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+				}
+				
 				if(element instanceof Air) {
 					//Background
 					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
