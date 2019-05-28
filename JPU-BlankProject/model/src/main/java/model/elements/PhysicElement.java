@@ -22,11 +22,20 @@ public abstract class PhysicElement extends Element {
 		Element downLeftEl = this.getMap().getElementAt(this.getX() - 1, this.getY() + 1);
 		Element downRightEl = this.getMap().getElementAt(this.getX() + 1, this.getY() + 1);
 		
-		if(downEl instanceof Air) {
+		if(downEl instanceof Air || downEl instanceof Mob) {
+			if(downEl instanceof Mob) {
+				((Mob) downEl).explode();
+			}
 			this.move(this.getX(), this.getY() + 1);
-		} else if (leftEl instanceof Air && downLeftEl instanceof Air) {
+		} else if ((leftEl instanceof Air && downLeftEl instanceof Air) || downLeftEl instanceof Mob) {
+			if(downLeftEl instanceof Mob) {
+				((Mob) downLeftEl).explode();
+			}
 			this.move(this.getX() - 1, this.getY() + 1);
-		} else if (rightEl instanceof Air && downRightEl instanceof Air) {
+		} else if ((rightEl instanceof Air && downRightEl instanceof Air) || downRightEl instanceof Mob) {
+			if(downRightEl instanceof Mob) {
+				((Mob) downRightEl).explode();
+			}
 			this.move(this.getX() + 1, this.getY() + 1);
 		}
 	}

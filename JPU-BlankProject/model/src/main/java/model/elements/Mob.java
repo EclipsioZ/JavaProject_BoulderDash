@@ -9,7 +9,7 @@ public abstract class Mob extends Element {
 
 	public Mob() {
 		super();
-		explosionRadius = 3;
+		explosionRadius = 2;
 		explosionType = "Air";
 		this.direction = "down";
 	}
@@ -24,18 +24,38 @@ public abstract class Mob extends Element {
 			for (int x = -radius; x <= radius; x++) {
 				if (x * x + y * y <= radius * radius) {
 					Element element = this.getMap().getElementAt(xCenter + x, yCenter + y);
-					if (!(element instanceof Player) && !(element instanceof Wall)) {
-						if (this.getExplosionType() == "Diamond") {
-							Element diamond = new Diamond();
-							diamond.setX(xCenter + x);
-							diamond.setY(yCenter + y);
-							diamond.setMap(this.getMap());
-							this.getMap().setElementAt(xCenter + x, yCenter + y, diamond);
-							this.getMap().getPhysicElements().add((PhysicElement) diamond);
-						} else {
-							this.getMap().setElementAt(xCenter + x, yCenter + y, new Air());
+					if (element != null) {
+						if (!(element instanceof Player) && !(element instanceof Wall)) {
+							try {
+								this.getMap().getElements().remove(element);
+							} catch (Exception e) {
+							}
+							try {
+								this.getMap().getMobs().remove(element);
+							} catch (Exception e) {
+							}
+//							try {
+//								this.getMap().getPhysicElements().remove(element);
+//							} catch (Exception e) {
+//							}
+
+							if (this.getExplosionType() == "Diamond") {
+								Element diamond = new Diamond();
+								diamond.setX(xCenter + x);
+								diamond.setY(yCenter + y);
+								diamond.setMap(this.getMap());
+								this.getMap().setElementAt(xCenter + x, yCenter + y, diamond);
+								this.getMap().getPhysicElements().add((PhysicElement) diamond);
+							} else {
+								Element air = new Air();
+								air.setX(xCenter + x);
+								air.setY(yCenter + y);
+								air.setMap(this.getMap());
+								this.getMap().setElementAt(xCenter + x, yCenter + y, air);
+							}
 						}
 					}
+
 				}
 			}
 		}
@@ -79,16 +99,16 @@ public abstract class Mob extends Element {
 		Element rightUpEl = this.getMap().getElementAt(this.getX() + 1, this.getY() - 1);
 		Element leftUpEl = this.getMap().getElementAt(this.getX() - 1, this.getY() - 1);
 
-		if(downEl instanceof Air && direction != "up") {
+		if (downEl instanceof Air && direction != "up") {
 			direction = "down";
 			this.move(this.getX(), this.getY() + 1);
-		} else if(leftEl instanceof Air && direction != "right") {
+		} else if (leftEl instanceof Air && direction != "right") {
 			direction = "left";
 			this.move(this.getX() - 1, this.getY());
-		} else if(upEl instanceof Air && direction != "down") {
+		} else if (upEl instanceof Air && direction != "down") {
 			direction = "up";
 			this.move(this.getX(), this.getY() - 1);
-		} else if(rightEl instanceof Air && direction != "left") {
+		} else if (rightEl instanceof Air && direction != "left") {
 			direction = "right";
 			this.move(this.getX() + 1, this.getY());
 		} else {
