@@ -28,6 +28,8 @@ public class GraphicBuilder {
 	}
 	
 	public void applyModelToGraphic(Graphics graphics) {
+		
+		System.out.println("Update");
 
 //		Map map = new Map();
 //		map.setHeight(10);

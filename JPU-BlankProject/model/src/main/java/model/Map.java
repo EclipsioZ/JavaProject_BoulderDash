@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Observable;
+
 import model.elements.Air;
 import model.elements.Diamond;
 import model.elements.Dirt;
@@ -11,7 +13,7 @@ import model.elements.Player;
 import model.elements.Rock;
 import model.elements.Wall;
 
-public class Map {
+public class Map extends Observable {
 
 	public Element[][] map;
 	
@@ -154,6 +156,16 @@ public class Map {
 			}
 			System.out.println();
 		}
+	}
+	
+	public final void setMapHasChanged(Element[][] map) {
+		this.map = map;
+		this.setChanged();
+		this.notifyObservers();
+	}
+	
+	public Observable getObservable() {
+		return this;
 	}
 	
 }

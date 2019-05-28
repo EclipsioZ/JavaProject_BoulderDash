@@ -33,8 +33,6 @@ public abstract class Main {
         view.setController(controller);
         
         controller.control();
-        controller.orderPerform(ControllerOrder.English);
-        
         
     }
 }
