@@ -13,6 +13,7 @@ public class Element {
 	private int y;
 	
 	private int indexAnimation;
+	private int indexElementAnimation;
 	
 	public String figure;
 
@@ -35,12 +36,14 @@ public class Element {
 	Element() {
 		this.sprites = new ArrayList<Image>();
 		this.indexAnimation = 0;
+		this.indexElementAnimation = 0;
 	}
 	
 	Element(Map map) {
 		this.map = map;
 		this.sprites = new ArrayList<Image>();
 		this.indexAnimation = 0;
+		this.indexElementAnimation = 0;
 	}
 	
 	public int getIndexAnimation() {
@@ -49,6 +52,13 @@ public class Element {
 
 	public void setIndexAnimation(int indexAnimation) {
 		this.indexAnimation = indexAnimation;
+	}
+	public int getIndexElementAnimation() {
+		return indexElementAnimation;
+	}
+
+	public void setIndexElementAnimation(int indexElementAnimation) {
+		this.indexElementAnimation = indexElementAnimation;
 	}
 
 	public void move(int x, int y) {

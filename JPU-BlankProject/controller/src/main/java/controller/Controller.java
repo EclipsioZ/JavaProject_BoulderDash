@@ -20,6 +20,7 @@ public final class Controller implements IController {
 	private int state;
 	
 	BlocksThread blocksThread;
+	ElementThread elementThread;
 
 	/**
 	 * Instantiates a new controller.
@@ -35,6 +36,10 @@ public final class Controller implements IController {
 		this.blocksThread = new BlocksThread(model.getMap());
 		Thread bThread = new Thread(this.blocksThread);
 		bThread.start();
+		
+		this.elementThread = new ElementThread(model.getMap());
+		Thread eThread = new Thread(this.elementThread);
+		eThread.start();
 	}
 
 	/**

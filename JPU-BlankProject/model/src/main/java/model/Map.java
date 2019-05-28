@@ -19,15 +19,20 @@ public class Map extends Observable {
 
 	public Element[][] map;
 	public ArrayList<PhysicElement> physicElements;
+	public ArrayList<Element> Elements;
 	
 	public Map() {
 		this.physicElements = new ArrayList<PhysicElement>();
+		this.Elements = new ArrayList<Element>();
 	}
 	
 	// Size of the map
 	private int height;
 	public ArrayList<PhysicElement> getPhysicElements() {
 		return physicElements;
+	}
+	public ArrayList<Element> getElements() {
+		return Elements;
 	}
 
 	private int width;
@@ -67,6 +72,7 @@ public class Map extends Observable {
 				case 1:
 					this.map[x][y] = new Player();
 					this.player = (Player) this.map[x][y]; // Add the player
+					this.Elements.add((Element)this.map[x][y]);
 					break;
 				case 2:
 					this.map[x][y] = new Wall();
@@ -84,12 +90,15 @@ public class Map extends Observable {
 					break;
 				case 6:
 					this.map[x][y] = new Mob1();
+					this.Elements.add((Element)this.map[x][y]);
 					break;
 				case 7:
 					this.map[x][y] = new Mob2();
+					this.Elements.add((Element)this.map[x][y]);
 					break;
 				case 8:
 					this.map[x][y] = new EndBlock();
+					this.Elements.add((Element)this.map[x][y]);
 					break;
 				default:
 					this.map[x][y] = new Air();
