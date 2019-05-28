@@ -10,6 +10,7 @@ import model.elements.Element;
 import model.elements.EndBlock;
 import model.elements.Mob1;
 import model.elements.Mob2;
+import model.elements.PhysicElement;
 import model.elements.Player;
 import model.elements.Rock;
 import model.elements.Wall;
@@ -17,16 +18,16 @@ import model.elements.Wall;
 public class Map extends Observable {
 
 	public Element[][] map;
-	public ArrayList<Rock> rocks;
+	public ArrayList<PhysicElement> physicElements;
 	
 	public Map() {
-		this.rocks = new ArrayList<Rock>();
+		this.physicElements = new ArrayList<PhysicElement>();
 	}
 	
 	// Size of the map
 	private int height;
-	public ArrayList<Rock> getRocks() {
-		return rocks;
+	public ArrayList<PhysicElement> getPhysicElements() {
+		return physicElements;
 	}
 
 	private int width;
@@ -75,10 +76,11 @@ public class Map extends Observable {
 					break;
 				case 4:
 					this.map[x][y] = new Rock();
-					this.rocks.add((Rock) this.map[x][y]);
+					this.physicElements.add((PhysicElement) this.map[x][y]);
 					break;
 				case 5:
 					this.map[x][y] = new Diamond();
+					this.physicElements.add((PhysicElement) this.map[x][y]);
 					break;
 				case 6:
 					this.map[x][y] = new Mob1();
