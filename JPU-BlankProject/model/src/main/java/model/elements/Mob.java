@@ -23,7 +23,12 @@ public abstract class Mob extends Element {
 					Element element = this.getMap().getElementAt(xCenter + x, yCenter + y);
 					if (!(element instanceof Player) && !(element instanceof Wall)) {
 						if(this.getExplosionType() == "Diamond") {
-							this.getMap().setElementAt(xCenter + x, yCenter + y, new Diamond());
+							Element diamond = new Diamond();
+							diamond.setX(xCenter + x);
+							diamond.setY(yCenter + y);
+							diamond.setMap(this.getMap());
+							this.getMap().setElementAt(xCenter + x, yCenter + y, diamond);
+							this.getMap().getPhysicElements().add((PhysicElement) diamond);
 						} else {
 							this.getMap().setElementAt(xCenter + x, yCenter + y, new Air());
 						}
