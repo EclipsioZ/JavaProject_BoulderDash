@@ -5,10 +5,13 @@ public abstract class Mob extends Element {
 	private int explosionRadius;
 	private String explosionType;
 
+	public String direction;
+
 	public Mob() {
 		super();
 		explosionRadius = 3;
 		explosionType = "Air";
+		this.direction = "down";
 	}
 
 	public void explode() {
@@ -22,7 +25,7 @@ public abstract class Mob extends Element {
 				if (x * x + y * y <= radius * radius) {
 					Element element = this.getMap().getElementAt(xCenter + x, yCenter + y);
 					if (!(element instanceof Player) && !(element instanceof Wall)) {
-						if(this.getExplosionType() == "Diamond") {
+						if (this.getExplosionType() == "Diamond") {
 							Element diamond = new Diamond();
 							diamond.setX(xCenter + x);
 							diamond.setY(yCenter + y);
@@ -55,6 +58,15 @@ public abstract class Mob extends Element {
 		this.explosionType = explosionType;
 	}
 
+	@Override
+	public Boolean canMove(int x, int y) {
+		Element el = this.getMap().getElementAt(x, y);
+		if (el instanceof Air) {
+			return true;
+		}
+		return false;
+	}
+
 	// The mob IA
 	// Each mob will first try to move right, then up, then left, then down
 	public void iaMove() {
@@ -62,15 +74,25 @@ public abstract class Mob extends Element {
 		Element downEl = this.getMap().getElementAt(this.getX(), this.getY() + 1);
 		Element rightEl = this.getMap().getElementAt(this.getX() + 1, this.getY());
 		Element leftEl = this.getMap().getElementAt(this.getX() - 1, this.getY());
+		Element rightDownEl = this.getMap().getElementAt(this.getX() + 1, this.getY() + 1);
+		Element leftDownEl = this.getMap().getElementAt(this.getX() - 1, this.getY() + 1);
+		Element rightUpEl = this.getMap().getElementAt(this.getX() + 1, this.getY() - 1);
+		Element leftUpEl = this.getMap().getElementAt(this.getX() - 1, this.getY() - 1);
 
-		if (rightEl instanceof Air) {
-			this.move(this.getX() + 1, this.getY());
-		} else if (upEl instanceof Air) {
-			this.move(this.getX(), this.getY() - 1);
-		} else if (leftEl instanceof Air) {
-			this.move(this.getX() - 1, this.getY());
-		} else if (downEl instanceof Air) {
+		if(downEl instanceof Air && direction != "up") {
+			direction = "down";
 			this.move(this.getX(), this.getY() + 1);
+		} else if(leftEl instanceof Air && direction != "right") {
+			direction = "left";
+			this.move(this.getX() - 1, this.getY());
+		} else if(upEl instanceof Air && direction != "down") {
+			direction = "up";
+			this.move(this.getX(), this.getY() - 1);
+		} else if(rightEl instanceof Air && direction != "left") {
+			direction = "right";
+			this.move(this.getX() + 1, this.getY());
+		} else {
+			direction = "";
 		}
 	}
 

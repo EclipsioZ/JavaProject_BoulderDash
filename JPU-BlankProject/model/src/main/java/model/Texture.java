@@ -49,8 +49,8 @@ public class Texture {
 	
 	
 	public Texture() {
-		playerpng = new File("C:\\Users\\Florian\\Desktop\\Player.png");
-		blockpng = new File("C:\\Users\\Florian\\Desktop\\Blocks.png");
+		playerpng = new File("C:\\Users\\Baptiste\\Desktop\\Player.png");
+		blockpng = new File("C:\\Users\\Baptiste\\Desktop\\Blocks.png");
 		try {
 			player_sheet = ImageIO.read(playerpng);
 		} catch (IOException e) {

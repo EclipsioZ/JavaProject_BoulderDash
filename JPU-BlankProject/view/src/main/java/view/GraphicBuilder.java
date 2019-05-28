@@ -57,7 +57,6 @@ public class GraphicBuilder {
 					//Background
 					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 					//Texture for Player
-					System.out.println(element.getIndexElementAnimation());
 					graphics.drawImage(Texture.playerrest[element.getIndexElementAnimation()%2], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				

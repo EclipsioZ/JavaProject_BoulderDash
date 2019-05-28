@@ -4,20 +4,23 @@ import java.util.ArrayList;
 
 import model.Map;
 import model.elements.Element;
+import model.elements.Mob;
 import model.elements.PhysicElement;
 
 public class ElementThread implements Runnable {
-	
+
 	ArrayList<Element> Elements;
+	ArrayList<Mob> mobs;
 	Map map;
 	int indexElementAnimation;
-	
+
 	public ElementThread(Map map) {
 		this.map = map;
 		this.Elements = map.getElements();
+		this.mobs = map.getMobs();
 		this.indexElementAnimation = 0;
 	}
-	
+
 	public int getIndexElementAnimation() {
 		return indexElementAnimation;
 	}
@@ -25,18 +28,24 @@ public class ElementThread implements Runnable {
 	public void setIndexElementAnimation(int indexElementAnimation) {
 		this.indexElementAnimation = indexElementAnimation;
 	}
-	
+
 	public void run() {
-		while(true) {
+		while (true) {
 			try {
 				Thread.sleep(160);
+
+				for (Mob mob : mobs) {
+					mob.iaMove();
+				}
+
 				this.indexElementAnimation++;
-				if(this.indexElementAnimation > 3) {
+				if (this.indexElementAnimation > 3) {
 					this.indexElementAnimation = 0;
 				}
 				for (Element Element : Elements) {
 					Element.setIndexElementAnimation(this.indexElementAnimation);
 				}
+
 				map.setMapHasChanged(this.map.getMap());
 			} catch (InterruptedException e) {
 				e.printStackTrace();

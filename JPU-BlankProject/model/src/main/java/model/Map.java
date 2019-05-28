@@ -8,6 +8,7 @@ import model.elements.Diamond;
 import model.elements.Dirt;
 import model.elements.Element;
 import model.elements.EndBlock;
+import model.elements.Mob;
 import model.elements.Mob1;
 import model.elements.Mob2;
 import model.elements.PhysicElement;
@@ -20,10 +21,12 @@ public class Map extends Observable {
 	public Element[][] map;
 	public ArrayList<PhysicElement> physicElements;
 	public ArrayList<Element> Elements;
+	public ArrayList<Mob> mobs;
 	
 	public Map() {
 		this.physicElements = new ArrayList<PhysicElement>();
 		this.Elements = new ArrayList<Element>();
+		this.mobs = new ArrayList<Mob>();
 	}
 	
 	// Size of the map
@@ -33,6 +36,9 @@ public class Map extends Observable {
 	}
 	public ArrayList<Element> getElements() {
 		return Elements;
+	}
+	public ArrayList<Mob> getMobs() {
+		return mobs;
 	}
 
 	private int width;
@@ -91,10 +97,12 @@ public class Map extends Observable {
 				case 6:
 					this.map[x][y] = new Mob1();
 					this.Elements.add((Element)this.map[x][y]);
+					this.mobs.add((Mob) this.map[x][y]);
 					break;
 				case 7:
 					this.map[x][y] = new Mob2();
 					this.Elements.add((Element)this.map[x][y]);
+					this.mobs.add((Mob) this.map[x][y]);
 					break;
 				case 8:
 					this.map[x][y] = new EndBlock();
