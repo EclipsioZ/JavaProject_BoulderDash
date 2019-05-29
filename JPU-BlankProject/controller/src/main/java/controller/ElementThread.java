@@ -1,6 +1,8 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import model.Map;
 import model.elements.Block;
@@ -12,7 +14,7 @@ public class ElementThread implements Runnable {
 
 	ArrayList<Element> animatedElements;
 	ArrayList<Mob> mobs;
-	ArrayList<PhysicElement> physicElements;
+	List<PhysicElement> physicElements;
 	Map map;
 	int indexElementAnimation;
 
@@ -21,6 +23,7 @@ public class ElementThread implements Runnable {
 		this.animatedElements = map.getAnimatedElements();
 		this.mobs = map.getMobs();
 		this.physicElements = map.getPhysicElements();
+		this.physicElements = Collections.synchronizedList(this.physicElements);
 		this.indexElementAnimation = 0;
 	}
 
@@ -49,8 +52,8 @@ public class ElementThread implements Runnable {
 				if (this.indexElementAnimation > 3) {
 					this.indexElementAnimation = 0;
 				}
-				for (Element Element : animatedElements) {
-					Element.setIndexElementAnimation(this.indexElementAnimation);
+				for (Element animatedElement : animatedElements) {
+					animatedElement.setIndexElementAnimation(this.indexElementAnimation);
 				}
 
 				map.setMapHasChanged(this.map.getMap());

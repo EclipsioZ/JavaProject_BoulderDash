@@ -35,6 +35,11 @@ public final class Controller implements IController {
 		this.elementThread = new ElementThread(model.getMap());
 		Thread eThread = new Thread(this.elementThread);
 		eThread.start();
+		
+		Sound sound = new Sound();
+		sound.soundName = "LevelMusic";
+		Thread th = new Thread(sound);
+		th.start();
 	}
 
 	/**

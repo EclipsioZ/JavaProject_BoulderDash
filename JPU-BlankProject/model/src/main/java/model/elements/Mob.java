@@ -9,12 +9,13 @@ public abstract class Mob extends Element {
 
 	public Mob() {
 		super();
-		explosionRadius = 2;
+		explosionRadius = 3;
 		explosionType = "Air";
 		this.direction = "down";
 	}
 
 	public void explode() {
+		
 		int xCenter = this.getX();
 		int yCenter = this.getY();
 		int radius = this.getExplosionRadius();
@@ -26,18 +27,10 @@ public abstract class Mob extends Element {
 					Element element = this.getMap().getElementAt(xCenter + x, yCenter + y);
 					if (element != null) {
 						if (!(element instanceof Player) && !(element instanceof Wall)) {
-							try {
-								this.getMap().getAnimatedElements().remove(element);
-							} catch (Exception e) {
-							}
-							try {
-								this.getMap().getMobs().remove(element);
-							} catch (Exception e) {
-							}
-//							try {
-//								this.getMap().getPhysicElements().remove(element);
-//							} catch (Exception e) {
-//							}
+
+//							this.getMap().getAnimatedElements().remove(element);
+//							this.getMap().getMobs().remove(element);
+//							this.getMap().getPhysicElements().remove(element);
 
 							if (this.getExplosionType() == "Diamond") {
 								Element diamond = new Diamond();
@@ -59,7 +52,6 @@ public abstract class Mob extends Element {
 				}
 			}
 		}
-
 	}
 
 	public int getExplosionRadius() {
@@ -115,11 +107,10 @@ public abstract class Mob extends Element {
 			direction = "";
 		}
 	}
-	
+
 	@Override
 	public Boolean handleCollision(Element element) {
-		System.out.println("I'm gonna explode!!!!");
-		if(element instanceof Rock) {
+		if (element instanceof Rock) {
 			this.explode();
 		}
 		return true;

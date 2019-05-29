@@ -37,8 +37,5 @@ public abstract class Main {
         final Controller controller = new Controller(view, model);
         view.setController(controller);
         controller.control();
-        Sound.Sound("C:\\Users\\Florian\\Desktop\\ProjetJava.wav");
-        
-        
     }
 }

@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Observable;
 
 import model.elements.Air;
@@ -19,12 +21,12 @@ import model.elements.Wall;
 public class Map extends Observable {
 
 	public Element[][] map;
-	public ArrayList<PhysicElement> physicElements;
+	public List<PhysicElement> physicElements;
 	public ArrayList<Element> animatedElements;
 	public ArrayList<Mob> mobs;
 
 	public Map() {
-		this.physicElements = new ArrayList<PhysicElement>();
+		this.physicElements = Collections.synchronizedList(new ArrayList<PhysicElement>());
 		this.animatedElements = new ArrayList<Element>();
 		this.mobs = new ArrayList<Mob>();
 	}
@@ -32,7 +34,7 @@ public class Map extends Observable {
 	// Size of the map
 	private int height;
 
-	public ArrayList<PhysicElement> getPhysicElements() {
+	public List<PhysicElement> getPhysicElements() {
 		return physicElements;
 	}
 
