@@ -55,20 +55,8 @@ public class ElementThread implements Runnable {
 				}
 
 				toRemove = new ArrayList<Element>();
-
-//				synchronized (physicElements) {
-//					Iterator<PhysicElement> i = physicElements.iterator(); // Must be in synchronized block
-//					while (i.hasNext())
-//						if (i.next().isAlive) {
-//							i.next().gravity();
-//						} else {
-//							toRemove.add(i.next());
-//							this.map.setElementAt(i.next().getX(), i.next().getY(), new Air(this.map));
-//						}
-//				}
-
-				List<PhysicElement> cp = new ArrayList<PhysicElement>(physicElements);
-				for (PhysicElement physicElement : cp) {
+				List<PhysicElement> physicElementsClone = new ArrayList<PhysicElement>(physicElements);
+				for (PhysicElement physicElement : physicElementsClone) {
 					if (physicElement.isAlive) {
 						physicElement.gravity();
 					} else {
