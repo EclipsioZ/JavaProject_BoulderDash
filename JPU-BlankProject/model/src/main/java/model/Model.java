@@ -21,11 +21,12 @@ public final class Model extends Observable implements IModel {
 	Texture tex = new Texture();	
 
 	public Model() {
-        tex.getTexture(2);
+        tex.getTexture(5);
 		this.helloWorld = new HelloWorld();
 		this.map = new Map();
 		bdd = new BDDGetData();
-        bdd.loadLevel("8", map);
+        bdd.loadLevel("20", map);
+        map.setModel(this);
 	}
 
 	public HelloWorld getHelloWorld() {
@@ -54,4 +55,18 @@ public final class Model extends Observable implements IModel {
 	public Map getMap() {
 		return this.map;
 	}
+	
+	public void resetMap() {
+        tex.getTexture(5);
+		for (int i = 0; i < map.getMap().length; i++) {
+			for (int j = 0; j < map.getMap()[i].length; j++) {
+				map.getPhysicElements().clear();
+				map.getMobs().clear();
+				map.getAnimatedElements().clear();
+			}
+		}
+//		map = new Map();
+        bdd.loadLevel("20", map);
+        map.setModel(this);
+    }
 }

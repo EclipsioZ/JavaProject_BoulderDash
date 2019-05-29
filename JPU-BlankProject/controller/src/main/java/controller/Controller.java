@@ -112,6 +112,7 @@ public final class Controller implements IController {
 			}
 			break;
 		default:
+			this.elementThread.running = false;
 			break;
 		}
 //		model.getMap().printConsole();

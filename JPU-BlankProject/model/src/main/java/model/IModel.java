@@ -36,6 +36,8 @@ public interface IModel {
 	Map getMap();
 	
 	void updateMap(Map map);
+	
+	void resetMap();
 
 }
 

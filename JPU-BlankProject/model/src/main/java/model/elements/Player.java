@@ -26,7 +26,9 @@ public class Player extends Element {
 	}
 
 	public void die() {
-
+		this.isAlive = false;
+//		this.getMap().setElementAt(this.getX(), this.getY(), new Explode(this.getMap()));
+		this.getMap().getModel().resetMap();
 	}
 
 	@Override
@@ -68,5 +70,12 @@ public class Player extends Element {
 	public void pop() {
 		this.getMap().getAnimatedElements().remove(this);
 	}
-
+	
+	@Override
+	public Boolean handleCollision(Element element) {
+		if(element instanceof Rock || element instanceof Diamond) {
+			this.die();
+		}
+		return true;
+	}
 }

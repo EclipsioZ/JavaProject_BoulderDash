@@ -21,6 +21,8 @@ public class ElementThread implements Runnable {
 	List<PhysicElement> physicElements;
 	Map map;
 	int indexElementAnimation;
+	
+	public Boolean running;
 
 	public ElementThread(Map map) {
 		this.map = map;
@@ -28,6 +30,7 @@ public class ElementThread implements Runnable {
 		this.mobs = Collections.synchronizedList(map.getMobs());
 		this.physicElements = Collections.synchronizedList(map.getPhysicElements());
 		this.indexElementAnimation = 0;
+		this.running = true;
 	}
 
 	public int getIndexElementAnimation() {
@@ -37,9 +40,17 @@ public class ElementThread implements Runnable {
 	public void setIndexElementAnimation(int indexElementAnimation) {
 		this.indexElementAnimation = indexElementAnimation;
 	}
+	
+	public void resetLevel() throws InterruptedException {
+		this.running = false;
+		Thread.sleep(160);
+		this.animatedElements.clear();
+		this.mobs.clear();
+		this.physicElements.clear();
+	}
 
 	public void run() {
-		while (true) {
+		while (this.running) {
 			try {
 				Thread.sleep(160);
 

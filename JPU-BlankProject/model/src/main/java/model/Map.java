@@ -19,6 +19,8 @@ import model.elements.Rock;
 import model.elements.Wall;
 
 public class Map extends Observable {
+	
+	IModel model;
 
 	public Element[][] map;
 	public List<PhysicElement> physicElements;
@@ -57,6 +59,10 @@ public class Map extends Observable {
 	public void map(Element[][] existingMap) {
 		this.height = 0;
 		this.width = 0;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 
 	public void setMapFromString(String Contents) {
@@ -209,6 +215,14 @@ public class Map extends Observable {
 
 	public Observable getObservable() {
 		return this;
+	}
+
+	public void setModel(final IModel model) {
+		this.model = model;
+	}
+
+	public IModel getModel() {
+		return model;
 	}
 
 }

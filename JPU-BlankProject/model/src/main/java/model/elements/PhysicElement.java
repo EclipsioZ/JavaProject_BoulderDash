@@ -6,7 +6,7 @@ public abstract class PhysicElement extends Element {
 
 	PhysicElement(Map map) {
 		super(map);
-		
+
 		// Add this element to the physic elements
 		this.getMap().getPhysicElements().add(this);
 	}
@@ -30,12 +30,25 @@ public abstract class PhysicElement extends Element {
 		if (downEl instanceof Air || downEl instanceof Mob) {
 			downEl.handleCollision(this);
 			this.move(this.getX(), this.getY() + 1);
+			checkCanKillPlayer(this.getX(), this.getY() + 1);
 		} else if ((leftEl instanceof Air && downLeftEl instanceof Air) || downLeftEl instanceof Mob) {
 			downLeftEl.handleCollision(this);
 			this.move(this.getX() - 1, this.getY() + 1);
+			checkCanKillPlayer(this.getX(), this.getY() + 1);
 		} else if ((rightEl instanceof Air && downRightEl instanceof Air) || downRightEl instanceof Mob) {
 			downRightEl.handleCollision(this);
 			this.move(this.getX() + 1, this.getY() + 1);
+			checkCanKillPlayer(this.getX(), this.getY() + 1);
+		}
+		
+		
+
+	}
+	
+	public void checkCanKillPlayer(int x, int y) {
+		Element downEl = this.getMap().getElementAt(x, y);
+		if (!downEl.handleCollision(this)) {
+			this.move(this.getX(), this.getY() + 1);
 		}
 	}
 
@@ -43,7 +56,7 @@ public abstract class PhysicElement extends Element {
 	public Boolean handleCollision(Element element) {
 		return true;
 	}
-	
+
 	@Override
 	public void pop() {
 		this.getMap().getPhysicElements().remove(this);

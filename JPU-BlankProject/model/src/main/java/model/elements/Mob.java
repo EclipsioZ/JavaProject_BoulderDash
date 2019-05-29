@@ -11,7 +11,7 @@ public abstract class Mob extends Element {
 	
 	public Mob(Map map) {
 		super(map);
-		explosionRadius = 3;
+		explosionRadius = 2;
 		explosionType = "Air";
 		this.direction = "down";
 				

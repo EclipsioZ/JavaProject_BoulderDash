@@ -4,18 +4,8 @@
  */
 package main;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-
-import contract.ControllerOrder;
 import controller.Controller;
-import controller.Sound;
-import model.Map;
 import model.Model;
-import model.Texture;
-import model.Animation;
-import model.bdd.BDDConnector;
-import model.bdd.BDDGetData;
 import view.View;
 
 /**
