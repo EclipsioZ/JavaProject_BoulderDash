@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.SQLException;
 import java.util.Observable;
 
 import model.IModel;
@@ -22,11 +21,11 @@ public final class Model extends Observable implements IModel {
 	Texture tex = new Texture();	
 
 	public Model() {
-        tex.getTexture(3);
+        tex.getTexture(2);
 		this.helloWorld = new HelloWorld();
 		this.map = new Map();
 		bdd = new BDDGetData();
-        bdd.loadLevel("3", map);
+        bdd.loadLevel("19", map);
 	}
 
 	public HelloWorld getHelloWorld() {

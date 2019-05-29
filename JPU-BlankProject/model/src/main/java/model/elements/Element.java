@@ -2,6 +2,7 @@ package model.elements;
 
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import model.Map;
 
@@ -14,6 +15,8 @@ public class Element {
 	
 	private int indexAnimation;
 	private int indexElementAnimation;
+	
+	public UUID uuid;
 	
 	public String figure;
 
@@ -37,6 +40,7 @@ public class Element {
 		this.sprites = new ArrayList<Image>();
 		this.indexAnimation = 0;
 		this.indexElementAnimation = 0;
+		this.uuid = UUID.randomUUID();
 	}
 	
 	Element(Map map) {
@@ -44,6 +48,7 @@ public class Element {
 		this.sprites = new ArrayList<Image>();
 		this.indexAnimation = 0;
 		this.indexElementAnimation = 0;
+		this.uuid = UUID.randomUUID();
 	}
 	
 	public int getIndexAnimation() {

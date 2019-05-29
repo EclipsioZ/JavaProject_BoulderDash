@@ -180,15 +180,17 @@ public class Map extends Observable {
 		}
 	}
 	
-//	public void moveElementAt(int x, int y, Element element) {
-//		// If the asked position is in the map
-//		if (x >= 0 && x <= this.width && y >= 0 && y <= this.height) {
-//			element.setX(x);
-//			element.setY(y);
-//			element.setMap(this);
-//			map[x][y] = element;
-//		}
-//	}
+	public Boolean isInTheMap(Element element) {
+		Boolean ret = false;
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[i].length; j++) {
+				if(map[i][j].uuid == element.uuid && map[i][j].getX() == element.getX() && map[i][j].getY() == element.getY()) {
+					ret = true;
+				}
+			}
+		}
+		return ret;
+	}
 
 	public void printConsole() {
 		for (int i = 0; i < this.height; i++) {

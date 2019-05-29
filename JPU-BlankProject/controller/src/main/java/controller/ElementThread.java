@@ -39,22 +39,37 @@ public class ElementThread implements Runnable {
 		while (true) {
 			try {
 				Thread.sleep(160);
-				
-				synchronized (mobs) {
-				    Iterator<Mob> i = mobs.iterator();
-				    while (i.hasNext()) {
-				    	i.next().iaMove();
-				    }
+
+				List<Element> toRemove = new ArrayList<Element>();
+				for (Mob mob : mobs) {
+					if(mob.isAlive) {
+						mob.iaMove();
+					}
+					if (!map.isInTheMap(mob) || !mob.isAlive) {
+						toRemove.add(mob);
+					}
+					System.out.println(mob.isAlive);
+				}
+				for (Element toRem : toRemove) {
+					mobs.remove(toRem);
 				}
 
+				toRemove = new ArrayList<Element>();
 				for (PhysicElement physicElement : physicElements) {
 					physicElement.gravity();
+					if (!map.isInTheMap(physicElement)) {
+						toRemove.add(physicElement);
+					}
+				}
+				for (Element toRem : toRemove) {
+					physicElements.remove(toRem);
 				}
 
 				this.indexElementAnimation++;
 				if (this.indexElementAnimation > 3) {
 					this.indexElementAnimation = 0;
 				}
+
 				for (Element animatedElement : animatedElements) {
 					animatedElement.setIndexElementAnimation(this.indexElementAnimation);
 				}
