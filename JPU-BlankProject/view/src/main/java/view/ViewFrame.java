@@ -1,16 +1,13 @@
 package view;
 
-import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import contract.IController;
 import model.IModel;
-import model.Map;
 
 /**
  * The Class ViewFrame.
@@ -22,7 +19,7 @@ class ViewFrame extends JFrame implements KeyListener {
 	private IModel model;
 
 	private IController controller;
-
+	
 	long lastShoot = System.currentTimeMillis();
 	final long threshold = 200;
 
@@ -59,7 +56,6 @@ class ViewFrame extends JFrame implements KeyListener {
 		this.setSize(20 * 80, 20 * 80);
 		this.setLocationRelativeTo(null);
 		model.getMap().addObserver(panel);
-
 	}
 
 	public void keyTyped(final KeyEvent e) {

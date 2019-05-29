@@ -1,9 +1,11 @@
 package model.elements;
 
+import model.Map;
+
 public class Dirt extends Block {
 
-	public Dirt() {
-		super();
+	public Dirt(Map map) {
+		super(map);
 		this.figure = "3";
 	}
 

@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import model.Map;
@@ -12,18 +13,17 @@ import model.elements.PhysicElement;
 
 public class ElementThread implements Runnable {
 
-	ArrayList<Element> animatedElements;
-	ArrayList<Mob> mobs;
+	List<Element> animatedElements;
+	List<Mob> mobs;
 	List<PhysicElement> physicElements;
 	Map map;
 	int indexElementAnimation;
 
 	public ElementThread(Map map) {
 		this.map = map;
-		this.animatedElements = map.getAnimatedElements();
-		this.mobs = map.getMobs();
-		this.physicElements = map.getPhysicElements();
-		this.physicElements = Collections.synchronizedList(this.physicElements);
+		this.animatedElements = Collections.synchronizedList(map.getAnimatedElements());
+		this.mobs = Collections.synchronizedList(map.getMobs());
+		this.physicElements = Collections.synchronizedList(map.getPhysicElements());
 		this.indexElementAnimation = 0;
 	}
 
@@ -39,9 +39,12 @@ public class ElementThread implements Runnable {
 		while (true) {
 			try {
 				Thread.sleep(160);
-
-				for (Mob mob : mobs) {
-					mob.iaMove();
+				
+				synchronized (mobs) {
+				    Iterator<Mob> i = mobs.iterator();
+				    while (i.hasNext()) {
+				    	i.next().iaMove();
+				    }
 				}
 
 				for (PhysicElement physicElement : physicElements) {

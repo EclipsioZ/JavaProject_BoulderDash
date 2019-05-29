@@ -1,5 +1,7 @@
 package model.elements;
 
+import model.Map;
+
 public abstract class Mob extends Element {
 
 	private int explosionRadius;
@@ -7,11 +9,17 @@ public abstract class Mob extends Element {
 
 	public String direction;
 
-	public Mob() {
-		super();
+	public Mob(Map map) {
+		super(map);
 		explosionRadius = 3;
 		explosionType = "Air";
 		this.direction = "down";
+		
+		// Add this element to the animated elements
+		this.getMap().getAnimatedElements().add(this);
+		
+		// Add the mob to the mob list
+		this.getMap().getMobs().add(this);
 	}
 
 	public void explode() {
@@ -28,23 +36,10 @@ public abstract class Mob extends Element {
 					if (element != null) {
 						if (!(element instanceof Player) && !(element instanceof Wall)) {
 
-//							this.getMap().getAnimatedElements().remove(element);
-//							this.getMap().getMobs().remove(element);
-//							this.getMap().getPhysicElements().remove(element);
-
 							if (this.getExplosionType() == "Diamond") {
-								Element diamond = new Diamond();
-								diamond.setX(xCenter + x);
-								diamond.setY(yCenter + y);
-								diamond.setMap(this.getMap());
-								this.getMap().setElementAt(xCenter + x, yCenter + y, diamond);
-								this.getMap().getPhysicElements().add((PhysicElement) diamond);
+								this.getMap().setElementAt(xCenter + x, yCenter + y, new Diamond(getMap()));
 							} else {
-								Element air = new Air();
-								air.setX(xCenter + x);
-								air.setY(yCenter + y);
-								air.setMap(this.getMap());
-								this.getMap().setElementAt(xCenter + x, yCenter + y, air);
+								this.getMap().setElementAt(xCenter + x, yCenter + y, new Air(getMap()));
 							}
 						}
 					}
@@ -114,6 +109,12 @@ public abstract class Mob extends Element {
 			this.explode();
 		}
 		return true;
+	}
+	
+	@Override
+	public void pop() {
+		this.getMap().getAnimatedElements().remove(this);
+		this.getMap().getMobs().remove(this);
 	}
 
 }

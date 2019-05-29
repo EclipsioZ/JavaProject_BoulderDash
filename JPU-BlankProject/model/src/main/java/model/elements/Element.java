@@ -63,10 +63,8 @@ public class Element {
 
 	public void move(int x, int y) {
 		if(this.canMove(x, y)) {
+			map.setElementAt(this.getX(), this.getY(), new Air(map));
 			map.setElementAt(x, y, this);
-			map.setElementAt(this.getX(), this.getY(), new Air());
-			this.setX(x);
-			this.setY(y);
 		}
 	}
 	
@@ -92,6 +90,14 @@ public class Element {
 
 	public void setSprites(ArrayList<Image> sprites) {
 		this.sprites = sprites;
+	}
+	
+	public void pop() {
+		
+	}
+	
+	public void moveInLists() {
+		
 	}
 
 }

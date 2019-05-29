@@ -15,7 +15,7 @@ public final class Controller implements IController {
 
 	/** The model. */
 	private IModel model;
-
+	
 	// State of the game: 0 = in menu, 1 = in game
 	private int state;
 	
@@ -85,7 +85,7 @@ public final class Controller implements IController {
 	 * @see contract.IController#orderPerform(contract.ControllerOrder)
 	 */
 	public void orderPerform(final ControllerOrder controllerOrder) {
-		
+				
 		switch (controllerOrder) {
 		case UP:
 			if (this.state == 1) {

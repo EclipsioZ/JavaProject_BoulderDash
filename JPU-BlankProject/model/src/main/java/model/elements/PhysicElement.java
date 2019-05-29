@@ -1,9 +1,14 @@
 package model.elements;
 
+import model.Map;
+
 public abstract class PhysicElement extends Element {
 
-	PhysicElement() {
-		super();
+	PhysicElement(Map map) {
+		super(map);
+		
+		// Add this element to the physic elements
+		this.getMap().getPhysicElements().add(this);
 	}
 
 	@Override
@@ -37,6 +42,12 @@ public abstract class PhysicElement extends Element {
 	@Override
 	public Boolean handleCollision(Element element) {
 		return true;
+	}
+	
+	@Override
+	public void pop() {
+		this.getMap().getPhysicElements().remove(this);
+		this.getMap().getAnimatedElements().remove(this);
 	}
 
 }

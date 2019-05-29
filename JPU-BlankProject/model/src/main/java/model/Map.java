@@ -22,13 +22,13 @@ public class Map extends Observable {
 
 	public Element[][] map;
 	public List<PhysicElement> physicElements;
-	public ArrayList<Element> animatedElements;
-	public ArrayList<Mob> mobs;
+	public List<Element> animatedElements;
+	public List<Mob> mobs;
 
 	public Map() {
 		this.physicElements = Collections.synchronizedList(new ArrayList<PhysicElement>());
-		this.animatedElements = new ArrayList<Element>();
-		this.mobs = new ArrayList<Mob>();
+		this.animatedElements = Collections.synchronizedList(new ArrayList<Element>());
+		this.mobs = Collections.synchronizedList(new ArrayList<Mob>());
 	}
 
 	// Size of the map
@@ -38,11 +38,11 @@ public class Map extends Observable {
 		return physicElements;
 	}
 
-	public ArrayList<Element> getAnimatedElements() {
+	public List<Element> getAnimatedElements() {
 		return animatedElements;
 	}
 
-	public ArrayList<Mob> getMobs() {
+	public List<Mob> getMobs() {
 		return mobs;
 	}
 
@@ -78,45 +78,35 @@ public class Map extends Observable {
 				// TODO: factory: map[x][y] = Factory.createElement("air");
 				switch (element) {
 				case 0:
-					this.map[x][y] = new Air();
+					this.setElementAt(x, y, new Air(this));
 					break;
 				case 1:
-					this.map[x][y] = new Player();
+					this.setElementAt(x, y, new Player(this));
 					this.player = (Player) this.map[x][y]; // Add the player
-					this.animatedElements.add((Element) this.map[x][y]);
 					break;
 				case 2:
-					this.map[x][y] = new Wall();
+					this.setElementAt(x, y, new Wall(this));
 					break;
 				case 3:
-					this.map[x][y] = new Dirt();
+					this.setElementAt(x, y, new Dirt(this));
 					break;
 				case 4:
-					this.map[x][y] = new Rock();
-					this.animatedElements.add((Element) this.map[x][y]);
-					this.physicElements.add((PhysicElement) this.map[x][y]);
+					this.setElementAt(x, y, new Rock(this));
 					break;
 				case 5:
-					this.map[x][y] = new Diamond();
-					this.animatedElements.add((Element) this.map[x][y]);
-					this.physicElements.add((PhysicElement) this.map[x][y]);
+					this.setElementAt(x, y, new Diamond(this));
 					break;
 				case 6:
-					this.map[x][y] = new Mob1();
-					this.animatedElements.add((Element) this.map[x][y]);
-					this.mobs.add((Mob) this.map[x][y]);
+					this.setElementAt(x, y, new Mob1(this));
 					break;
 				case 7:
-					this.map[x][y] = new Mob2();
-					this.animatedElements.add((Element) this.map[x][y]);
-					this.mobs.add((Mob) this.map[x][y]);
+					this.setElementAt(x, y, new Mob2(this));
 					break;
 				case 8:
-					this.map[x][y] = new EndBlock();
-					this.animatedElements.add((Element) this.map[x][y]);
+					this.setElementAt(x, y, new EndBlock(this));
 					break;
 				default:
-					this.map[x][y] = new Air();
+					this.setElementAt(x, y, new Air(this));
 					break;
 				}
 			}
@@ -126,8 +116,6 @@ public class Map extends Observable {
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
 				map[i][j].setMap(this);
-				map[i][j].setX(i);
-				map[i][j].setY(j);
 			}
 		}
 
@@ -178,13 +166,29 @@ public class Map extends Observable {
 		return null;
 	}
 
-	public Element setElementAt(int x, int y, Element element) {
+	public void setElementAt(int x, int y, Element element) {
 		// If the asked position is in the map
 		if (x >= 0 && x <= this.width && y >= 0 && y <= this.height) {
+			Element elementAt = this.getElementAt(x, y);
+//			if(elementAt != null) {
+//				elementAt.pop();
+//			}
+			element.setX(x);
+			element.setY(y);
+			element.setMap(this);
 			map[x][y] = element;
 		}
-		return null;
 	}
+	
+//	public void moveElementAt(int x, int y, Element element) {
+//		// If the asked position is in the map
+//		if (x >= 0 && x <= this.width && y >= 0 && y <= this.height) {
+//			element.setX(x);
+//			element.setY(y);
+//			element.setMap(this);
+//			map[x][y] = element;
+//		}
+//	}
 
 	public void printConsole() {
 		for (int i = 0; i < this.height; i++) {

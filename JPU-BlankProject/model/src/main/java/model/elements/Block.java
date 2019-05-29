@@ -1,9 +1,11 @@
 package model.elements;
 
+import model.Map;
+
 public abstract class Block extends Element {
 
-	public Block() {
-		super();
+	public Block(Map map) {
+		super(map);
 	}
 	
 }

@@ -6,10 +6,13 @@ public class Player extends Element {
 
 	private int diamonds;
 
-	public Player() {
-		super();
+	public Player(Map map) {
+		super(map);
 		this.diamonds = 0;
 		this.figure = "1";
+		
+		// Add this element to the animated elements
+		this.getMap().getAnimatedElements().add(this);
 	}
 
 	public int getDiamonds() {
@@ -29,8 +32,9 @@ public class Player extends Element {
 		
 		int movementDirectionX = x - this.getX();
 		int movementDirectionY = y - this.getY();
-		
+				
 		Element el = this.getMap().getElementAt(x, y);
+
 		if (el instanceof Air || el instanceof Dirt) {
 			return true;
 		}
@@ -42,7 +46,7 @@ public class Player extends Element {
 		}
 		if (el instanceof Diamond) {
 			this.setDiamonds(this.getDiamonds() + 1);
-			this.getMap().setElementAt(x, y, new Air());
+			this.getMap().setElementAt(x, y, new Air(getMap()));
 			this.getMap().getPhysicElements().remove(el);
 			return true;
 		}
@@ -56,6 +60,11 @@ public class Player extends Element {
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public void pop() {
+		this.getMap().getAnimatedElements().remove(this);
 	}
 
 }
