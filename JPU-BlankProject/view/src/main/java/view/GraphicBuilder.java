@@ -2,7 +2,10 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.TexturePaint;
+import java.awt.geom.AffineTransform;
 
 import model.Animation;
 import model.IModel;
@@ -46,8 +49,44 @@ public class GraphicBuilder {
 //		String content = "433111111111111\r\n141111111111111\r\n415111111111111\r\n141111111111111\r\n415111111111111\r\n141111111111111\r\n415111111111111\r\n141111111111111\r\n415111111111111\r\n415111111111111";
 //		map.setMapFromString(content);
 		
-		int spriteSize = 50;
+		int spriteSize = 80;
 		
+		Graphics2D gg = (Graphics2D) graphics;
+
+		gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		int VIEWPORT_SIZE_X = 15 * 80;
+
+		int VIEWPORT_SIZE_Y = 15 * 80;
+
+		int offsetMaxX = map.getWidth() * 80 - VIEWPORT_SIZE_X;
+		int offsetMaxY = map.getHeight() * 80 - VIEWPORT_SIZE_Y;
+
+		int offsetMinX = 8 * 80 - VIEWPORT_SIZE_X / 2;
+		int offsetMinY = 8 * 80 - VIEWPORT_SIZE_Y / 2;
+
+		int camX = map.getPlayer().getX() * 80 - VIEWPORT_SIZE_X / 2;
+		int camY = map.getPlayer().getY() * 80 - VIEWPORT_SIZE_Y / 2;
+
+        if (camX > offsetMaxX) {
+            camX = offsetMaxX;
+        }
+
+        if (camY > offsetMaxY) {
+            camY = offsetMaxY;
+        }
+
+        if (camX < offsetMinX) {
+            camX = offsetMinX;
+        }
+
+        if (camY < offsetMinY) {
+            camY = offsetMinY;
+        }
+
+		gg.translate(-camX, -camY);
+
+		AffineTransform old = gg.getTransform();
+		gg.setTransform(old);
 		
 		for (int y = 0; y < map.getHeight(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
