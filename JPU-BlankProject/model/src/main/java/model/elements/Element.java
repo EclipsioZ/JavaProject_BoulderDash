@@ -19,6 +19,8 @@ public class Element {
 	public UUID uuid;
 	
 	public String figure;
+	
+	public Boolean isAlive;
 
 	public int getX() {
 		return x;
@@ -41,6 +43,7 @@ public class Element {
 		this.indexAnimation = 0;
 		this.indexElementAnimation = 0;
 		this.uuid = UUID.randomUUID();
+		this.isAlive = true;
 	}
 	
 	Element(Map map) {
@@ -49,6 +52,7 @@ public class Element {
 		this.indexAnimation = 0;
 		this.indexElementAnimation = 0;
 		this.uuid = UUID.randomUUID();
+		this.isAlive = true;
 	}
 	
 	public int getIndexAnimation() {

@@ -169,7 +169,7 @@ public class Map extends Observable {
 	public void setElementAt(int x, int y, Element element) {
 		// If the asked position is in the map
 		if (x >= 0 && x <= this.width && y >= 0 && y <= this.height) {
-			Element elementAt = this.getElementAt(x, y);
+//			Element elementAt = this.getElementAt(x, y);
 //			if(elementAt != null) {
 //				elementAt.pop();
 //			}

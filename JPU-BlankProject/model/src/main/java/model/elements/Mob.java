@@ -9,16 +9,12 @@ public abstract class Mob extends Element {
 
 	public String direction;
 	
-	public Boolean isAlive;
-
 	public Mob(Map map) {
 		super(map);
 		explosionRadius = 3;
 		explosionType = "Air";
 		this.direction = "down";
-		
-		this.isAlive = true;
-		
+				
 		// Add this element to the animated elements
 		this.getMap().getAnimatedElements().add(this);
 		
@@ -39,6 +35,7 @@ public abstract class Mob extends Element {
 					Element element = this.getMap().getElementAt(xCenter + x, yCenter + y);
 					if (element != null) {
 						if (!(element instanceof Player) && !(element instanceof Wall)) {
+							element.isAlive = false;
 							if (this.getExplosionType() == "Diamond") {
 								this.getMap().setElementAt(xCenter + x, yCenter + y, new Diamond(getMap()));
 							} else {
@@ -53,9 +50,6 @@ public abstract class Mob extends Element {
 		
 		this.getMap().setElementAt(this.getX(), this.getY(), new Air(this.getMap()));
 		this.isAlive = false;
-//		System.out.println(this.getX() + " ; " + this.getY() + " : " + this.getMap().getElementAt(this.getX(), this.getY()));
-		System.out.println(this.isAlive);
-		this.getMap().hasChanged();
 		
 	}
 
