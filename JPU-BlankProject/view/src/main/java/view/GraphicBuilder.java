@@ -14,6 +14,7 @@ import model.elements.Diamond;
 import model.elements.Dirt;
 import model.elements.Element;
 import model.elements.EndBlock;
+import model.elements.Explode;
 import model.elements.Mob1;
 import model.elements.Mob2;
 import model.elements.Player;
@@ -55,26 +56,26 @@ public class GraphicBuilder {
 				
 				if(element instanceof Player) {
 					//Background
-					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+					graphics.drawImage(Texture.background[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 					//Texture for Player
 					graphics.drawImage(Texture.playerrest[element.getIndexElementAnimation()%2], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				
 				if(element instanceof Rock) {
 					//Background
-					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+					graphics.drawImage(Texture.background[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 					//Texture for Rock
 					graphics.drawImage(Texture.rock[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				
 				if(element instanceof Dirt) {
 					//Texture for Dirt
-					graphics.drawImage(Texture.dirt[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+					graphics.drawImage(Texture.dirt[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				
 				if(element instanceof Diamond) {
 					//Background
-					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+					graphics.drawImage(Texture.background[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 					//Texture for Diamond
 					graphics.drawImage(Texture.diamond[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
@@ -87,30 +88,35 @@ public class GraphicBuilder {
 				
 				if(element instanceof EndBlock) {
 					//Background
-					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+					graphics.drawImage(Texture.background[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 					//Texture for Wall
 					graphics.drawImage(Texture.endblock[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				
 				if(element instanceof Mob1) {
 					//Background
-					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+					graphics.drawImage(Texture.background[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 					//Texture for Wall
 					graphics.drawImage(Texture.mob1[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				
 				if(element instanceof Mob2) {
 					//Background
-					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+					graphics.drawImage(Texture.background[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 					//Texture for Wall
 					graphics.drawImage(Texture.mob2[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				
-				if(element instanceof Air) {
+				if(element instanceof Explode) {
 					//Background
-					graphics.drawImage(Texture.background[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+					graphics.drawImage(Texture.background[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 					//Texture for Air
-					graphics.drawImage(Texture.air[0], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+					graphics.drawImage(Texture.explode[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+				}
+				
+				if(element instanceof Air) {
+					//Texture for Air
+					graphics.drawImage(Texture.air[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 			}
 		}

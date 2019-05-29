@@ -12,10 +12,10 @@ public class Texture {
 	private static int width = 16;
 	
 	//Creating block objects for different animations
-	public static BufferedImage[] background = new BufferedImage[1]; //ID = 9
-	public static BufferedImage[] air = new BufferedImage[1]; // ID = 0
+	public static BufferedImage[] background = new BufferedImage[4]; //ID = 9
+	public static BufferedImage[] air = new BufferedImage[4]; // ID = 0
 	public static BufferedImage[] wall = new BufferedImage[1]; // ID = 2
-	public static BufferedImage[] dirt = new BufferedImage[1]; // ID = 3
+	public static BufferedImage[] dirt = new BufferedImage[4]; // ID = 3
 	public static BufferedImage[] rock = new BufferedImage[4]; // ID = 4
 	public static BufferedImage[] diamond = new BufferedImage[4]; // ID = 5
 	public static BufferedImage[] mob1 = new BufferedImage[4]; // ID = 6
@@ -73,22 +73,81 @@ public class Texture {
 	// return tex;
 	// }
 	
-	public void getTexture() {
+	public void getTexture(int world) {
+		
+		int textureworld = 0;
+		int dirtanimated = 0;
+		int backgroundanimated = 0;
+		int rockanimated = 0;
+		
+		switch (world) {
+		case 1:
+			textureworld = 0;
+			rockanimated = 1;
+			break;
+		case 2:
+			textureworld = 4;
+			rockanimated = 1;
+			break;
+		case 3:
+			textureworld = 8;
+			rockanimated = 1;
+			dirtanimated = 1;
+			backgroundanimated = 1;
+			break;
+		case 4:
+			textureworld = 12;
+			rockanimated = 1;
+			backgroundanimated = 1;
+			break;
+		case 5:
+			textureworld = 16;
+			dirtanimated = 1;
+			backgroundanimated = 1;
+			break;
+		case 6:
+			textureworld = 20;
+			rockanimated = 1;
+			dirtanimated = 1;
+			backgroundanimated = 1;
+			break;
+		default:
+			textureworld = 0;
+			break;
+		}
+		
 		
 		//Texture for Blocks
-		background[0] = bs.grabImage(3, 1, width, height);
-		air[0] = null;
-		wall[0] = bs.grabImage(1, 1, width, height);
-		dirt[0] = bs.grabImage(2, 1, width, height);
+		wall[0] = bs.grabImage(1, textureworld + 1, width, height);
+		dirt[0] = bs.grabImage(2, textureworld + 1, width, height);
 		
 		//Animations with 4 frames
 		for(int x = 0; x < 4; x++) {
-			rock[x] = bs.grabImage(4, x+1, width, height);
-			diamond[x] = bs.grabImage(5, x+1, width, height);
-			mob1[x] = bs.grabImage(10, x+1, width, height);
-			mob2[x] = bs.grabImage(11, x+1, width, height);
-			endblock[x] = bs.grabImage(7, x+1, width, height);
-			explode[x] = bs.grabImage(12, x+1, width, height);
+			if(backgroundanimated == 1) {
+				background[x] = bs.grabImage(3, textureworld + (x+1), width, height);
+				air[x] = bs.grabImage(3, textureworld + (x+1), width, height);
+			}
+			else {
+				background[x] = bs.grabImage(3, textureworld + 1, width, height);
+				air[x] = bs.grabImage(3, textureworld + 1, width, height);
+			}
+			if(dirtanimated == 1) {
+				dirt[x] = bs.grabImage(2, textureworld + (x+1), width, height);
+			}
+			else {
+				dirt[x] = bs.grabImage(2, textureworld + 1, width, height);
+			}
+			if(rockanimated == 1) {
+				rock[x] = bs.grabImage(4, textureworld + (x+1), width, height);
+			}
+			else {
+				rock[x] = bs.grabImage(4, textureworld + 1, width, height);
+			}
+			diamond[x] = bs.grabImage(5, textureworld + (x+1), width, height);
+			mob1[x] = bs.grabImage(10, textureworld + (x+1), width, height);
+			mob2[x] = bs.grabImage(11, textureworld + (x+1), width, height);
+			endblock[x] = bs.grabImage(7, textureworld + (x+1), width, height);
+			explode[x] = bs.grabImage(12, textureworld + (x+1), width, height);
 			
 		}
 		//Texture for player

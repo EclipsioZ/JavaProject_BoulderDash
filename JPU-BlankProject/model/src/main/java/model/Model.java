@@ -22,11 +22,11 @@ public final class Model extends Observable implements IModel {
 	Texture tex = new Texture();	
 
 	public Model() {
-        tex.getTexture();
+        tex.getTexture(3);
 		this.helloWorld = new HelloWorld();
 		this.map = new Map();
 		bdd = new BDDGetData();
-        bdd.loadLevel("19", map);
+        bdd.loadLevel("3", map);
 	}
 
 	public HelloWorld getHelloWorld() {
