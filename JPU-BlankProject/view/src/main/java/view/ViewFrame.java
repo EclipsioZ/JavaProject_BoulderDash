@@ -21,7 +21,7 @@ class ViewFrame extends JFrame implements KeyListener {
 	private IController controller;
 	
 	long lastShoot = System.currentTimeMillis();
-	final long threshold = 200;
+	final long threshold = 20;
 
 	private static final long serialVersionUID = -697358409737458175L;
 
@@ -53,7 +53,7 @@ class ViewFrame extends JFrame implements KeyListener {
 		this.addKeyListener(this);
 		final ViewPanel panel = new ViewPanel(new GraphicBuilder(), model);
 		this.setContentPane(panel);
-		this.setSize(20 * 80, 20 * 80);
+		this.setSize(10 * 80, 10 * 80 + 20);
 		this.setLocationRelativeTo(null);
 		model.getMap().addObserver(panel);
 	}

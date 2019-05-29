@@ -10,6 +10,7 @@ import model.elements.Air;
 import model.elements.Block;
 import model.elements.Diamond;
 import model.elements.Element;
+import model.elements.Explode;
 import model.elements.Mob;
 import model.elements.PhysicElement;
 
@@ -61,22 +62,26 @@ public class ElementThread implements Runnable {
 						physicElement.gravity();
 					} else {
 						toRemove.add(physicElement);
-						this.map.setElementAt(physicElement.getX(), physicElement.getY(), new Air(this.map));
+						this.map.setElementAt(physicElement.getX(), physicElement.getY(), new Explode(this.map));
 					}
 				}
 				for (Element toRem : toRemove) {
 					physicElements.remove(toRem);
 				}
 
-				this.indexElementAnimation++;
-				if (this.indexElementAnimation > 3) {
-					this.indexElementAnimation = 0;
-				}
-
 				toRemove = new ArrayList<Element>();
-				for (Element animatedElement : animatedElements) {
+				List<Element> animatedElementsClone = new ArrayList<Element>(animatedElements);
+				for (Element animatedElement : animatedElementsClone) {
 					if (animatedElement.isAlive) {
-						animatedElement.setIndexElementAnimation(this.indexElementAnimation);
+						if(animatedElement.getIndexElementAnimation() <= animatedElement.getMaxAnimations() - 2) {
+							animatedElement.setIndexElementAnimation(animatedElement.getIndexElementAnimation() + 1);
+						} else {
+							animatedElement.setIndexElementAnimation(0);
+							if(animatedElement instanceof Explode) {
+								map.setElementAt(animatedElement.getX(), animatedElement.getY(), new Air(map));
+								toRemove.add(animatedElement);
+							}
+						}
 					} else {
 						toRemove.add(animatedElement);
 					}

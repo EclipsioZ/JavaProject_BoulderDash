@@ -11,6 +11,8 @@ public class Player extends Element {
 		this.diamonds = 0;
 		this.figure = "1";
 		
+		this.setMaxAnimations(2);
+		
 		// Add this element to the animated elements
 		this.getMap().getAnimatedElements().add(this);
 	}
@@ -35,7 +37,7 @@ public class Player extends Element {
 				
 		Element el = this.getMap().getElementAt(x, y);
 
-		if (el instanceof Air || el instanceof Dirt) {
+		if (el instanceof Air || el instanceof Dirt || el instanceof Explode) {
 			return true;
 		}
 		if (el instanceof Rock) {

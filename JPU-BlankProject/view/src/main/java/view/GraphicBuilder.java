@@ -54,18 +54,17 @@ public class GraphicBuilder {
 		Graphics2D gg = (Graphics2D) graphics;
 
 		gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		int VIEWPORT_SIZE_X = 15 * 80;
+		int VIEWPORT_SIZE_X = 10 * 80;
+		int VIEWPORT_SIZE_Y = 10 * 80;
 
-		int VIEWPORT_SIZE_Y = 15 * 80;
-
-		int offsetMaxX = map.getWidth() * 80 - VIEWPORT_SIZE_X;
+		int offsetMaxX = (int) (map.getWidth() * 80 - VIEWPORT_SIZE_X);
 		int offsetMaxY = map.getHeight() * 80 - VIEWPORT_SIZE_Y;
 
-		int offsetMinX = 8 * 80 - VIEWPORT_SIZE_X / 2;
-		int offsetMinY = 8 * 80 - VIEWPORT_SIZE_Y / 2;
-
-		int camX = map.getPlayer().getX() * 80 - VIEWPORT_SIZE_X / 2;
-		int camY = map.getPlayer().getY() * 80 - VIEWPORT_SIZE_Y / 2;
+		int offsetMinX = 10 * 80 - VIEWPORT_SIZE_X;
+		int offsetMinY = 10 * 80 - VIEWPORT_SIZE_Y;
+		
+		int camX = (int) (map.getPlayer().getX() * 80 - Math.floor(VIEWPORT_SIZE_X / 2)) + 40;
+		int camY = (int) (map.getPlayer().getY() * 80 - Math.floor(VIEWPORT_SIZE_Y / 2)) + 40;		
 
         if (camX > offsetMaxX) {
             camX = offsetMaxX;
@@ -82,6 +81,7 @@ public class GraphicBuilder {
         if (camY < offsetMinY) {
             camY = offsetMinY;
         }
+        
 
 		gg.translate(-camX, -camY);
 
@@ -97,7 +97,7 @@ public class GraphicBuilder {
 					//Background
 					graphics.drawImage(Texture.background[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 					//Texture for Player
-					graphics.drawImage(Texture.playerrest[element.getIndexElementAnimation()%2], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
+					graphics.drawImage(Texture.playerrest[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				
 				if(element instanceof Rock) {
@@ -128,28 +128,24 @@ public class GraphicBuilder {
 				if(element instanceof EndBlock) {
 					//Background
 					graphics.drawImage(Texture.background[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
-					//Texture for Wall
 					graphics.drawImage(Texture.endblock[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				
 				if(element instanceof Mob1) {
 					//Background
 					graphics.drawImage(Texture.background[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
-					//Texture for Wall
 					graphics.drawImage(Texture.mob1[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				
 				if(element instanceof Mob2) {
 					//Background
 					graphics.drawImage(Texture.background[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
-					//Texture for Wall
 					graphics.drawImage(Texture.mob2[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				
 				if(element instanceof Explode) {
 					//Background
 					graphics.drawImage(Texture.background[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
-					//Texture for Air
 					graphics.drawImage(Texture.explode[element.getIndexElementAnimation()], x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
 				}
 				
@@ -159,6 +155,12 @@ public class GraphicBuilder {
 				}
 			}
 		}
+		
+		// SHOW CAMERA
+//		graphics.setColor(Color.RED);
+//		graphics.fillRect(camX + VIEWPORT_SIZE_X / 2 - 10, camY + VIEWPORT_SIZE_Y / 2 - 10, 20, 20);
+//		graphics.fillRect(camX + VIEWPORT_SIZE_X / 2 + 80 * 3 - 10, camY + VIEWPORT_SIZE_Y / 2 - 10, 20, 20);
+		
 	}
 	
 		public void loadAnimation(){

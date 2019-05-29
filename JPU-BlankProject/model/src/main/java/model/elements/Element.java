@@ -13,9 +13,10 @@ public class Element {
 	private int x;
 	private int y;
 	
-	private int indexAnimation;
+	private int indexAnimation; // TODO: REMOVE
 	private int indexElementAnimation;
-	
+	private int maxAnimations;
+
 	public UUID uuid;
 	
 	public String figure;
@@ -44,6 +45,7 @@ public class Element {
 		this.indexElementAnimation = 0;
 		this.uuid = UUID.randomUUID();
 		this.isAlive = true;
+		this.maxAnimations = 4;
 	}
 	
 	Element(Map map) {
@@ -53,6 +55,7 @@ public class Element {
 		this.indexElementAnimation = 0;
 		this.uuid = UUID.randomUUID();
 		this.isAlive = true;
+		this.maxAnimations = 4;
 	}
 	
 	public int getIndexAnimation() {
@@ -107,6 +110,14 @@ public class Element {
 	
 	public void moveInLists() {
 		
+	}
+
+	public int getMaxAnimations() {
+		return this.maxAnimations;
+	}
+	
+	public void setMaxAnimations(int maxAnimations) {
+		this.maxAnimations = maxAnimations;
 	}
 
 }

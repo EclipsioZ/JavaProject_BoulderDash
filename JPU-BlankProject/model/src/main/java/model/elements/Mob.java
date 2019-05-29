@@ -39,7 +39,7 @@ public abstract class Mob extends Element {
 							if (this.getExplosionType() == "Diamond") {
 								this.getMap().setElementAt(xCenter + x, yCenter + y, new Diamond(getMap()));
 							} else {
-								this.getMap().setElementAt(xCenter + x, yCenter + y, new Air(getMap()));
+								this.getMap().setElementAt(xCenter + x, yCenter + y, new Explode(getMap()));
 							}
 						}
 					}
