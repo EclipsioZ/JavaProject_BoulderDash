@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.Random;
+
 import contract.ControllerOrder;
 import contract.IController;
 import model.IModel;
@@ -112,6 +114,8 @@ public final class Controller implements IController {
 			}
 			break;
 		default:
+			Random r = new Random();
+			model.loadMap(r.nextInt(6), "13");
 			break;
 		}
 //		model.getMap().printConsole();

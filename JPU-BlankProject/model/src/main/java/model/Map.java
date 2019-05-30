@@ -26,11 +26,15 @@ public class Map extends Observable {
 	public List<PhysicElement> physicElements;
 	public List<Element> animatedElements;
 	public List<Mob> mobs;
+	
+	public String levelId;
+	public Boolean running;
 
 	public Map() {
 		this.physicElements = Collections.synchronizedList(new ArrayList<PhysicElement>());
 		this.animatedElements = Collections.synchronizedList(new ArrayList<Element>());
 		this.mobs = Collections.synchronizedList(new ArrayList<Mob>());
+		this.running = true;
 	}
 
 	// Size of the map

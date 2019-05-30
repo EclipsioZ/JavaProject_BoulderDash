@@ -25,7 +25,7 @@ public final class Model extends Observable implements IModel {
 		this.helloWorld = new HelloWorld();
 		this.map = new Map();
 		bdd = new BDDGetData();
-		bdd.loadLevel("19", map);
+		bdd.loadLevel("34", map);
 		map.setModel(this);
 	}
 
@@ -57,11 +57,24 @@ public final class Model extends Observable implements IModel {
 	}
 
 	public void resetMap() {
-		tex.getTexture(5);
+		map.running = false;
+		tex.getTexture(tex.idTexture);
 		map.getPhysicElements().clear();
 		map.getMobs().clear();
 		map.getAnimatedElements().clear();
-		bdd.loadLevel("20", map);
+		bdd.loadLevel(map.levelId, map);
 		map.setModel(this);
+		map.running = true;
+	}
+	
+	public void loadMap(int idTexture, String mapId) {
+		map.running = false;
+		tex.getTexture(idTexture);
+		map.getPhysicElements().clear();
+		map.getMobs().clear();
+		map.getAnimatedElements().clear();
+		bdd.loadLevel(mapId, map);
+		map.setModel(this);
+		map.running = true;
 	}
 }

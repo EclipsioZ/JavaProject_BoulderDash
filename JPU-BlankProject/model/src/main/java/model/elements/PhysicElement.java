@@ -33,12 +33,12 @@ public abstract class PhysicElement extends Element {
 			checkCanKillPlayer(this.getX(), this.getY() + 1);
 		} else if ((leftEl instanceof Air && downLeftEl instanceof Air) || downLeftEl instanceof Mob) {
 			downLeftEl.handleCollision(this);
-			this.move(this.getX() - 1, this.getY() + 1);
-			checkCanKillPlayer(this.getX(), this.getY() + 1);
+			this.move(this.getX() - 1, this.getY());
+			checkCanKillPlayer(this.getX(), this.getY());
 		} else if ((rightEl instanceof Air && downRightEl instanceof Air) || downRightEl instanceof Mob) {
 			downRightEl.handleCollision(this);
-			this.move(this.getX() + 1, this.getY() + 1);
-			checkCanKillPlayer(this.getX(), this.getY() + 1);
+			this.move(this.getX() + 1, this.getY());
+			checkCanKillPlayer(this.getX(), this.getY());
 		}
 		
 		

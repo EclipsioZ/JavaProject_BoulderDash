@@ -49,6 +49,7 @@ public class BDDGetData {
 				map.setWidth(Integer.parseInt(result.getString("width")));
 				map.setMapFromString(result.getString("content"));
 				map.setPosEndBlock(new int[Integer.parseInt(endBlockX)][Integer.parseInt(endBlockY)]);
+				map.levelId = id;
 			}
 			result.close();
 			state.close();

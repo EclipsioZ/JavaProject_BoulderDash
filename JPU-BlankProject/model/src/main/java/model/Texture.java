@@ -10,6 +10,7 @@ public class Texture {
 	
 	private static int height = 16;
 	private static int width = 16;
+	public int idTexture;
 	
 	//Creating block objects for different animations
 	public static BufferedImage[] background = new BufferedImage[4]; //ID = 9
@@ -74,6 +75,8 @@ public class Texture {
 	// }
 	
 	public void getTexture(int world) {
+		
+		idTexture = world;
 		
 		int textureworld = 0;
 		int dirtanimated = 0;

@@ -39,5 +39,7 @@ public interface IModel {
 	
 	void resetMap();
 
+	void loadMap(int idTexture, String mapId);
+
 }
 
