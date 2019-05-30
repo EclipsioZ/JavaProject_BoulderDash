@@ -17,16 +17,16 @@ public final class Model extends Observable implements IModel {
 	private HelloWorld helloWorld;
 	Map map;
 	BDDGetData bdd;
-		
-	Texture tex = new Texture();	
 
-	public Model() {
-        tex.getTexture(5);
+	Texture tex = new Texture();
+
+	public Model() throws Exception {
+		tex.getTexture(3);
 		this.helloWorld = new HelloWorld();
 		this.map = new Map();
 		bdd = new BDDGetData();
-        bdd.loadLevel("20", map);
-        map.setModel(this);
+		bdd.loadLevel("19", map);
+		map.setModel(this);
 	}
 
 	public HelloWorld getHelloWorld() {
@@ -44,9 +44,9 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void loadHelloWorld(String code) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	public Texture getInstanceTexture() {
 		return tex;
 	}
@@ -55,18 +55,13 @@ public final class Model extends Observable implements IModel {
 	public Map getMap() {
 		return this.map;
 	}
-	
+
 	public void resetMap() {
-        tex.getTexture(5);
-		for (int i = 0; i < map.getMap().length; i++) {
-			for (int j = 0; j < map.getMap()[i].length; j++) {
-				map.getPhysicElements().clear();
-				map.getMobs().clear();
-				map.getAnimatedElements().clear();
-			}
-		}
-//		map = new Map();
-        bdd.loadLevel("20", map);
-        map.setModel(this);
-    }
+		tex.getTexture(5);
+		map.getPhysicElements().clear();
+		map.getMobs().clear();
+		map.getAnimatedElements().clear();
+		bdd.loadLevel("20", map);
+		map.setModel(this);
+	}
 }

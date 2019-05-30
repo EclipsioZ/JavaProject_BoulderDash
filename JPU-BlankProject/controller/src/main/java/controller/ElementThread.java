@@ -2,17 +2,15 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import model.Map;
 import model.elements.Air;
-import model.elements.Block;
-import model.elements.Diamond;
 import model.elements.Element;
 import model.elements.Explode;
 import model.elements.Mob;
 import model.elements.PhysicElement;
+import model.elements.Player;
 
 public class ElementThread implements Runnable {
 
@@ -55,7 +53,8 @@ public class ElementThread implements Runnable {
 				Thread.sleep(160);
 
 				List<Element> toRemove = new ArrayList<Element>();
-				for (Mob mob : mobs) {
+				List<Mob> mobsClone = new ArrayList<Mob>(mobs);
+				for (Mob mob : mobsClone) {
 					if (mob.isAlive) {
 						mob.iaMove();
 					} else {
@@ -89,7 +88,9 @@ public class ElementThread implements Runnable {
 						} else {
 							animatedElement.setIndexElementAnimation(0);
 							if(animatedElement instanceof Explode) {
-								map.setElementAt(animatedElement.getX(), animatedElement.getY(), new Air(map));
+								if(!(map.getElementAt(animatedElement.getX(), animatedElement.getY()) instanceof Player)) {
+									map.setElementAt(animatedElement.getX(), animatedElement.getY(), new Air(map));
+								}
 								toRemove.add(animatedElement);
 							}
 						}

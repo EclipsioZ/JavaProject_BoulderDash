@@ -28,20 +28,22 @@ public class BDDGetData {
 			state.execute();
 
 			ResultSet result = state.getResultSet();
+			
+//			if(result.getFetchSize() != 1) {
+//			}
 
 			// For each occurrence
 			while (result.next()) {
-				System.out.println("Loaded map:");
-				System.out.println(result.getString("content"));
-				System.out.println("height: " + result.getString("height"));
-				System.out.println("width: " + result.getString("width"));
-				System.out.println("id: " + result.getString("id"));
-				System.out.println("endBlockX: " + result.getString("endBlock").split(";")[0]);
-				System.out.println("endBlockY: " + result.getString("endBlock").split(";")[1]);
+//				System.out.println("Loaded map:");
+//				System.out.println(result.getString("content"));
+//				System.out.println("height: " + result.getString("height"));
+//				System.out.println("width: " + result.getString("width"));
+//				System.out.println("id: " + result.getString("id"));
+//				System.out.println("endBlockX: " + result.getString("endBlock").split(";")[0]);
+//				System.out.println("endBlockY: " + result.getString("endBlock").split(";")[1]);
 				
 				String endBlockX = result.getString("endBlock").split(";")[0];
 				String endBlockY = result.getString("endBlock").split(";")[1];
-				
 				
 				map.setHeight(Integer.parseInt(result.getString("height")));
 				map.setWidth(Integer.parseInt(result.getString("width")));
@@ -50,11 +52,18 @@ public class BDDGetData {
 			}
 			result.close();
 			state.close();
+			
+			if(map.getMap() == null) {
+				try {
+					throw new Exception("Incorrect map id: " + id);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }
