@@ -62,8 +62,14 @@ public class ElementThread implements Runnable {
 					List<PhysicElement> physicElementsClone = new ArrayList<PhysicElement>(physicElements);
 					for (PhysicElement physicElement : physicElementsClone) {
 						if (physicElement.isAlive && map.isInTheMap(physicElement)) {
-							physicElement.checkCanKillPlayer(physicElement.getX(), physicElement.getY());
-							physicElement.gravity();
+							if(physicElement.hasMoved) {
+								physicElement.checkCanKillPlayer(physicElement.getX(), physicElement.getY());
+							}
+							if(physicElement.gravity()) {
+								physicElement.hasMoved = true;
+							} else {
+								physicElement.hasMoved = false;
+							}
 						} else {
 							toRemove.add(physicElement);
 							this.map.setElementAt(physicElement.getX(), physicElement.getY(), new Explode(this.map));

@@ -3,9 +3,13 @@ package model.elements;
 import model.Map;
 
 public abstract class PhysicElement extends Element {
+	
+	public Boolean hasMoved;
 
 	PhysicElement(Map map) {
 		super(map);
+		
+		this.hasMoved = false;
 
 		// Add this element to the physic elements
 		this.getMap().getPhysicElements().add(this);
@@ -20,7 +24,7 @@ public abstract class PhysicElement extends Element {
 		return false;
 	}
 
-	public void gravity() {
+	public Boolean gravity() {
 		Element downEl = this.getMap().getElementAt(this.getX(), this.getY() + 1);
 		Element rightEl = this.getMap().getElementAt(this.getX() + 1, this.getY());
 		Element leftEl = this.getMap().getElementAt(this.getX() - 1, this.getY());
@@ -30,16 +34,19 @@ public abstract class PhysicElement extends Element {
 		if (downEl instanceof Air || downEl instanceof Mob) {
 			downEl.handleCollision(this);
 			this.move(this.getX(), this.getY() + 1);
-		} else if ((leftEl instanceof Air && downLeftEl instanceof Air) || downLeftEl instanceof Mob) {
+			return true;
+		}
+		if ((leftEl instanceof Air && downLeftEl instanceof Air) || downLeftEl instanceof Mob) {
 			downLeftEl.handleCollision(this);
 			this.move(this.getX() - 1, this.getY());
-		} else if ((rightEl instanceof Air && downRightEl instanceof Air) || downRightEl instanceof Mob) {
+			return true;
+		}
+		if ((rightEl instanceof Air && downRightEl instanceof Air) || downRightEl instanceof Mob) {
 			downRightEl.handleCollision(this);
 			this.move(this.getX() + 1, this.getY());
+			return true;
 		}
-		
-		
-
+		return false;
 	}
 	
 	public void checkCanKillPlayer(int x, int y) {

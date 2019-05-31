@@ -21,7 +21,7 @@ class ViewFrame extends JFrame implements KeyListener {
 	private IController controller;
 	
 	long lastShoot = System.currentTimeMillis();
-	final long threshold = 20;
+	final long threshold = 80;
 
 	private static final long serialVersionUID = -697358409737458175L;
 
