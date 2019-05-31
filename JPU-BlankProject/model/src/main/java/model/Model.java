@@ -71,12 +71,16 @@ public final class Model extends Observable implements IModel {
 		tex.getTexture(tex.idTexture);
 		bdd.loadLevel(map.levelId, map);
 		map.setModel(this);
+		map.setTimer(120000);
+		map.levelEnded = false;
 	}
 	
 	public void loadMap(int idTexture, String mapId) {
 		tex.getTexture(idTexture);
 		bdd.loadLevel(mapId, map);
 		map.setModel(this);
+		map.setTimer(120000);
+		map.levelEnded = false;
 	}
 
 }

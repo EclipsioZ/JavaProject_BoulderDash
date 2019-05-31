@@ -121,6 +121,9 @@ public class ElementThread implements Runnable {
 					}
 					
 					map.setTimer(map.getTimer() - 160);
+					if(map.getTimer() < 0) {
+						map.getPlayer().die();
+					}
 
 					map.setMapHasChanged(this.map.getMap());
 				} catch (InterruptedException e) {
