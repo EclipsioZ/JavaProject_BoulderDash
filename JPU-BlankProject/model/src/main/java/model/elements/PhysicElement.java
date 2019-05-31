@@ -30,15 +30,12 @@ public abstract class PhysicElement extends Element {
 		if (downEl instanceof Air || downEl instanceof Mob) {
 			downEl.handleCollision(this);
 			this.move(this.getX(), this.getY() + 1);
-			checkCanKillPlayer(this.getX(), this.getY() + 1);
 		} else if ((leftEl instanceof Air && downLeftEl instanceof Air) || downLeftEl instanceof Mob) {
 			downLeftEl.handleCollision(this);
 			this.move(this.getX() - 1, this.getY());
-			checkCanKillPlayer(this.getX(), this.getY());
 		} else if ((rightEl instanceof Air && downRightEl instanceof Air) || downRightEl instanceof Mob) {
 			downRightEl.handleCollision(this);
 			this.move(this.getX() + 1, this.getY());
-			checkCanKillPlayer(this.getX(), this.getY());
 		}
 		
 		
@@ -46,9 +43,10 @@ public abstract class PhysicElement extends Element {
 	}
 	
 	public void checkCanKillPlayer(int x, int y) {
-		Element downEl = this.getMap().getElementAt(x, y);
-		if (!downEl.handleCollision(this)) {
-			this.move(this.getX(), this.getY() + 1);
+		Element downEl = this.getMap().getElementAt(x, y + 1);
+		// If there is a down element
+		if(downEl != null) {
+			downEl.handleCollision(this);
 		}
 	}
 

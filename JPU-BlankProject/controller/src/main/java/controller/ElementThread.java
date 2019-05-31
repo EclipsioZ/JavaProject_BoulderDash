@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import model.IModel;
 import model.Map;
 import model.elements.Air;
 import model.elements.Element;
@@ -19,16 +20,15 @@ public class ElementThread implements Runnable {
 	List<PhysicElement> physicElements;
 	Map map;
 	int indexElementAnimation;
+	public IModel model;
 
-	public Boolean running;
-
-	public ElementThread(Map map) {
-		this.map = map;
-		this.animatedElements = Collections.synchronizedList(map.getAnimatedElements());
-		this.mobs = Collections.synchronizedList(map.getMobs());
-		this.physicElements = Collections.synchronizedList(map.getPhysicElements());
+	public ElementThread(IModel model) {
+		this.model = model;
+		this.map = model.getMap();
+		this.animatedElements = Collections.synchronizedList(model.getMap().getAnimatedElements());
+		this.mobs = Collections.synchronizedList(model.getMap().getMobs());
+		this.physicElements = Collections.synchronizedList(model.getMap().getPhysicElements());
 		this.indexElementAnimation = 0;
-		this.running = true;
 	}
 
 	public int getIndexElementAnimation() {
@@ -37,14 +37,6 @@ public class ElementThread implements Runnable {
 
 	public void setIndexElementAnimation(int indexElementAnimation) {
 		this.indexElementAnimation = indexElementAnimation;
-	}
-
-	public void resetLevel() throws InterruptedException {
-		this.running = false;
-		Thread.sleep(160);
-		this.animatedElements.clear();
-		this.mobs.clear();
-		this.physicElements.clear();
 	}
 
 	public void run() {
@@ -56,7 +48,7 @@ public class ElementThread implements Runnable {
 					List<Element> toRemove = new ArrayList<Element>();
 					List<Mob> mobsClone = new ArrayList<Mob>(mobs);
 					for (Mob mob : mobsClone) {
-						if (mob.isAlive) {
+						if (mob.isAlive && map.isInTheMap(mob)) {
 							mob.iaMove();
 						} else {
 							toRemove.add(mob);
@@ -69,7 +61,8 @@ public class ElementThread implements Runnable {
 					toRemove = new ArrayList<Element>();
 					List<PhysicElement> physicElementsClone = new ArrayList<PhysicElement>(physicElements);
 					for (PhysicElement physicElement : physicElementsClone) {
-						if (physicElement.isAlive) {
+						if (physicElement.isAlive && map.isInTheMap(physicElement)) {
+							physicElement.checkCanKillPlayer(physicElement.getX(), physicElement.getY());
 							physicElement.gravity();
 						} else {
 							toRemove.add(physicElement);
@@ -83,7 +76,7 @@ public class ElementThread implements Runnable {
 					toRemove = new ArrayList<Element>();
 					List<Element> animatedElementsClone = new ArrayList<Element>(animatedElements);
 					for (Element animatedElement : animatedElementsClone) {
-						if (animatedElement.isAlive) {
+						if (animatedElement.isAlive && map.isInTheMap(animatedElement)) {
 							if (animatedElement.getIndexElementAnimation() <= animatedElement.getMaxAnimations() - 2) {
 								animatedElement
 										.setIndexElementAnimation(animatedElement.getIndexElementAnimation() + 1);
@@ -109,6 +102,10 @@ public class ElementThread implements Runnable {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+			} else {
+				map.resetAllElements();
+				map.running = true;
+				model.resetMap();
 			}
 		}
 	}

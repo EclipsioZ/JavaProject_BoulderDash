@@ -5,6 +5,7 @@ import java.util.Observable;
 import model.IModel;
 import entity.HelloWorld;
 import model.bdd.BDDGetData;
+import model.elements.Air;
 
 /**
  * The Class Model.
@@ -57,24 +58,15 @@ public final class Model extends Observable implements IModel {
 	}
 
 	public void resetMap() {
-		map.running = false;
 		tex.getTexture(tex.idTexture);
-		map.getPhysicElements().clear();
-		map.getMobs().clear();
-		map.getAnimatedElements().clear();
 		bdd.loadLevel(map.levelId, map);
 		map.setModel(this);
-		map.running = true;
 	}
 	
 	public void loadMap(int idTexture, String mapId) {
-		map.running = false;
 		tex.getTexture(idTexture);
-		map.getPhysicElements().clear();
-		map.getMobs().clear();
-		map.getAnimatedElements().clear();
 		bdd.loadLevel(mapId, map);
 		map.setModel(this);
-		map.running = true;
 	}
+
 }

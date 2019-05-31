@@ -228,5 +228,17 @@ public class Map extends Observable {
 	public IModel getModel() {
 		return model;
 	}
+	
+	public void resetAllElements() {
+		this.getPhysicElements().clear();
+		this.getMobs().clear();
+		this.getAnimatedElements().clear();
+		for (int i = 0; i < this.getMap().length; i++) {
+			for (int j = 0; j < this.getMap()[i].length; j++) {
+				this.getElementAt(i, j).pop();
+				this.setElementAt(i, j, new Air(this));
+			}
+		}
+	}
 
 }

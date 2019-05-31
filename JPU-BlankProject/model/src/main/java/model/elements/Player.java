@@ -10,9 +10,9 @@ public class Player extends Element {
 		super(map);
 		this.diamonds = 0;
 		this.figure = "1";
-		
+
 		this.setMaxAnimations(2);
-		
+
 		// Add this element to the animated elements
 		this.getMap().getAnimatedElements().add(this);
 	}
@@ -28,15 +28,15 @@ public class Player extends Element {
 	public void die() {
 		this.isAlive = false;
 //		this.getMap().setElementAt(this.getX(), this.getY(), new Explode(this.getMap()));
-		this.getMap().getModel().resetMap();
+		this.getMap().running = false;
 	}
 
 	@Override
 	public Boolean canMove(int x, int y) {
-		
+
 		int movementDirectionX = x - this.getX();
 		int movementDirectionY = y - this.getY();
-				
+
 		Element el = this.getMap().getElementAt(x, y);
 
 		if (el instanceof Air || el instanceof Dirt || el instanceof Explode) {
@@ -65,15 +65,15 @@ public class Player extends Element {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public void pop() {
 		this.getMap().getAnimatedElements().remove(this);
 	}
-	
+
 	@Override
 	public Boolean handleCollision(Element element) {
-		if(element instanceof Rock || element instanceof Diamond) {
+		if (element instanceof PhysicElement) {
 			this.die();
 		}
 		return true;

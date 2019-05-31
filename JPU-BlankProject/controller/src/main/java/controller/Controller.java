@@ -34,7 +34,7 @@ public final class Controller implements IController {
 		this.setModel(model);
 		this.state = 1;
 
-		this.elementThread = new ElementThread(model.getMap());
+		this.elementThread = new ElementThread(model);
 		Thread eThread = new Thread(this.elementThread);
 		eThread.start();
 		
