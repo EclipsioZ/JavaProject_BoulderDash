@@ -18,17 +18,29 @@ public final class Model extends Observable implements IModel {
 	private HelloWorld helloWorld;
 	Map map;
 	BDDGetData bdd;
+	
+	int levelId;
+
+	public int getLevelId() {
+		return levelId;
+	}
+
+	public void setLevelId(int levelId) {
+		this.levelId = levelId;
+	}
 
 	AnimatedText animatedText;
 	
 	Texture tex = new Texture();
 
 	public Model() throws Exception {
+		this.setLevelId(levelId);
 		tex.getTexture(2);
 		this.helloWorld = new HelloWorld();
 		this.map = new Map();
 		bdd = new BDDGetData();
-		bdd.loadLevel("16", map);
+//		bdd.loadLevel(Integer.toString(getLevelId()), map);
+		bdd.loadLevel("10", map);
 		map.setModel(this);
 	}
 
@@ -81,6 +93,7 @@ public final class Model extends Observable implements IModel {
 		map.setModel(this);
 		map.setTimer(120000);
 		map.levelEnded = false;
+		System.out.println("Map loaded: " + mapId);
 	}
 
 }

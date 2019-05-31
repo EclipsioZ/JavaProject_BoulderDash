@@ -7,6 +7,8 @@ import javax.swing.SwingUtilities;
 import contract.ControllerOrder;
 import contract.IController;
 import model.IModel;
+import view.menu.LevelFrame;
+import view.menu.MenuFrame;
 
 /**
  * The Class View.
@@ -16,38 +18,61 @@ import model.IModel;
 public final class View implements IView, Runnable {
 
 	/** The frame. */
-	private final ViewFrame viewFrame;
+	public ViewFrame viewFrame;
+	public LevelFrame levelframe = new LevelFrame();
+	public MenuFrame menuframe = new MenuFrame();
+	
+	public IController controller;
 
 	/**
 	 * Instantiates a new view.
 	 *
-	 * @param model
-	 *          the model
+	 * @param model the model
 	 */
 	public View(final IModel model) {
 		this.viewFrame = new ViewFrame(model, "Boulderdash");
-		SwingUtilities.invokeLater(this);
+		this.menuframe.setView(this);
+		this.levelframe.setMenuframe(menuframe);
+		this.changeView();
+	}
+
+	public void changeView() {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println(menuframe.getFrame());
+				if (menuframe.getFrame() == 0) {
+					System.out.println(menuframe.getFrame());
+					menuframe.MenuFrame();
+				} else if (menuframe.getFrame() == 1) {
+
+					levelframe.LevelFrame();
+				} else {
+					viewFrame.buildViewFrame();
+					updateController();
+				}
+			}
+		});
 	}
 
 	/**
 	 * Key code to controller order.
 	 *
-	 * @param keyCode
-	 *          the key code
+	 * @param keyCode the key code
 	 * @return the controller order
 	 */
 	protected static ControllerOrder keyCodeToControllerOrder(final int keyCode) {
 		switch (keyCode) {
-			case KeyEvent.VK_UP:
-				return ControllerOrder.UP;
-			case KeyEvent.VK_DOWN:
-				return ControllerOrder.DOWN;
-			case KeyEvent.VK_LEFT:
-				return ControllerOrder.LEFT;
-			case KeyEvent.VK_RIGHT:
-				return ControllerOrder.RIGHT;
-			default:
-				return ControllerOrder.NOP;
+		case KeyEvent.VK_UP:
+			return ControllerOrder.UP;
+		case KeyEvent.VK_DOWN:
+			return ControllerOrder.DOWN;
+		case KeyEvent.VK_LEFT:
+			return ControllerOrder.LEFT;
+		case KeyEvent.VK_RIGHT:
+			return ControllerOrder.RIGHT;
+		default:
+			return ControllerOrder.NOP;
 		}
 	}
 
@@ -56,7 +81,8 @@ public final class View implements IView, Runnable {
 	 *
 	 * @see contract.IView#printMessage(java.lang.String)
 	 */
-	public void printMessage(final String message) {;
+	public void printMessage(final String message) {
+		;
 	}
 
 	/*
@@ -71,15 +97,22 @@ public final class View implements IView, Runnable {
 	/**
 	 * Sets the controller.
 	 *
-	 * @param controller
-	 *          the new controller
+	 * @param controller the new controller
 	 */
 	public void setController(final IController controller) {
-		this.viewFrame.setController(controller);
+		this.controller = controller;
 	}
 	
+	public void updateController() {
+		if (menuframe.getFrame() == 2) {
+			controller.setLevel(levelframe.getLevelpanel().getLevel());
+			this.viewFrame.setController(controller);
+			this.viewFrame.getModel().loadMap(2, Integer.toString(levelframe.getLevelpanel().getLevel()));
+		}
+	}
+
 	public void updateMap() {
 
 	}
-	
+
 }

@@ -20,4 +20,6 @@ public interface IController {
 	 * @throws InterruptedException 
 	 */
 	public void orderPerform(ControllerOrder controllerOrder) throws InterruptedException;
+
+	public void setLevel(int level);
 }

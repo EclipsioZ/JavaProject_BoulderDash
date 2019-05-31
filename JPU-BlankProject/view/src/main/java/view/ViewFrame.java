@@ -27,7 +27,8 @@ class ViewFrame extends JFrame implements KeyListener {
 
 	public ViewFrame(final IModel model, final String title) throws HeadlessException {
 		super(title);
-		this.buildViewFrame(model);
+		this.setModel(model);
+//		this.buildViewFrame(model);
 	}
 
 	private IController getController() {
@@ -46,16 +47,17 @@ class ViewFrame extends JFrame implements KeyListener {
 		this.model = model;
 	}
 
-	private void buildViewFrame(final IModel model) {
-		this.setModel(model);
+	public void buildViewFrame() {
+		this.setModel(this.getModel());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
+		this.setVisible(true);
 		this.addKeyListener(this);
-		final ViewPanel panel = new ViewPanel(new GraphicBuilder(), model);
+		final ViewPanel panel = new ViewPanel(new GraphicBuilder(), this.getModel());
 		this.setContentPane(panel);
 		this.setSize(10 * 80, 10 * 80 + 20);
 		this.setLocationRelativeTo(null);
-		model.getMap().addObserver(panel);
+		this.getModel().getMap().addObserver(panel);
 	}
 
 	public void keyTyped(final KeyEvent e) {

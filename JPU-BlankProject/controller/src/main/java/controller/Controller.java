@@ -122,5 +122,10 @@ public final class Controller implements IController {
 		model.updateMap(model.getMap());
 		
 	}
+
+	@Override
+	public void setLevel(int level) {
+		this.model.setLevelId(level);
+	}
 	
 }

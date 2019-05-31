@@ -45,5 +45,7 @@ public interface IModel {
 	
 	void setAnimatedText(AnimatedText animatedText);
 
+	void setLevelId(int level);
+
 }
 
