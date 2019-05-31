@@ -119,6 +119,8 @@ public class ElementThread implements Runnable {
 							model.setAnimatedText(null);
 						}
 					}
+					
+					map.setTimer(map.getTimer() - 160);
 
 					map.setMapHasChanged(this.map.getMap());
 				} catch (InterruptedException e) {

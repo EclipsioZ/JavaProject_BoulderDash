@@ -7,6 +7,11 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.TexturePaint;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import model.AnimatedText;
 import model.Animation;
@@ -146,17 +151,58 @@ public class GraphicBuilder {
 		if (model.getAnimatedText() != null) {
 			Font font = new Font("Arial", Font.BOLD, 35);
 			graphics.setFont(font);
-			graphics.setColor(new Color(80, 255, 80, 220));
+			graphics.setColor(new Color(80, 255, 80, 255));
 			graphics.drawString(model.getAnimatedText().getText(), map.getPlayer().getX() * 80 + 0,
-					map.getPlayer().getY() * 80 + 100 + model.getAnimatedText().getLifeTime() * -1);
-
-//			Font font2 = new Font("Verdana", Font.BOLD, 30);
-//			graphics.setFont(font2);
-//			graphics.setColor(Color.RED);
-//			graphics.drawString(model.getAnimatedText().getText(), map.getPlayer().getX() * 80 + 0,
-//					map.getPlayer().getY() * 80 + 100 + model.getAnimatedText().getLifeTime() * -1);
+					map.getPlayer().getY() * 80 + 80 + model.getAnimatedText().getLifeTime() * -1);
 		}
 
+		showHUD(graphics);
+
+	}
+
+	public void showHUD(Graphics graphics) {
+		File hud1 = new File(getClass().getClassLoader().getResource("Hud1.png").getFile());
+		BufferedImage hudImage;
+		try {
+			hudImage = ImageIO.read(hud1);
+			graphics.drawImage(hudImage, camX + 10, camY + 100, (int) Math.round(hudImage.getWidth() / 1.5),
+					(int) Math.round(hudImage.getHeight() / 1.5), null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		
+		File hud2 = new File(getClass().getClassLoader().getResource("Hud2.png").getFile());
+		BufferedImage hud2Image = null;
+		try {
+			hud2Image = ImageIO.read(hud2);
+			graphics.drawImage(hud2Image, (camX + ((80 * 10) / 2)) - (hud2Image.getWidth() / 5), camY + 10,
+					(int) Math.round(hud2Image.getWidth() / 1.5), (int) Math.round(hud2Image.getHeight() / 1.5), null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		Font diamondsFont = new Font("Arial", Font.BOLD, 35);
+		graphics.setFont(diamondsFont);
+		graphics.setColor(Color.WHITE);
+		int diamonds = map.getRequiredDiamonds() - map.getPlayer().getDiamonds();
+		if (diamonds < 0)
+			diamonds = 0;
+		graphics.drawString(String.format("%03d", diamonds), camX + 72, camY + 138);
+
+		Font timerFont = new Font("Arial", Font.BOLD, 35);
+		graphics.setFont(timerFont);
+		graphics.setColor(Color.WHITE);
+		int timer = Math.round(map.getTimer() / 1000);
+		if (timer < 0)
+			timer = 0;
+		graphics.drawString(String.format("%03d", timer), camX + 72, camY + 190);
+		
+		Font scoreFont = new Font("Arial", Font.BOLD, 35);
+		graphics.setFont(scoreFont);
+		graphics.setColor(Color.WHITE);
+		int score = this.getMap().getPlayer().getScore();
+		graphics.drawString(String.format("%06d", score), (camX + ((80 * 10) / 2)) - (hud2Image.getWidth() / 5) + 40, camY + 48);
 	}
 
 	public void loadAnimation() {

@@ -29,6 +29,11 @@ public class Map extends Observable {
 	
 	public String levelId;
 	public Boolean running;
+	
+	/**
+	 * Timer in ms
+	 */
+	private int timer;
 
 	public Map() {
 		this.physicElements = Collections.synchronizedList(new ArrayList<PhysicElement>());
@@ -36,6 +41,15 @@ public class Map extends Observable {
 		this.mobs = Collections.synchronizedList(new ArrayList<Mob>());
 		this.running = true;
 		this.levelEnded = false;
+		this.timer = 120000;
+	}
+	
+	public int getTimer() {
+		return timer;
+	}
+
+	public void setTimer(int timer) {
+		this.timer = timer;
 	}
 
 	// Size of the map

@@ -5,11 +5,13 @@ import model.Map;
 public class Player extends Element implements ElementStrategy {
 
 	private int diamonds;
+	private int score;
 
 	public Player(Map map) {
 		super(map);
 		this.diamonds = 0;
 		this.figure = "1";
+		this.score = 0;
 
 		this.setMaxAnimations(2);
 
@@ -23,6 +25,14 @@ public class Player extends Element implements ElementStrategy {
 
 	public void setDiamonds(int diamonds) {
 		this.diamonds = diamonds;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 	public void die() {
@@ -50,6 +60,7 @@ public class Player extends Element implements ElementStrategy {
 		}
 		if (el instanceof Diamond) {
 			this.setDiamonds(this.getDiamonds() + 1);
+			this.setScore(this.getScore() + 10);
 			this.getMap().setElementAt(x, y, new Air(getMap()));
 			this.getMap().getPhysicElements().remove(el);
 			return true;
@@ -59,6 +70,8 @@ public class Player extends Element implements ElementStrategy {
 			return true;
 		}
 		if (el instanceof EndBlock) {
+			this.setScore(this.getScore() + 100);
+			this.setScore((int) this.getScore() + Math.round(this.getMap().getTimer() / 1000));
 			// TODO: end level, load next level
 			return true;
 		}

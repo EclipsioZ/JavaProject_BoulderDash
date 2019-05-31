@@ -24,7 +24,7 @@ public final class Model extends Observable implements IModel {
 	Texture tex = new Texture();
 
 	public Model() throws Exception {
-		tex.getTexture(3);
+		tex.getTexture(2);
 		this.helloWorld = new HelloWorld();
 		this.map = new Map();
 		bdd = new BDDGetData();
