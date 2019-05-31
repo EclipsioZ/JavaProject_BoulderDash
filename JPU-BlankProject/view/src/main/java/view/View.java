@@ -108,6 +108,7 @@ public final class View implements IView, Runnable {
 			controller.setLevel(levelframe.getLevelpanel().getLevel());
 			this.viewFrame.setController(controller);
 			this.viewFrame.getModel().loadMap(2, Integer.toString(levelframe.getLevelpanel().getLevel()));
+			this.viewFrame.getModel().getMap().running = false;
 		}
 	}
 

@@ -114,8 +114,8 @@ public final class Controller implements IController {
 			}
 			break;
 		default:
-			Random r = new Random();
-			model.loadMap(r.nextInt(6), "13");
+//			Random r = new Random();
+//			model.loadMap(r.nextInt(6), "13");
 			break;
 		}
 //		model.getMap().printConsole();
