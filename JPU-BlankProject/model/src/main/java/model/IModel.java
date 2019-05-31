@@ -41,5 +41,9 @@ public interface IModel {
 
 	void loadMap(int idTexture, String mapId);
 
+	AnimatedText getAnimatedText();
+	
+	void setAnimatedText(AnimatedText animatedText);
+
 }
 

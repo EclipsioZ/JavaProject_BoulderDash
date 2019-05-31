@@ -1,12 +1,14 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.TexturePaint;
 import java.awt.geom.AffineTransform;
 
+import model.AnimatedText;
 import model.Animation;
 import model.IModel;
 import model.Map;
@@ -28,8 +30,12 @@ public class GraphicBuilder {
 
 	Map map;
 	Animation animation;
+	IModel model;
+	int camX;
+	int camY;
 
 	public void setMap(IModel iModel) {
+		this.model = iModel;
 		this.map = iModel.getMap();
 	}
 
@@ -42,9 +48,9 @@ public class GraphicBuilder {
 	}
 
 	public void applyModelToGraphic(Graphics graphics) {
-		
+
 		int spriteSize = 80;
-		if(map.getPlayer() != null) {
+		if (map.getPlayer() != null) {
 			moveCamera(graphics);
 		}
 
@@ -137,6 +143,20 @@ public class GraphicBuilder {
 //		graphics.fillRect(camX + VIEWPORT_SIZE_X / 2 - 10, camY + VIEWPORT_SIZE_Y / 2 - 10, 20, 20);
 //		graphics.fillRect(camX + VIEWPORT_SIZE_X / 2 + 80 * 3 - 10, camY + VIEWPORT_SIZE_Y / 2 - 10, 20, 20);
 
+		if (model.getAnimatedText() != null) {
+			Font font = new Font("Arial", Font.BOLD, 35);
+			graphics.setFont(font);
+			graphics.setColor(new Color(80, 255, 80, 220));
+			graphics.drawString(model.getAnimatedText().getText(), map.getPlayer().getX() * 80 + 0,
+					map.getPlayer().getY() * 80 + 100 + model.getAnimatedText().getLifeTime() * -1);
+
+//			Font font2 = new Font("Verdana", Font.BOLD, 30);
+//			graphics.setFont(font2);
+//			graphics.setColor(Color.RED);
+//			graphics.drawString(model.getAnimatedText().getText(), map.getPlayer().getX() * 80 + 0,
+//					map.getPlayer().getY() * 80 + 100 + model.getAnimatedText().getLifeTime() * -1);
+		}
+
 	}
 
 	public void loadAnimation() {
@@ -176,8 +196,8 @@ public class GraphicBuilder {
 		int offsetMinX = 10 * 80 - VIEWPORT_SIZE_X;
 		int offsetMinY = 10 * 80 - VIEWPORT_SIZE_Y;
 
-		int camX = (int) (map.getPlayer().getX() * 80 - Math.floor(VIEWPORT_SIZE_X / 2)) + 40;
-		int camY = (int) (map.getPlayer().getY() * 80 - Math.floor(VIEWPORT_SIZE_Y / 2)) + 40;
+		this.camX = (int) (map.getPlayer().getX() * 80 - Math.floor(VIEWPORT_SIZE_X / 2)) + 40;
+		this.camY = (int) (map.getPlayer().getY() * 80 - Math.floor(VIEWPORT_SIZE_Y / 2)) + 40;
 
 		if (camX > offsetMaxX) {
 			camX = offsetMaxX;

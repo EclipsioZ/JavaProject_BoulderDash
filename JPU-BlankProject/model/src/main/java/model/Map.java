@@ -35,6 +35,7 @@ public class Map extends Observable {
 		this.animatedElements = Collections.synchronizedList(new ArrayList<Element>());
 		this.mobs = Collections.synchronizedList(new ArrayList<Mob>());
 		this.running = true;
+		this.levelEnded = false;
 	}
 
 	// Size of the map
@@ -55,14 +56,22 @@ public class Map extends Observable {
 	private int width;
 
 	// Position of the end block
-	private int[][] endblock;
+	private int[] endblock;
 
 	// The player element
 	Player player;
 
+	private int requiredDiamonds;
+
+	public Boolean levelEnded;
+
 	public void map(Element[][] existingMap) {
 		this.height = 0;
 		this.width = 0;
+	}
+
+	public int getRequiredDiamonds() {
+		return requiredDiamonds;
 	}
 
 	public void setPlayer(Player player) {
@@ -160,11 +169,11 @@ public class Map extends Observable {
 		this.height = height;
 	}
 
-	public int[][] getPosEndblock() {
+	public int[] getPosEndblock() {
 		return endblock;
 	}
 
-	public void setPosEndBlock(int[][] endblock) {
+	public void setPosEndBlock(int[] endblock) {
 		this.endblock = endblock;
 	}
 
@@ -239,6 +248,10 @@ public class Map extends Observable {
 				this.setElementAt(i, j, new Air(this));
 			}
 		}
+	}
+
+	public void setRequiredDiamonds(int reqDiamons) {
+		this.requiredDiamonds = reqDiamons;
 	}
 
 }

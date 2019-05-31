@@ -19,6 +19,8 @@ public final class Model extends Observable implements IModel {
 	Map map;
 	BDDGetData bdd;
 
+	AnimatedText animatedText;
+	
 	Texture tex = new Texture();
 
 	public Model() throws Exception {
@@ -26,10 +28,18 @@ public final class Model extends Observable implements IModel {
 		this.helloWorld = new HelloWorld();
 		this.map = new Map();
 		bdd = new BDDGetData();
-		bdd.loadLevel("17", map);
+		bdd.loadLevel("16", map);
 		map.setModel(this);
 	}
 
+	public AnimatedText getAnimatedText() {
+		return animatedText;
+	}
+
+	public void setAnimatedText(AnimatedText animatedText) {
+		this.animatedText = animatedText;
+	}
+	
 	public HelloWorld getHelloWorld() {
 		return this.helloWorld;
 	}

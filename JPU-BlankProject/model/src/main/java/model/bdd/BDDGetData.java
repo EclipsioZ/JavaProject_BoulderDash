@@ -48,7 +48,11 @@ public class BDDGetData {
 				map.setHeight(Integer.parseInt(result.getString("height")));
 				map.setWidth(Integer.parseInt(result.getString("width")));
 				map.setMapFromString(result.getString("content"));
-				map.setPosEndBlock(new int[Integer.parseInt(endBlockX)][Integer.parseInt(endBlockY)]);
+				int[] posEndBlock = new int[2];
+				posEndBlock[0] = Integer.parseInt(endBlockX);
+				posEndBlock[1] = Integer.parseInt(endBlockY);
+				map.setPosEndBlock(posEndBlock);
+				map.setRequiredDiamonds(Integer.parseInt(result.getString("requiredDiamonds")));
 				map.levelId = id;
 			}
 			result.close();

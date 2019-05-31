@@ -16,5 +16,10 @@ public class EndBlock extends Block {
 	public void pop() {
 		this.getMap().getAnimatedElements().remove(this);
 	}
+	
+	@Override
+	public Boolean handleCollision(Element element) {
+		return element instanceof Player;
+	}
 
 }

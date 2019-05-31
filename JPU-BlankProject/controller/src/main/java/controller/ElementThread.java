@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import model.AnimatedText;
+import model.Animation;
 import model.IModel;
 import model.Map;
 import model.elements.Air;
 import model.elements.Element;
+import model.elements.EndBlock;
 import model.elements.Explode;
 import model.elements.Mob;
 import model.elements.PhysicElement;
@@ -62,10 +65,10 @@ public class ElementThread implements Runnable {
 					List<PhysicElement> physicElementsClone = new ArrayList<PhysicElement>(physicElements);
 					for (PhysicElement physicElement : physicElementsClone) {
 						if (physicElement.isAlive && map.isInTheMap(physicElement)) {
-							if(physicElement.hasMoved) {
+							if (physicElement.hasMoved) {
 								physicElement.checkCanKillPlayer(physicElement.getX(), physicElement.getY());
 							}
-							if(physicElement.gravity()) {
+							if (physicElement.gravity()) {
 								physicElement.hasMoved = true;
 							} else {
 								physicElement.hasMoved = false;
@@ -102,6 +105,19 @@ public class ElementThread implements Runnable {
 					}
 					for (Element toRem : toRemove) {
 						animatedElements.remove(toRem);
+					}
+
+					if (map.getPlayer().getDiamonds() >= map.getRequiredDiamonds() && !map.levelEnded) {
+						map.levelEnded = true;
+						map.setElementAt(map.getPosEndblock()[0], map.getPosEndblock()[1], new EndBlock(map));
+						model.setAnimatedText(new AnimatedText());
+					}
+
+					if (model.getAnimatedText() != null) {
+						model.getAnimatedText().setLifeTime(model.getAnimatedText().getLifeTime() - 1);
+						if (model.getAnimatedText().getLifeTime() < 0) {
+							model.setAnimatedText(null);
+						}
 					}
 
 					map.setMapHasChanged(this.map.getMap());
