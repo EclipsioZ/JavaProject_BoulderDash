@@ -8,11 +8,15 @@ import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 
+import model.Texture;
+import model.elements.Element;
+
 public class LevelPanel extends JPanel{
 
 	Image image;
-	private int level = 1;	
+	int level = 1;	
 	int[][] coordlevel;
+	int i;
 	
 	public LevelPanel() {
 		CoordLevel();
@@ -60,7 +64,8 @@ public class LevelPanel extends JPanel{
 	}
 	
 	public void drawLevel(Graphics g, int level) {
-		g.drawRect(getCoordlevel(level-1, 0), getCoordlevel(level-1, 1), 30, 30);
+			g.drawImage(Texture.playerlevelselector[1], getCoordlevel(level-1, 0) -25,getCoordlevel(level-1, 1)-25, 70, 70, null);
+
 	}
 	
 	public int getCoordlevel(int a, int b) {

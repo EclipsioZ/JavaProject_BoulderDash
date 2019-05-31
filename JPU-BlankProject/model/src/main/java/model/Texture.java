@@ -37,6 +37,7 @@ public class Texture {
 	public static BufferedImage[] playerlowers = new BufferedImage[4];
 	public static BufferedImage[] playerup = new BufferedImage[4];
 	public static BufferedImage[] playerdietime = new BufferedImage[6];
+	public static BufferedImage[] playerlevelselector = new BufferedImage[2];
 	
 	
 	
@@ -164,6 +165,7 @@ public class Texture {
 			playerrest[x] = ps.grabImage(x+1, 1, width, height);
 			playerwinlevel[x] = ps.grabImage(x+3, 1, width, height);
 			playerdierock[x] = ps.grabImage(x+5, 1, width, height);
+			playerlevelselector[x] = ps.grabImage(x+5, 14, width, height);
 		}
 		
 		//Animations with 3 frames
