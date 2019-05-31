@@ -90,17 +90,21 @@ public abstract class Mob extends Element {
 		Element rightUpEl = this.getMap().getElementAt(this.getX() + 1, this.getY() - 1);
 		Element leftUpEl = this.getMap().getElementAt(this.getX() - 1, this.getY() - 1);
 
-		if (downEl instanceof Air && direction != "up") {
+		if ((downEl instanceof Air || downEl instanceof Player) && direction != "up") {
 			direction = "down";
+			this.getMap().getElementAt(this.getX(), this.getY() + 1).handleCollision(this);
 			this.move(this.getX(), this.getY() + 1);
-		} else if (leftEl instanceof Air && direction != "right") {
+		} else if ((leftEl instanceof Air || leftEl instanceof Player) && direction != "right") {
 			direction = "left";
+			this.getMap().getElementAt(this.getX() - 1, this.getY()).handleCollision(this);
 			this.move(this.getX() - 1, this.getY());
-		} else if (upEl instanceof Air && direction != "down") {
+		} else if ((upEl instanceof Air || upEl instanceof Player) && direction != "down") {
 			direction = "up";
+			this.getMap().getElementAt(this.getX(), this.getY() - 1).handleCollision(this);
 			this.move(this.getX(), this.getY() - 1);
-		} else if (rightEl instanceof Air && direction != "left") {
+		} else if ((rightEl instanceof Air || rightEl instanceof Player) && direction != "left") {
 			direction = "right";
+			this.getMap().getElementAt(this.getX() + 1, this.getY()).handleCollision(this);
 			this.move(this.getX() + 1, this.getY());
 		} else {
 			direction = "";

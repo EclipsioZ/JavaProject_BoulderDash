@@ -55,8 +55,7 @@ public class Player extends Element {
 			return true;
 		}
 		if (el instanceof Mob) {
-//			this.die();
-			((Mob) el).explode();
+			this.die();
 			return true;
 		}
 		if (el instanceof EndBlock) {
@@ -73,7 +72,7 @@ public class Player extends Element {
 
 	@Override
 	public Boolean handleCollision(Element element) {
-		if (element instanceof PhysicElement) {
+		if (element instanceof PhysicElement || element instanceof Mob) {
 			this.die();
 		}
 		return true;
