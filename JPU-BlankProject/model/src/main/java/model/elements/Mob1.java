@@ -2,7 +2,7 @@ package model.elements;
 
 import model.Map;
 
-public class Mob1 extends Mob {
+public class Mob1 extends Mob implements ElementStrategy {
 
 	public Mob1(Map map) {
 		super(map);

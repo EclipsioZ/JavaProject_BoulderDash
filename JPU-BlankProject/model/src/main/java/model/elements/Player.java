@@ -2,7 +2,7 @@ package model.elements;
 
 import model.Map;
 
-public class Player extends Element {
+public class Player extends Element implements ElementStrategy {
 
 	private int diamonds;
 

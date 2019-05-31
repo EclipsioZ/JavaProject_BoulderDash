@@ -2,7 +2,7 @@ package model.elements;
 
 import model.Map;
 
-public class EndBlock extends Block {
+public class EndBlock extends Block implements ElementStrategy {
 
 	public EndBlock(Map map) {
 		super(map);

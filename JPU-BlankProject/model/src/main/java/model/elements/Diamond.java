@@ -2,7 +2,7 @@ package model.elements;
 
 import model.Map;
 
-public class Diamond extends PhysicElement {
+public class Diamond extends PhysicElement implements ElementStrategy {
 
 	public Diamond(Map map) {
 		super(map);

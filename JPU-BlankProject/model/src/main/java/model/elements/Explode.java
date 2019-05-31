@@ -2,7 +2,7 @@ package model.elements;
 
 import model.Map;
 
-public class Explode extends Block {
+public class Explode extends Block implements ElementStrategy {
 
 	public Explode(Map map) {
 		super(map);

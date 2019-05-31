@@ -2,7 +2,7 @@ package model.elements;
 
 import model.Map;
 
-public abstract class Mob extends Element {
+public abstract class Mob extends Element implements ElementStrategy {
 
 	private int explosionRadius;
 	private String explosionType;

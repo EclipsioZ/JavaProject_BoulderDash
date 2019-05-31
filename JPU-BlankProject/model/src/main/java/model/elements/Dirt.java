@@ -2,7 +2,7 @@ package model.elements;
 
 import model.Map;
 
-public class Dirt extends Block {
+public class Dirt extends Block implements ElementStrategy {
 
 	public Dirt(Map map) {
 		super(map);

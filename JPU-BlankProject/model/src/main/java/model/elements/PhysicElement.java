@@ -2,7 +2,7 @@ package model.elements;
 
 import model.Map;
 
-public abstract class PhysicElement extends Element {
+public abstract class PhysicElement extends Element implements ElementStrategy {
 	
 	public Boolean hasMoved;
 

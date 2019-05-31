@@ -2,7 +2,7 @@ package model.elements;
 
 import model.Map;
 
-public class Rock extends PhysicElement {
+public class Rock extends PhysicElement implements ElementStrategy {
 
 	public Rock(Map map) {
 		super(map);
