@@ -1,5 +1,7 @@
 package view;
 
+import view.menu.MenuFrame;
+
 /**
  * The Interface IView.
  *
@@ -16,4 +18,6 @@ public interface IView {
 	void printMessage(final String message);
 
 	void changeView();
+
+	MenuFrame getMenuFrame();
 }

@@ -6,6 +6,7 @@ public class Player extends Element implements ElementStrategy {
 
 	private int diamonds;
 	private int score;
+	private int returnmenu;
 
 	public Player(Map map) {
 		super(map);
@@ -72,7 +73,7 @@ public class Player extends Element implements ElementStrategy {
 		if (el instanceof EndBlock) {
 			this.setScore(this.getScore() + 100);
 			this.setScore((int) this.getScore() + Math.round(this.getMap().getTimer() / 1000));
-			// TODO: end level, load next level
+			this.setReturnLevelSelector(1);
 			return true;
 		}
 		return false;
@@ -81,6 +82,14 @@ public class Player extends Element implements ElementStrategy {
 	@Override
 	public void pop() {
 		this.getMap().getAnimatedElements().remove(this);
+	}
+	
+	public void setReturnLevelSelector(int returnm) {
+		this.returnmenu = returnm;
+	}
+	
+	public int getReturnLevelSelector() {
+		return returnmenu;
 	}
 
 	@Override

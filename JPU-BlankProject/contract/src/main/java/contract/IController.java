@@ -22,4 +22,6 @@ public interface IController {
 	public void orderPerform(ControllerOrder controllerOrder) throws InterruptedException;
 
 	public void setLevel(int level);
+
+	public void returnToMenu();
 }

@@ -116,4 +116,9 @@ public final class View implements IView, Runnable {
 
 	}
 
+	@Override
+	public MenuFrame getMenuFrame() {
+		return this.menuframe;
+	}
+
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import contract.IController;
 import model.AnimatedText;
 import model.Animation;
 import model.IModel;
@@ -24,9 +25,11 @@ public class ElementThread implements Runnable {
 	Map map;
 	int indexElementAnimation;
 	public IModel model;
+	public IController controller;
 
-	public ElementThread(IModel model) {
+	public ElementThread(IModel model, IController controller) {
 		this.model = model;
+		this.controller = controller;
 		this.map = model.getMap();
 		this.animatedElements = Collections.synchronizedList(model.getMap().getAnimatedElements());
 		this.mobs = Collections.synchronizedList(model.getMap().getMobs());
@@ -126,6 +129,13 @@ public class ElementThread implements Runnable {
 					}
 
 					map.setMapHasChanged(this.map.getMap());
+					
+					if(map.getPlayer().getReturnLevelSelector() == 1) {
+						map.getPlayer().setReturnLevelSelector(0);
+						this.controller.returnToMenu();
+					}
+					
+					
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

@@ -34,7 +34,7 @@ public final class Controller implements IController {
 		this.setModel(model);
 		this.state = 1;
 
-		this.elementThread = new ElementThread(model);
+		this.elementThread = new ElementThread(model, this);
 		Thread eThread = new Thread(this.elementThread);
 		eThread.start();
 		
@@ -126,6 +126,11 @@ public final class Controller implements IController {
 	@Override
 	public void setLevel(int level) {
 		this.model.setLevelId(level);
+	}
+	
+	public void returnToMenu() {
+		this.view.getMenuFrame().setFrame(1);
+		this.view.changeView();
 	}
 	
 }
