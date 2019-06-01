@@ -38,7 +38,6 @@ public class Player extends Element implements ElementStrategy {
 
 	public void die() {
 		this.isAlive = false;
-//		this.getMap().setElementAt(this.getX(), this.getY(), new Explode(this.getMap()));
 		this.getMap().running = false;
 	}
 

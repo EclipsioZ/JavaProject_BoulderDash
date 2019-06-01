@@ -20,4 +20,8 @@ public interface IView {
 	void changeView();
 
 	MenuFrame getMenuFrame();
+
+	void setCurrentFrame(int i);
+
+	int getCurrentFrame();
 }

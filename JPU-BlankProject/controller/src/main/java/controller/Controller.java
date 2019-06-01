@@ -116,6 +116,7 @@ public final class Controller implements IController {
 		default:
 //			Random r = new Random();
 //			model.loadMap(r.nextInt(6), "13");
+			this.returnToMenu();
 			break;
 		}
 //		model.getMap().printConsole();
@@ -129,7 +130,7 @@ public final class Controller implements IController {
 	}
 	
 	public void returnToMenu() {
-		this.view.getMenuFrame().setFrame(1);
+		this.view.setCurrentFrame(1);
 		this.view.changeView();
 	}
 	

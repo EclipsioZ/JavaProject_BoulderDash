@@ -1,5 +1,7 @@
 package view.menu;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -9,6 +11,7 @@ import java.awt.Toolkit;
 import javax.swing.JPanel;
 
 import model.Texture;
+import model.bdd.BDDGetData;
 import model.elements.Element;
 
 public class LevelPanel extends JPanel{
@@ -17,13 +20,15 @@ public class LevelPanel extends JPanel{
 	int level = 1;	
 	int[][] coordlevel;
 	int i;
+	private String levelName;
 	
 	public LevelPanel() {
-		CoordLevel();
-		image = Toolkit.getDefaultToolkit()
+		this.CoordLevel();
+		this.image = Toolkit.getDefaultToolkit()
 				.createImage(getClass().getClassLoader().getResource("MapLevel.png").getFile());
+		this.levelName = "";
 	}
-	
+
 	private void CoordLevel() {
 	coordlevel = new int[13][2];
 	//Level 1
@@ -61,6 +66,15 @@ public class LevelPanel extends JPanel{
 		g.drawImage(image, 0, 0, 12*80 - 18, 12*80 - 20, this);
 		
 		drawLevel(g, level);
+		
+		drawLevelName(g);
+	}
+	
+	public void drawLevelName(Graphics g) {
+		Font font = new Font("Arial", Font.BOLD, 20);
+		g.setFont(font);
+		g.setColor(Color.BLACK);
+		g.drawString(this.getLevelName(), 10, 30);
 	}
 	
 	public void drawLevel(Graphics g, int level) {
@@ -81,6 +95,14 @@ public class LevelPanel extends JPanel{
 
 	public void setLevel(int level) {
 		this.level = level;
+	}
+	
+	public String getLevelName() {
+		return levelName;
+	}
+	
+	public void setLevelName(String levelName) {
+		this.levelName = levelName;
 	}
 
 }

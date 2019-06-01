@@ -23,6 +23,9 @@ public final class View implements IView, Runnable {
 	public MenuFrame menuframe = new MenuFrame();
 	
 	public IController controller;
+	public IModel model;
+	
+	private int currentFrame = 0;
 
 	/**
 	 * Instantiates a new view.
@@ -30,23 +33,37 @@ public final class View implements IView, Runnable {
 	 * @param model the model
 	 */
 	public View(final IModel model) {
+		this.model = model;
 		this.viewFrame = new ViewFrame(model, "Boulderdash");
 		this.menuframe.setView(this);
 		this.levelframe.setMenuframe(menuframe);
 		this.changeView();
 	}
+	
+	public int getCurrentFrame() {
+		return currentFrame;
+	}
+
+	public void setCurrentFrame(int currentFrame) {
+		this.currentFrame = currentFrame;
+	}
+
+	public void resetViews() {
+		this.viewFrame.setVisible(false);
+		this.viewFrame = new ViewFrame(model, "Boulderdash");
+		this.menuframe.setView(this);
+	}
 
 	public void changeView() {
+		this.resetViews();
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				System.out.println(menuframe.getFrame());
-				if (menuframe.getFrame() == 0) {
+				if (getCurrentFrame() == 0) {
 					System.out.println(menuframe.getFrame());
 					menuframe.MenuFrame();
-				} else if (menuframe.getFrame() == 1) {
-
-					levelframe.LevelFrame();
+				} else if (getCurrentFrame() == 1) {
+					levelframe.loadLevelFrame();
 				} else {
 					viewFrame.buildViewFrame();
 					updateController();
@@ -104,7 +121,7 @@ public final class View implements IView, Runnable {
 	}
 	
 	public void updateController() {
-		if (menuframe.getFrame() == 2) {
+		if (this.getCurrentFrame() == 2) {
 			controller.setLevel(levelframe.getLevelpanel().getLevel());
 			this.viewFrame.setController(controller);
 			this.viewFrame.getModel().loadMap(2, Integer.toString(levelframe.getLevelpanel().getLevel()));

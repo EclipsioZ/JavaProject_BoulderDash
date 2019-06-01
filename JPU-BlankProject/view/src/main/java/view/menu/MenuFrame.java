@@ -32,7 +32,7 @@ public class MenuFrame {
 				if (ke.getKeyCode() == ke.VK_ENTER) {
 					System.out.println("test");
 					menu.setVisible(false);
-					setFrame(1);
+					getView().setCurrentFrame(1);
 					getView().changeView();
 				}
 			}

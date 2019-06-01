@@ -78,7 +78,8 @@ public class ElementThread implements Runnable {
 							}
 						} else {
 							toRemove.add(physicElement);
-							this.map.setElementAt(physicElement.getX(), physicElement.getY(), new Explode(this.map));
+							if(map.running) // Avoid strange bugs on map reloading
+								this.map.setElementAt(physicElement.getX(), physicElement.getY(), new Explode(this.map));
 						}
 					}
 					for (Element toRem : toRemove) {
