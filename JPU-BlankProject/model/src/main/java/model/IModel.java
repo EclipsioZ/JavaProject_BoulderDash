@@ -47,5 +47,7 @@ public interface IModel {
 
 	void setLevelId(int level);
 
+	void changeTexture(int id);
+
 }
 

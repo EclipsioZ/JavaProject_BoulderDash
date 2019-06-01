@@ -88,6 +88,20 @@ public final class View implements IView, Runnable {
 			return ControllerOrder.LEFT;
 		case KeyEvent.VK_RIGHT:
 			return ControllerOrder.RIGHT;
+		case KeyEvent.VK_1:
+			return ControllerOrder.TEX1;
+		case KeyEvent.VK_2:
+			return ControllerOrder.TEX2;
+		case KeyEvent.VK_3:
+			return ControllerOrder.TEX3;
+		case KeyEvent.VK_4:
+			return ControllerOrder.TEX4;
+		case KeyEvent.VK_5:
+			return ControllerOrder.TEX5;
+		case KeyEvent.VK_6:
+			return ControllerOrder.TEX6;
+		case KeyEvent.VK_ESCAPE:
+			return ControllerOrder.QUIT;
 		default:
 			return ControllerOrder.NOP;
 		}
@@ -124,7 +138,7 @@ public final class View implements IView, Runnable {
 		if (this.getCurrentFrame() == 2) {
 			controller.setLevel(levelframe.getLevelpanel().getLevel());
 			this.viewFrame.setController(controller);
-			this.viewFrame.getModel().loadMap(2, Integer.toString(levelframe.getLevelpanel().getLevel()));
+			this.viewFrame.getModel().loadMap(1, Integer.toString(levelframe.getLevelpanel().getLevel()));
 			this.viewFrame.getModel().getMap().running = false;
 		}
 	}

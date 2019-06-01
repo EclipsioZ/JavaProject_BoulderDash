@@ -113,10 +113,30 @@ public final class Controller implements IController {
 						model.getMap().getPlayer().getY());
 			}
 			break;
+		case TEX1:
+			model.changeTexture(1);
+			break;
+		case TEX2:
+			model.changeTexture(2);
+			break;
+		case TEX3:
+			model.changeTexture(3);
+			break;
+		case TEX4:
+			model.changeTexture(4);
+			break;
+		case TEX5:
+			model.changeTexture(5);
+			break;
+		case TEX6:
+			model.changeTexture(6);
+			break;
+		case QUIT:
+			this.returnToMenu();
+			break;
 		default:
 //			Random r = new Random();
 //			model.loadMap(r.nextInt(6), "13");
-			this.returnToMenu();
 			break;
 		}
 //		model.getMap().printConsole();

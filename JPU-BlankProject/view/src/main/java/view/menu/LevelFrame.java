@@ -45,17 +45,19 @@ public class LevelFrame {
 			@Override
 			public void keyPressed(KeyEvent ke) {
 
-				if (ke.getKeyCode() == ke.VK_ENTER) {
-					getMenuframe().getView().setCurrentFrame(2);
-					menu.setVisible(false);
-					getMenuframe().getView().changeView();
+				if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (levelpanel.getLevelName() != "-- No map found --") {
+						getMenuframe().getView().setCurrentFrame(2);
+						menu.setVisible(false);
+						getMenuframe().getView().changeView();
+					}
 				}
 
-				if (ke.getKeyCode() == ke.VK_RIGHT && levelpanel.getLevel() < 13) {
+				if (ke.getKeyCode() == KeyEvent.VK_RIGHT && levelpanel.getLevel() < 13) {
 					levelpanel.setLevel(levelpanel.getLevel() + 1);
 					levelpanel.repaint();
 				}
-				if (ke.getKeyCode() == ke.VK_LEFT && levelpanel.getLevel() > 1) {
+				if (ke.getKeyCode() == KeyEvent.VK_LEFT && levelpanel.getLevel() > 1) {
 					levelpanel.setLevel(levelpanel.getLevel() - 1);
 					levelpanel.repaint();
 				}

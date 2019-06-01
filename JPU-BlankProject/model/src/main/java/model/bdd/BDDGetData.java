@@ -62,7 +62,7 @@ public class BDDGetData {
 	}
 	
 	public String getMapNameFromId(int idInt) {
-		String mapName = "";
+		String mapName = "-- No map found --";
 		try {
 			String id = Integer.toString(idInt);
 			

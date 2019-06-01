@@ -10,5 +10,12 @@ public enum ControllerOrder {
 	DOWN,
 	LEFT,
 	RIGHT,
+	TEX1,
+	TEX2,
+	TEX3,
+	TEX4,
+	TEX5,
+	TEX6,
+	QUIT,
 	NOP
 }

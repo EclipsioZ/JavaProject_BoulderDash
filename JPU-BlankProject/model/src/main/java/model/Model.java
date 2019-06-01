@@ -35,12 +35,16 @@ public final class Model extends Observable implements IModel {
 
 	public Model() throws Exception {
 		this.setLevelId(levelId);
-		tex.getTexture(2);
+		this.tex.getTexture(1);
 		this.helloWorld = new HelloWorld();
 		this.map = new Map();
 		bdd = new BDDGetData();
-		bdd.loadLevel("10", map);
+		bdd.loadLevel("1", map);
 		map.setModel(this);
+	}
+	
+	public void changeTexture(int id) {
+		this.tex.getTexture(id);
 	}
 
 	public AnimatedText getAnimatedText() {
