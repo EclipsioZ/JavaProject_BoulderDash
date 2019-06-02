@@ -113,7 +113,7 @@ public abstract class Mob extends Element implements ElementStrategy {
 
 	@Override
 	public Boolean handleCollision(Element element) {
-		if (element instanceof Rock) {
+		if (element instanceof PhysicElement) {
 			this.explode();
 		}
 		return true;
