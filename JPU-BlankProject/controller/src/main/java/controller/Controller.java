@@ -36,7 +36,7 @@ public final class Controller implements IController {
 		eThread.start();
 
 		Sound sound = new Sound();
-		sound.soundName = "LevelMusic";
+		sound.setSoundName("LevelMusic");
 		Thread th = new Thread(sound);
 		th.start();
 	}
