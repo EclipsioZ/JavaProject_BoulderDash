@@ -28,6 +28,13 @@ import model.elements.Player;
 import model.elements.Rock;
 import model.elements.Wall;
 
+/**
+ * The class for the graphic builder
+ * 
+ * @author Florian Rossi
+ * @author Baptiste Miquel
+ *
+ */
 public class GraphicBuilder {
 
 	private Map map;
@@ -197,7 +204,6 @@ public class GraphicBuilder {
 	 * @param graphics The graphic
 	 */
 	public void showHUD(Graphics graphics) {
-//		File leftHudFile = new File(getClass().getClassLoader().getResource("Hud1.png").getFile());
 		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 		InputStream leftHudFile = classLoader.getResourceAsStream("Hud1.png");	
 		BufferedImage leftHudImage;
@@ -209,7 +215,6 @@ public class GraphicBuilder {
 			e.printStackTrace();
 		}
 
-//		File topHudFile = new File(getClass().getClassLoader().getResource("Hud2.png").getFile());
 		InputStream topHudFile = classLoader.getResourceAsStream("Hud2.png");	
 		BufferedImage topHudImage = null;
 		try {

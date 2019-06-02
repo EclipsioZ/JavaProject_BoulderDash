@@ -10,11 +10,29 @@ import view.menu.MenuFrame;
  */
 public interface IView {
 
+	/**
+	 * Change the view (menu, map or game)
+	 */
 	void changeView();
 
+	/**
+	 * Get the menu frame
+	 * 
+	 * @return The menu frame
+	 */
 	MenuFrame getMenuFrame();
 
-	void setCurrentFrame(int i);
+	/**
+	 * Set the current frame
+	 * 
+	 * @param id The id of the frame
+	 */
+	void setCurrentFrame(int id);
 
+	/**
+	 * Get the current frame id
+	 * 
+	 * @return The frame id
+	 */
 	int getCurrentFrame();
 }

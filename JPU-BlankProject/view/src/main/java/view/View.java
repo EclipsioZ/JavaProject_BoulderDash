@@ -57,9 +57,6 @@ public final class View implements IView, Runnable {
 		this.menuframe.setView(this);
 	}
 
-	/**
-	 * Change the view (menu, map or game)
-	 */
 	public void changeView() {
 		this.resetViews();
 		SwingUtilities.invokeLater(new Runnable() {
