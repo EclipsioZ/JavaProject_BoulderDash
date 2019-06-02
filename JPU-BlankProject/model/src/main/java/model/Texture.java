@@ -7,6 +7,13 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
+/**
+ * The Class View
+ *
+ * @author Florian Rossi
+ * @author Baptiste Miquel
+ */
+
 public class Texture {
 	
 	private static int height = 16;
@@ -49,7 +56,9 @@ public class Texture {
 	private BufferedImage player_sheet = null;
 	private BufferedImage block_sheet = null;
 	
-	
+	/**
+	 * Load the file for get the spritesheet
+	 */
 	public Texture() {
 		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 		InputStream playerpng = classLoader.getResourceAsStream("Player.png");	
@@ -77,23 +86,20 @@ public class Texture {
 		
 	}
 	
-	// Classe élément pour créer l'instance
-	// Texture tex;
-	// tex = new Texture();
-	// public static Texture getInstance(){
-	// return tex;
-	// }
-	
-	public void getTexture(int world) {
+	/**
+	 * Get the texture of object and cut the spritesheet for make the animation
+	 * @param IdTex Int for change the texture
+	 */
+	public void getTexture(int IdTex) {
 		
-		idTexture = world;
+		idTexture = IdTex;
 		
 		int textureworld = 0;
 		int dirtanimated = 0;
 		int backgroundanimated = 0;
 		int rockanimated = 0;
 		
-		switch (world) {
+		switch (IdTex) {
 		case 1:
 			textureworld = 0;
 			rockanimated = 1;
@@ -189,7 +195,7 @@ public class Texture {
 			playerup[x] = ps.grabImage(x+1, 3, width, height);
 		}
 		
-		//Animations with 4 frames
+		//Animations with 5 frames
 		for(int x = 0; x < 5; x++) {
 			playerdietime[x] = ps.grabImage(x+1, 6, width, height);
 		}
