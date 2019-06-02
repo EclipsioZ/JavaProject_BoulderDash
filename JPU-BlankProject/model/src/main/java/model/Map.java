@@ -264,8 +264,14 @@ public class Map extends Observable {
 		}
 	}
 
-	public void setRequiredDiamonds(int reqDiamons) {
-		this.requiredDiamonds = reqDiamons;
+	public void setRequiredDiamonds(int reqDiamonds) {
+		if(reqDiamonds < 0) {
+			reqDiamonds = 0;
+		}
+		if(reqDiamonds > 100) {
+			reqDiamonds = 100;
+		}
+		this.requiredDiamonds = reqDiamonds;
 	}
 
 }

@@ -6,7 +6,6 @@ import java.util.List;
 
 import contract.IController;
 import model.AnimatedText;
-import model.Animation;
 import model.IModel;
 import model.Map;
 import model.elements.Air;
@@ -22,11 +21,19 @@ public class ElementThread implements Runnable {
 	List<Element> animatedElements;
 	List<Mob> mobs;
 	List<PhysicElement> physicElements;
+
 	Map map;
 	int indexElementAnimation;
+
 	public IModel model;
 	public IController controller;
 
+	/**
+	 * Instantiates a new element thread
+	 * 
+	 * @param model      The model interface
+	 * @param controller The controller interface
+	 */
 	public ElementThread(IModel model, IController controller) {
 		this.model = model;
 		this.controller = controller;
@@ -45,14 +52,25 @@ public class ElementThread implements Runnable {
 		this.indexElementAnimation = indexElementAnimation;
 	}
 
+	/**
+	 * Executed when the thread is started
+	 */
 	public void run() {
 		while (true) {
 			if (map.running) {
 				try {
+					// Time between loop (160ms)
 					Thread.sleep(160);
 
+					// Elements that will be removed after the loop are in that list
 					List<Element> toRemove = new ArrayList<Element>();
+
+					// To avoid ConcurrentModificationException => We can't edit a list while
+					// iterating it
+					// We have to make a clone of that list
 					List<Mob> mobsClone = new ArrayList<Mob>(mobs);
+
+					// The mobs
 					for (Mob mob : mobsClone) {
 						if (mob.isAlive && map.isInTheMap(mob)) {
 							mob.iaMove();
@@ -64,6 +82,7 @@ public class ElementThread implements Runnable {
 						mobs.remove(toRem);
 					}
 
+					// The elements that have a physic
 					toRemove = new ArrayList<Element>();
 					List<PhysicElement> physicElementsClone = new ArrayList<PhysicElement>(physicElements);
 					for (PhysicElement physicElement : physicElementsClone) {
@@ -78,14 +97,16 @@ public class ElementThread implements Runnable {
 							}
 						} else {
 							toRemove.add(physicElement);
-							if(map.running) // Avoid strange bugs on map reloading
-								this.map.setElementAt(physicElement.getX(), physicElement.getY(), new Explode(this.map));
+							if (map.running) // Avoid strange bugs on map reloading
+								this.map.setElementAt(physicElement.getX(), physicElement.getY(),
+										new Explode(this.map));
 						}
 					}
 					for (Element toRem : toRemove) {
 						physicElements.remove(toRem);
 					}
 
+					// The animated elements
 					toRemove = new ArrayList<Element>();
 					List<Element> animatedElementsClone = new ArrayList<Element>(animatedElements);
 					for (Element animatedElement : animatedElementsClone) {
@@ -111,44 +132,70 @@ public class ElementThread implements Runnable {
 						animatedElements.remove(toRem);
 					}
 
-					if (map.getPlayer().getDiamonds() >= map.getRequiredDiamonds() && !map.levelEnded) {
-						map.levelEnded = true;
-						map.setElementAt(map.getPosEndblock()[0], map.getPosEndblock()[1], new EndBlock(map));
-						model.setAnimatedText(new AnimatedText());
-					}
+					this.checkLastDiamond();
+					this.updateTimer();
+					this.checkReturnToMenu();
 
-					if (model.getAnimatedText() != null) {
-						model.getAnimatedText().setLifeTime(model.getAnimatedText().getLifeTime() - 1);
-						if (model.getAnimatedText().getLifeTime() < 0) {
-							model.setAnimatedText(null);
-						}
-					}
-					
-					map.setTimer(map.getTimer() - 160);
-					if(map.getTimer() < 0) {
-						map.getPlayer().die();
-					}
-
+					// Update the map
 					map.setMapHasChanged(this.map.getMap());
-					
-					if(map.getPlayer().getReturnLevelSelector() == 1) {
-						map.getPlayer().setReturnLevelSelector(0);
-						this.controller.returnToMenu();
-					}
-					
-					
+
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			} else {
-				map.resetAllElements();
-				map.running = true;
-				try {
-					model.resetMap();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				this.resetMap();
 			}
+		}
+	}
+
+	/**
+	 * Check if the player as collected the last diamond, and display the animated
+	 * text "EXIT"
+	 */
+	private void checkLastDiamond() {
+		if (map.getPlayer().getDiamonds() >= map.getRequiredDiamonds() && !map.levelEnded) {
+			map.levelEnded = true;
+			map.setElementAt(map.getPosEndblock()[0], map.getPosEndblock()[1], new EndBlock(map));
+			model.setAnimatedText(new AnimatedText());
+		}
+		if (model.getAnimatedText() != null) {
+			model.getAnimatedText().setLifeTime(model.getAnimatedText().getLifeTime() - 1);
+			if (model.getAnimatedText().getLifeTime() < 0) {
+				model.setAnimatedText(null);
+			}
+		}
+	}
+
+	/**
+	 * Update the timer and kill the player if it's bellow 0
+	 */
+	private void updateTimer() {
+		map.setTimer(map.getTimer() - 160);
+		if (map.getTimer() < 0) {
+			map.getPlayer().die();
+		}
+	}
+
+	/**
+	 * Check if the player wants to return to the level selector
+	 */
+	private void checkReturnToMenu() {
+		if (map.getPlayer().getReturnLevelSelector() == 1) {
+			map.getPlayer().setReturnLevelSelector(0);
+			this.controller.returnToMenu();
+		}
+	}
+
+	/**
+	 * If the map is not running, reset it
+	 */
+	private void resetMap() {
+		map.resetAllElements();
+		map.running = true;
+		try {
+			model.resetMap();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
