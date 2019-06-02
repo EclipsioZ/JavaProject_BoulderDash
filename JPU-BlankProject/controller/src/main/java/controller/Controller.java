@@ -1,14 +1,15 @@
 package controller;
 
-import java.util.Random;
-
 import contract.ControllerOrder;
 import contract.IController;
 import model.IModel;
 import view.IView;
 
 /**
- * The Class Controller.
+ * The Class Controller
+ * 
+ * @author Florian Rossi
+ * @author Baptiste Miquel
  */
 public final class Controller implements IController {
 

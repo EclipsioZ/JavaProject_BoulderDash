@@ -16,6 +16,12 @@ import model.elements.Mob;
 import model.elements.PhysicElement;
 import model.elements.Player;
 
+/**
+ * The Class ElementThread
+ * 
+ * @author Florian Rossi
+ * @author Baptiste Miquel
+ */
 public class ElementThread implements Runnable {
 
 	List<Element> animatedElements;
@@ -25,8 +31,8 @@ public class ElementThread implements Runnable {
 	Map map;
 	int indexElementAnimation;
 
-	public IModel model;
-	public IController controller;
+	IModel model;
+	IController controller;
 
 	/**
 	 * Instantiates a new element thread
