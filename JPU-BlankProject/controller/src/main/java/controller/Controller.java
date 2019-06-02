@@ -63,12 +63,6 @@ public final class Controller implements IController {
 	 * Order perform.
 	 *
 	 * @param controllerOrder the controller order
-	 * @throws InterruptedException
-	 */
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IController#orderPerform(contract.ControllerOrder)
 	 */
 	public void orderPerform(final ControllerOrder controllerOrder) {
 

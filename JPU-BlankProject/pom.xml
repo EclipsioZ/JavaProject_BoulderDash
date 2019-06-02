@@ -1,3 +1,4 @@
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -71,6 +72,7 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.1.0</version>
 				<configuration>
+					<source>8</source>
 					<show>private</show>
 					<nohelp>true</nohelp>
 				</configuration>
@@ -124,7 +126,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jxr-plugin</artifactId>
-				<version>2.5</version>
+				<version>3.0.0</version>
+				<configuration>
+					<linkJavadoc>true</linkJavadoc>
+					<javadocDir>target/site/apidocs</javadocDir>
+				</configuration>
 				<reportSets>
 					<reportSet>
 						<id>aggregate</id>
@@ -140,6 +146,7 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.1.0</version>
 				<configuration>
+					<source>8</source>
 					<aggregate>true</aggregate>
 					<show>private</show>
 				</configuration>

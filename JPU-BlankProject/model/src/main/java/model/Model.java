@@ -14,7 +14,7 @@ import model.db.DBGetData;
 public final class Model extends Observable implements IModel {
 
 	Map map;
-	DBGetData bdd;
+	DBGetData db;
 	
 	AnimatedText animatedText;
 	
@@ -31,8 +31,8 @@ public final class Model extends Observable implements IModel {
 		this.setLevelId(levelId);
 		this.tex.getTexture(1);
 		this.map = new Map();
-		bdd = new DBGetData();
-		bdd.loadLevel("1", map);
+		db = new DBGetData();
+		db.loadLevel("1", map);
 		map.setModel(this);
 	}
 	
@@ -75,7 +75,7 @@ public final class Model extends Observable implements IModel {
 
 	public void resetMap() throws Exception {
 		tex.getTexture(tex.idTexture);
-		bdd.loadLevel(map.levelId, map);
+		db.loadLevel(map.levelId, map);
 		map.setModel(this);
 		map.setTimer(120000);
 		map.levelEnded = false;
@@ -83,7 +83,7 @@ public final class Model extends Observable implements IModel {
 	
 	public void loadMap(int idTexture, String mapId) throws Exception {
 		tex.getTexture(idTexture);
-		bdd.loadLevel(mapId, map);
+		db.loadLevel(mapId, map);
 		map.setModel(this);
 		map.setTimer(120000);
 		map.levelEnded = false;
