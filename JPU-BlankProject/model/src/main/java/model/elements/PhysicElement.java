@@ -2,13 +2,20 @@ package model.elements;
 
 import model.Map;
 
+/**
+ * The class for the physic element
+ * 
+ * @author Florian Rossi
+ * @author Baptiste Miquel
+ *
+ */
 public abstract class PhysicElement extends Element implements ElementStrategy {
-	
+
 	public Boolean hasMoved;
 
 	PhysicElement(Map map) {
 		super(map);
-		
+
 		this.hasMoved = false;
 
 		// Add this element to the physic elements
@@ -24,6 +31,11 @@ public abstract class PhysicElement extends Element implements ElementStrategy {
 		return false;
 	}
 
+	/**
+	 * Apply gravity to the element
+	 * 
+	 * @return True if the element moved, false if not
+	 */
 	public Boolean gravity() {
 		Element downEl = this.getMap().getElementAt(this.getX(), this.getY() + 1);
 		Element rightEl = this.getMap().getElementAt(this.getX() + 1, this.getY());
@@ -48,11 +60,17 @@ public abstract class PhysicElement extends Element implements ElementStrategy {
 		}
 		return false;
 	}
-	
+
+	/**
+	 * Check if it can kill the player at given coordinates
+	 * 
+	 * @param x The x coordinate
+	 * @param y The y coordinate
+	 */
 	public void checkCanKillPlayer(int x, int y) {
 		Element downEl = this.getMap().getElementAt(x, y + 1);
 		// If there is a down element
-		if(downEl != null) {
+		if (downEl != null) {
 			downEl.handleCollision(this);
 		}
 	}

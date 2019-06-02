@@ -6,6 +6,13 @@ import java.util.UUID;
 
 import model.Map;
 
+/**
+ * The class for the element
+ * 
+ * @author Florian Rossi
+ * @author Baptiste Miquel
+ *
+ */
 public class Element {
 
 	private ArrayList<Image> sprites;
@@ -13,7 +20,6 @@ public class Element {
 	private int x;
 	private int y;
 
-	private int indexAnimation; // TODO: REMOVE
 	private int indexElementAnimation;
 	private int maxAnimations;
 
@@ -44,7 +50,6 @@ public class Element {
 	 */
 	Element() {
 		this.sprites = new ArrayList<Image>();
-		this.indexAnimation = 0;
 		this.indexElementAnimation = 0;
 		this.uuid = UUID.randomUUID();
 		this.isAlive = true;
@@ -59,19 +64,10 @@ public class Element {
 	Element(Map map) {
 		this.map = map;
 		this.sprites = new ArrayList<Image>();
-		this.indexAnimation = 0;
 		this.indexElementAnimation = 0;
 		this.uuid = UUID.randomUUID();
 		this.isAlive = true;
 		this.maxAnimations = 4;
-	}
-
-	public int getIndexAnimation() {
-		return indexAnimation;
-	}
-
-	public void setIndexAnimation(int indexAnimation) {
-		this.indexAnimation = indexAnimation;
 	}
 
 	public int getIndexElementAnimation() {

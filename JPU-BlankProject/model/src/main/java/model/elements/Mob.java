@@ -8,22 +8,25 @@ public abstract class Mob extends Element implements ElementStrategy {
 	private String explosionType;
 
 	public String direction;
-	
+
 	public Mob(Map map) {
 		super(map);
 		explosionRadius = 2;
 		explosionType = "Air";
 		this.direction = "down";
-				
+
 		// Add this element to the animated elements
 		this.getMap().getAnimatedElements().add(this);
-		
+
 		// Add the mob to the mob list
 		this.getMap().getMobs().add(this);
 	}
 
+	/**
+	 * Explode the mob in a circle with a radius
+	 */
 	public void explode() {
-		
+
 		int xCenter = this.getX();
 		int yCenter = this.getY();
 		int radius = this.getExplosionRadius();
@@ -47,10 +50,10 @@ public abstract class Mob extends Element implements ElementStrategy {
 				}
 			}
 		}
-		
+
 		this.getMap().setElementAt(this.getX(), this.getY(), new Air(this.getMap()));
 		this.isAlive = false;
-		
+
 	}
 
 	public int getExplosionRadius() {
@@ -78,17 +81,14 @@ public abstract class Mob extends Element implements ElementStrategy {
 		return false;
 	}
 
-	// The mob IA
-	// Each mob will first try to move right, then up, then left, then down
+	/**
+	 * The mob IA
+	 */
 	public void iaMove() {
 		Element upEl = this.getMap().getElementAt(this.getX(), this.getY() - 1);
 		Element downEl = this.getMap().getElementAt(this.getX(), this.getY() + 1);
 		Element rightEl = this.getMap().getElementAt(this.getX() + 1, this.getY());
 		Element leftEl = this.getMap().getElementAt(this.getX() - 1, this.getY());
-		Element rightDownEl = this.getMap().getElementAt(this.getX() + 1, this.getY() + 1);
-		Element leftDownEl = this.getMap().getElementAt(this.getX() - 1, this.getY() + 1);
-		Element rightUpEl = this.getMap().getElementAt(this.getX() + 1, this.getY() - 1);
-		Element leftUpEl = this.getMap().getElementAt(this.getX() - 1, this.getY() - 1);
 
 		if ((downEl instanceof Air || downEl instanceof Player) && direction != "up") {
 			direction = "down";
@@ -118,7 +118,7 @@ public abstract class Mob extends Element implements ElementStrategy {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public void pop() {
 		this.getMap().getAnimatedElements().remove(this);

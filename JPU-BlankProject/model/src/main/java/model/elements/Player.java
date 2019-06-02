@@ -2,12 +2,26 @@ package model.elements;
 
 import model.Map;
 
+/**
+ * The class for the player
+ * 
+ * @author Florian Rossi
+ * @author Baptiste Miquel
+ *
+ */
 public class Player extends Element implements ElementStrategy {
 
 	private int diamonds;
 	private int score;
+	
+	/** Do the player wants to return to the menu */
 	private int returnmenu;
 
+	/**
+	 * Instantiates a new player
+	 * 
+	 * @param map The map
+	 */
 	public Player(Map map) {
 		super(map);
 		this.diamonds = 0;
@@ -45,7 +59,6 @@ public class Player extends Element implements ElementStrategy {
 	public Boolean canMove(int x, int y) {
 
 		int movementDirectionX = x - this.getX();
-		int movementDirectionY = y - this.getY();
 
 		Element el = this.getMap().getElementAt(x, y);
 
