@@ -7,7 +7,12 @@ import javax.swing.JFrame;
 
 import view.IView;
 import view.View;
-
+/**
+ * The Class MenuFrame
+ *
+ * @author Florian Rossi
+ * @author Baptiste Miquel
+ */
 public class MenuFrame {
 
 	private int frame = 0;
@@ -15,7 +20,10 @@ public class MenuFrame {
 	LevelPanel levelpanel = new LevelPanel();
 
 	IView view;
-
+	
+	/**
+	 * Create the frame of the menu and give the parameters
+	 */
 	public void MenuFrame() {
 		MenuPanel menupanel = new MenuPanel();
 		menu.add(menupanel);

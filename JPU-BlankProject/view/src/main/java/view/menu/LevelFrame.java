@@ -10,35 +10,22 @@ import java.net.URISyntaxException;
 import javax.swing.JFrame;
 
 import model.db.DBGetData;
-
+/**
+ * The Class LevelFrame
+ *
+ * @author Florian Rossi
+ * @author Baptiste Miquel
+ */
 public class LevelFrame {
 
-	MenuFrame menuframe;
+	private MenuFrame menuframe;
 	MenuFrame menuframe2 = new MenuFrame();
 	JFrame menu;
-	LevelPanel levelpanel;
+	private LevelPanel levelpanel;
 
-	public MenuFrame getMenuframe() {
-		return menuframe;
-	}
-
-	public LevelPanel getLevelpanel() {
-		return levelpanel;
-	}
-
-	public void setMenuframe(MenuFrame menuframe) {
-		this.menuframe = menuframe;
-	}
-
-	public void loadLevelFrame() {
-		menu.add(levelpanel);
-		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		menu.setSize(12 * 80 - 12, 12 * 80);
-		menu.setResizable(false);
-		menu.setLocationRelativeTo(null);
-		menu.setVisible(true);
-	}
-
+	/**
+	 * Constructor of levelFrame with the parameters of the level selector
+	 */
 	public LevelFrame() {
 		menu = menuframe2.getJframe();
 		levelpanel = new LevelPanel();
@@ -86,15 +73,43 @@ public class LevelFrame {
 		});
 	}
 
+	/**
+	 * Create the frame of the level menu
+	 */
+	public void loadLevelFrame() {
+		menu.add(levelpanel);
+		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		menu.setSize(12 * 80 - 12, 12 * 80);
+		menu.setResizable(false);
+		menu.setLocationRelativeTo(null);
+		menu.setVisible(true);
+	}
+	/**
+	 * Method for open the level editor in the web page
+	 * @throws IOException
+	 * @throws URISyntaxException
+	 */
+	public void openEditor() throws IOException, URISyntaxException {
+		if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+		    Desktop.getDesktop().browse(new URI("http://localhost/mapEditor/"));
+		}
+	}
+	
 	public String getLevelName(int id) {
 		DBGetData bdd = new DBGetData();
 		return bdd.getMapNameFromId(id);
 	}
 	
-	public void openEditor() throws IOException, URISyntaxException {
-		if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-		    Desktop.getDesktop().browse(new URI("http://localhost/mapEditor/"));
-		}
+	public MenuFrame getMenuframe() {
+		return menuframe;
+	}
+
+	public LevelPanel getLevelpanel() {
+		return levelpanel;
+	}
+
+	public void setMenuframe(MenuFrame menuframe) {
+		this.menuframe = menuframe;
 	}
 
 }

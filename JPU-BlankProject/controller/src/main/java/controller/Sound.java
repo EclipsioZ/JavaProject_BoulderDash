@@ -7,7 +7,7 @@ import java.net.URL;
 import javax.sound.sampled.*;
 
 /**
- * The Class View
+ * The Class Sound
  *
  * @author Florian Rossi
  * @author Baptiste Miquel

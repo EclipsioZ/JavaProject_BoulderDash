@@ -8,7 +8,7 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 /**
- * The Class View
+ * The Class texture
  *
  * @author Florian Rossi
  * @author Baptiste Miquel

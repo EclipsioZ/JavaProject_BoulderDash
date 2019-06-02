@@ -3,7 +3,7 @@ package model;
 import java.awt.image.BufferedImage;
 
 /**
- * The Class View
+ * The Class Spritesheet
  *
  * @author Florian Rossi
  * @author Baptiste Miquel

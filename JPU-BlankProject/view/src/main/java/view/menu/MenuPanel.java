@@ -14,7 +14,12 @@ import java.text.AttributedString;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-
+/**
+ * The Class MenuPanel
+ *
+ * @author Florian Rossi
+ * @author Baptiste Miquel
+ */
 public class MenuPanel extends JPanel{
 	/**
 	 * 
@@ -22,22 +27,32 @@ public class MenuPanel extends JPanel{
 	private static final long serialVersionUID = 6628867251040356742L;
 	
 	Image image;
-	int i = 0;
+	private int i = 0;
+	
+	/**
+	 * Constructor of class menupanel
+	 */
 	public MenuPanel() {
 		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 		URL menugif = classLoader.getResource("menu.gif");
 		this.image = Toolkit.getDefaultToolkit().createImage(menugif);
 	}
-
+	/**
+	 * Paint the panel menu
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
+		
+		//String for the text
 		AttributedString as1 = new AttributedString("PRESS ENTER TO PLAY");
+		//Give the attribute for the text
 		as1.addAttribute(TextAttribute.SIZE, 30);
 		g2d.setColor(Color.WHITE);
+		
+		//Draw the animated text
 		g2d.drawString(as1.getIterator(), 45, 20);
 		if (image != null) {
 			g.drawImage(image, 0, 0, 960, 540, this);

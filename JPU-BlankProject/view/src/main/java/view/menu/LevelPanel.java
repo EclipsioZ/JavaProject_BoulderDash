@@ -16,7 +16,12 @@ import javax.swing.JPanel;
 import model.Texture;
 import model.db.DBGetData;
 import model.elements.Element;
-
+/**
+ * The Class LevelPanel
+ *
+ * @author Florian Rossi
+ * @author Baptiste Miquel
+ */
 public class LevelPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
@@ -26,6 +31,9 @@ public class LevelPanel extends JPanel{
 	int i;
 	private String levelName;
 	
+	/**
+	 * Constructor of class levelPanel for load the picture of the map
+	 */
 	public LevelPanel() {
 		this.CoordLevel();
 		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
@@ -39,7 +47,9 @@ public class LevelPanel extends JPanel{
 //				.createImage(getClass().getClassLoader().getResource("MapLevel.png").getFile());
 		this.levelName = "";
 	}
-
+	/**
+	 * Initialize the coord of the map level
+	 */
 	private void CoordLevel() {
 	coordlevel = new int[14][2];
 	//Editor
@@ -72,6 +82,9 @@ public class LevelPanel extends JPanel{
 	coordlevel[13][0] = 748; coordlevel[13][1] = 559;
 	}
 
+	/**
+	 * Paint the map level
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
@@ -83,6 +96,10 @@ public class LevelPanel extends JPanel{
 		drawLevelName(g);
 	}
 	
+	/**
+	 * Draw the level name in the left top
+	 * @param g
+	 */
 	public void drawLevelName(Graphics g) {
 		Font font = new Font("Arial", Font.BOLD, 20);
 		g.setFont(font);
@@ -94,7 +111,11 @@ public class LevelPanel extends JPanel{
 			g.drawString(this.getLevelName(), 10, 40);
 		}
 	}
-	
+	/**
+	 * Draw the sprite of the player level selector
+	 * @param g
+	 * @param level
+	 */
 	public void drawLevel(Graphics g, int level) {
 			g.drawImage(Texture.playerlevelselector[1], getCoordlevel(level-1, 0) -25,getCoordlevel(level-1, 1)-25, 70, 70, null);
 	}
