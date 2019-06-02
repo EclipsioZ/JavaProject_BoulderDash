@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.*;
+import java.net.URL;
+
 import javax.sound.sampled.*;
 
 public class Sound implements Runnable {
@@ -11,13 +13,13 @@ public class Sound implements Runnable {
 		soundName = "";
 	}
 
-	public void loadSound(String songFile) {
+	public void loadSound(URL songFile) {
 		SourceDataLine soundLine = null;
 		int BUFFER_SIZE = 64 * 1024; // 64 KB
 
 		try {
-			File soundFile = new File(songFile);
-			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+//			File soundFile = new File(songFile);
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(songFile);
 			AudioFormat audioFormat = audioInputStream.getFormat();
 			DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioFormat);
 			soundLine = (SourceDataLine) AudioSystem.getLine(info);
@@ -45,7 +47,9 @@ public class Sound implements Runnable {
 
 	@Override
 	public void run() {
-		String songFile = getClass().getClassLoader().getResource(this.soundName + ".wav").getFile();
+		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+		URL songFile = classLoader.getResource(this.soundName + ".wav");	
+//		String songFile = getClass().getClassLoader().getResource(this.soundName + ".wav").getFile();
 		this.loadSound(songFile);
 	}
 	

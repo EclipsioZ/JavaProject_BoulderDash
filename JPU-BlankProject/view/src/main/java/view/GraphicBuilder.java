@@ -9,6 +9,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
@@ -203,7 +204,9 @@ public class GraphicBuilder {
 	 * @param graphics The graphic
 	 */
 	public void showHUD(Graphics graphics) {
-		File leftHudFile = new File(getClass().getClassLoader().getResource("Hud1.png").getFile());
+//		File leftHudFile = new File(getClass().getClassLoader().getResource("Hud1.png").getFile());
+		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+		InputStream leftHudFile = classLoader.getResourceAsStream("Hud1.png");	
 		BufferedImage leftHudImage;
 		try {
 			leftHudImage = ImageIO.read(leftHudFile);
@@ -213,7 +216,8 @@ public class GraphicBuilder {
 			e.printStackTrace();
 		}
 
-		File topHudFile = new File(getClass().getClassLoader().getResource("Hud2.png").getFile());
+//		File topHudFile = new File(getClass().getClassLoader().getResource("Hud2.png").getFile());
+		InputStream topHudFile = classLoader.getResourceAsStream("Hud2.png");	
 		BufferedImage topHudImage = null;
 		try {
 			topHudImage = ImageIO.read(topHudFile);

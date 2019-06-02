@@ -3,6 +3,7 @@ package model;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
@@ -50,12 +51,20 @@ public class Texture {
 	
 	
 	public Texture() {
-		playerpng = new File(getClass().getClassLoader().getResource("Player.png").getFile());
-		blockpng = new File(getClass().getClassLoader().getResource("Blocks.png").getFile());
+		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+		InputStream playerpng = classLoader.getResourceAsStream("Player.png");	
+		InputStream blockpng = classLoader.getResourceAsStream("Blocks.png");		
+//		playerpng = new File(getClass().getClassLoader().getResource("Player.png").getFile());
+//		blockpng = new File(getClass().getClassLoader().getResource("Blocks.png").getFile());
 		try {
 			player_sheet = ImageIO.read(playerpng);
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+		try {
+			playerpng.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 		try {
 			block_sheet = ImageIO.read(blockpng);

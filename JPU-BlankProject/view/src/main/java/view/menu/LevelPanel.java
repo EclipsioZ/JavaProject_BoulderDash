@@ -7,7 +7,10 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
+import java.io.IOException;
+import java.io.InputStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import model.Texture;
@@ -25,8 +28,15 @@ public class LevelPanel extends JPanel{
 	
 	public LevelPanel() {
 		this.CoordLevel();
-		this.image = Toolkit.getDefaultToolkit()
-				.createImage(getClass().getClassLoader().getResource("MapLevel.png").getFile());
+		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+		InputStream mappng = classLoader.getResourceAsStream("MapLevel.png");
+		try {
+			this.image = ImageIO.read(mappng);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+//		this.image = Toolkit.getDefaultToolkit()
+//				.createImage(getClass().getClassLoader().getResource("MapLevel.png").getFile());
 		this.levelName = "";
 	}
 

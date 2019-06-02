@@ -7,8 +7,12 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.font.TextAttribute;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.text.AttributedString;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class MenuPanel extends JPanel{
@@ -20,8 +24,9 @@ public class MenuPanel extends JPanel{
 	Image image;
 	int i = 0;
 	public MenuPanel() {
-		image = Toolkit.getDefaultToolkit()
-				.createImage(getClass().getClassLoader().getResource("menu.gif").getFile());
+		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+		URL menugif = classLoader.getResource("menu.gif");
+		this.image = Toolkit.getDefaultToolkit().createImage(menugif);
 	}
 
 	@Override
