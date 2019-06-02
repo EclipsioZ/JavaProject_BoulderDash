@@ -3,19 +3,12 @@ package view;
 import view.menu.MenuFrame;
 
 /**
- * The Interface IView.
+ * The Interface IView
  *
- * @author Jean-Aymeric Diet
+ * @author Florian Rossi
+ * @author Baptiste Miquel
  */
 public interface IView {
-
-	/**
-	 * Prints the message.
-	 *
-	 * @param message
-	 *          the message
-	 */
-	void printMessage(final String message);
 
 	void changeView();
 

@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.TexturePaint;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,11 +12,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import model.AnimatedText;
 import model.Animation;
 import model.IModel;
 import model.Map;
-import model.Model;
 import model.Texture;
 import model.elements.Air;
 import model.elements.Diamond;
@@ -33,32 +30,72 @@ import model.elements.Wall;
 
 public class GraphicBuilder {
 
-	Map map;
-	Animation animation;
-	IModel model;
-	int camX;
-	int camY;
+	private Map map;
+	private Animation animation;
+	private IModel model;
+	private int camX;
+	private int camY;
+	private int spriteSize;
 
+	// TODO: Remove ?
+	public void setAnimation(Animation animation) {
+		this.animation = animation;
+	}
+
+	/**
+	 * Get the map element
+	 * 
+	 * @return The map element
+	 */
+	public Map getMap() {
+		return this.map;
+	}
+	
+	/**
+	 * Set the model interface and get its map
+	 * 
+	 * @param iModel The model interface
+	 */
 	public void setMap(IModel iModel) {
 		this.model = iModel;
 		this.map = iModel.getMap();
 	}
 
-	public void setAnimation(Animation animation) {
-		this.animation = animation;
+	/**
+	 * Instantiates a new graphic builder
+	 */
+	public GraphicBuilder() {
+		this.spriteSize = 80;
 	}
 
-	public Map getMap() {
-		return this.map;
-	}
-
+	/**
+	 * Draw the model
+	 * 
+	 * @param graphics The graphic
+	 */
 	public void applyModelToGraphic(Graphics graphics) {
 
-		int spriteSize = 80;
 		if (map.getPlayer() != null) {
-			moveCamera(graphics);
+			this.moveCamera(graphics);
 		}
 
+		this.showMapElements(graphics, this.spriteSize);
+
+		if (model.getAnimatedText() != null) {
+			this.showAnimatedText(graphics);
+		}
+
+		showHUD(graphics);
+
+	}
+
+	/**
+	 * Show all the elements of the map
+	 * 
+	 * @param graphics   The graphic
+	 * @param spriteSize The size of each sprite
+	 */
+	public void showMapElements(Graphics graphics, int spriteSize) {
 		for (int y = 0; y < map.getHeight(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
 
@@ -142,84 +179,81 @@ public class GraphicBuilder {
 				}
 			}
 		}
-
-		// SHOW CAMERA
-//		graphics.setColor(Color.RED);
-//		graphics.fillRect(camX + VIEWPORT_SIZE_X / 2 - 10, camY + VIEWPORT_SIZE_Y / 2 - 10, 20, 20);
-//		graphics.fillRect(camX + VIEWPORT_SIZE_X / 2 + 80 * 3 - 10, camY + VIEWPORT_SIZE_Y / 2 - 10, 20, 20);
-
-		if (model.getAnimatedText() != null) {
-			Font font = new Font("Arial", Font.BOLD, 35);
-			graphics.setFont(font);
-			graphics.setColor(new Color(80, 255, 80, 255));
-			graphics.drawString(model.getAnimatedText().getText(), map.getPlayer().getX() * 80 + 0,
-					map.getPlayer().getY() * 80 + 80 + model.getAnimatedText().getLifeTime() * -1);
-		}
-
-		showHUD(graphics);
-
 	}
 
+	/**
+	 * Show the "EXIT" text with animation
+	 * 
+	 * @param graphics The graphic
+	 */
+	public void showAnimatedText(Graphics graphics) {
+		graphics.setColor(Color.BLACK);
+		graphics.fillRect(map.getPlayer().getX() * 80 - 4,
+				map.getPlayer().getY() * 80 + 40 + model.getAnimatedText().getLifeTime() * -1, 84, 50);
+		Font font = new Font("Arial", Font.BOLD, 35);
+		graphics.setFont(font);
+		graphics.setColor(new Color(80, 255, 80, 255));
+		graphics.drawString(model.getAnimatedText().getText(), map.getPlayer().getX() * 80 + 0,
+				map.getPlayer().getY() * 80 + 80 + model.getAnimatedText().getLifeTime() * -1);
+	}
+
+	/**
+	 * Show the HUD (Sprite and text)
+	 * 
+	 * @param graphics The graphic
+	 */
 	public void showHUD(Graphics graphics) {
-		File hud1 = new File(getClass().getClassLoader().getResource("Hud1.png").getFile());
-		BufferedImage hudImage;
+		File leftHudFile = new File(getClass().getClassLoader().getResource("Hud1.png").getFile());
+		BufferedImage leftHudImage;
 		try {
-			hudImage = ImageIO.read(hud1);
-			graphics.drawImage(hudImage, camX + 10, camY + 100, (int) Math.round(hudImage.getWidth() / 1.5),
-					(int) Math.round(hudImage.getHeight() / 1.5), null);
+			leftHudImage = ImageIO.read(leftHudFile);
+			graphics.drawImage(leftHudImage, camX + 10, camY + 100, (int) Math.round(leftHudImage.getWidth() / 1.5),
+					(int) Math.round(leftHudImage.getHeight() / 1.5), null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		
-		File hud2 = new File(getClass().getClassLoader().getResource("Hud2.png").getFile());
-		BufferedImage hud2Image = null;
+		File topHudFile = new File(getClass().getClassLoader().getResource("Hud2.png").getFile());
+		BufferedImage topHudImage = null;
 		try {
-			hud2Image = ImageIO.read(hud2);
-			graphics.drawImage(hud2Image, (camX + ((80 * 10) / 2)) - (hud2Image.getWidth() / 5), camY + 10,
-					(int) Math.round(hud2Image.getWidth() / 1.5), (int) Math.round(hud2Image.getHeight() / 1.5), null);
+			topHudImage = ImageIO.read(topHudFile);
+			graphics.drawImage(topHudImage, (camX + ((80 * 10) / 2)) - (topHudImage.getWidth() / 5), camY + 10,
+					(int) Math.round(topHudImage.getWidth() / 1.5), (int) Math.round(topHudImage.getHeight() / 1.5),
+					null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		Font diamondsFont = new Font("Arial", Font.BOLD, 35);
-		graphics.setFont(diamondsFont);
+		Font hudFont = new Font("Arial", Font.BOLD, 35);
+		graphics.setFont(hudFont);
 		graphics.setColor(Color.WHITE);
+
 		int diamonds = map.getRequiredDiamonds() - map.getPlayer().getDiamonds();
 		if (diamonds < 0)
 			diamonds = 0;
 		graphics.drawString(String.format("%03d", diamonds), camX + 72, camY + 138);
 
-		Font timerFont = new Font("Arial", Font.BOLD, 35);
-		graphics.setFont(timerFont);
-		graphics.setColor(Color.WHITE);
 		int timer = Math.round(map.getTimer() / 1000);
 		if (timer < 0)
 			timer = 0;
 		graphics.drawString(String.format("%03d", timer), camX + 72, camY + 190);
-		
-		Font scoreFont = new Font("Arial", Font.BOLD, 35);
-		graphics.setFont(scoreFont);
-		graphics.setColor(Color.WHITE);
+
 		int score = this.getMap().getPlayer().getScore();
-		graphics.drawString(String.format("%06d", score), (camX + ((80 * 10) / 2)) - (hud2Image.getWidth() / 5) + 40, camY + 48);
+		graphics.drawString(String.format("%06d", score), (camX + ((80 * 10) / 2)) - (topHudImage.getWidth() / 5) + 40,
+				camY + 48);
 	}
 
+	// TODO: Remove ?
 	public void loadAnimation() {
-
 		for (int y = 0; y < map.getHeight(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
 				Element element = map.getElementAt(x, y);
-
 				if (element instanceof Rock) {
 					for (int j = 0; j < Texture.rock.length; j++) {
-
 						element.getSprites().add(Texture.rock[j]);
 					}
 				}
-
 				if (element instanceof Diamond) {
-
 					for (int j = 0; j < Texture.diamond.length; j++) {
 						element.getSprites().add(Texture.diamond[j]);
 					}
@@ -228,38 +262,26 @@ public class GraphicBuilder {
 		}
 	}
 
+	/**
+	 * Move the camera
+	 * 
+	 * @param graphics The graphic
+	 */
 	public void moveCamera(Graphics graphics) {
-
 		Graphics2D gg = (Graphics2D) graphics;
 
 		gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		int VIEWPORT_SIZE_X = 10 * 80;
-		int VIEWPORT_SIZE_Y = 10 * 80;
+		int viewPortSizeX = 10 * this.spriteSize;
+		int viewPortSizeY = 10 * this.spriteSize;
 
-		int offsetMaxX = (int) (map.getWidth() * 80 - VIEWPORT_SIZE_X);
-		int offsetMaxY = map.getHeight() * 80 - VIEWPORT_SIZE_Y;
+		int offsetMinX = 10 * this.spriteSize - viewPortSizeX;
+		int offsetMaxX = (int) (map.getWidth() * this.spriteSize - viewPortSizeX);
 
-		int offsetMinX = 10 * 80 - VIEWPORT_SIZE_X;
-		int offsetMinY = 10 * 80 - VIEWPORT_SIZE_Y;
+		int offsetMinY = 10 * this.spriteSize - viewPortSizeY;
+		int offsetMaxY = map.getHeight() * this.spriteSize - viewPortSizeY;
 
-		this.camX = (int) (map.getPlayer().getX() * 80 - Math.floor(VIEWPORT_SIZE_X / 2)) + 40;
-		this.camY = (int) (map.getPlayer().getY() * 80 - Math.floor(VIEWPORT_SIZE_Y / 2)) + 40;
-
-		if (camX > offsetMaxX) {
-			camX = offsetMaxX;
-		}
-
-		if (camY > offsetMaxY) {
-			camY = offsetMaxY;
-		}
-
-		if (camX < offsetMinX) {
-			camX = offsetMinX;
-		}
-
-		if (camY < offsetMinY) {
-			camY = offsetMinY;
-		}
+		this.camX = this.findCamPos(viewPortSizeX, offsetMinX, offsetMaxX, map.getPlayer().getX(), this.spriteSize);
+		this.camY = this.findCamPos(viewPortSizeY, offsetMinY, offsetMaxY, map.getPlayer().getY(), this.spriteSize);
 
 		gg.translate(-camX, -camY);
 
@@ -267,6 +289,28 @@ public class GraphicBuilder {
 		gg.setTransform(old);
 	}
 
+	/**
+	 * Get the camera position
+	 * 
+	 * @param viewPortSize Size of the viewport
+	 * @param offsetMin    Minimum camera position
+	 * @param offsetMax    Maximum camera position
+	 * @param playerPos    Player position
+	 * @param spriteSize   Size of sprite
+	 * @return The camera position
+	 */
+	public int findCamPos(int viewPortSize, int offsetMin, int offsetMax, int playerPos, int spriteSize) {
+		int cam = (int) (playerPos * spriteSize - Math.floor(viewPortSize / 2)) + spriteSize / 2;
+		if (cam > offsetMax) {
+			cam = offsetMax;
+		}
+		if (cam < offsetMin) {
+			cam = offsetMin;
+		}
+		return cam;
+	}
+
+	// TODO: Remove ?
 	public void graphicsAnimation(Graphics graphics) {
 
 		loadAnimation();

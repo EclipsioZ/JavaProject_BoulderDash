@@ -11,26 +11,26 @@ import view.menu.LevelFrame;
 import view.menu.MenuFrame;
 
 /**
- * The Class View.
+ * The Class View
  *
- * @author Jean-Aymeric Diet
+ * @author Florian Rossi
+ * @author Baptiste Miquel
  */
 public final class View implements IView, Runnable {
 
-	/** The frame. */
 	public ViewFrame viewFrame;
 	public LevelFrame levelframe = new LevelFrame();
 	public MenuFrame menuframe = new MenuFrame();
-	
+
 	public IController controller;
 	public IModel model;
-	
+
 	private int currentFrame = 0;
 
 	/**
-	 * Instantiates a new view.
+	 * Instantiates a new view
 	 *
-	 * @param model the model
+	 * @param model The model
 	 */
 	public View(final IModel model) {
 		this.model = model;
@@ -39,7 +39,7 @@ public final class View implements IView, Runnable {
 		this.levelframe.setMenuframe(menuframe);
 		this.changeView();
 	}
-	
+
 	public int getCurrentFrame() {
 		return currentFrame;
 	}
@@ -48,35 +48,46 @@ public final class View implements IView, Runnable {
 		this.currentFrame = currentFrame;
 	}
 
+	/**
+	 * Reset the view frame and the menu frame
+	 */
 	public void resetViews() {
 		this.viewFrame.setVisible(false);
 		this.viewFrame = new ViewFrame(model, "Boulderdash");
 		this.menuframe.setView(this);
 	}
 
+	/**
+	 * Change the view (menu, map or game)
+	 */
 	public void changeView() {
 		this.resetViews();
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				if (getCurrentFrame() == 0) {
-					System.out.println(menuframe.getFrame());
 					menuframe.MenuFrame();
 				} else if (getCurrentFrame() == 1) {
 					levelframe.loadLevelFrame();
 				} else {
 					viewFrame.buildViewFrame();
-					updateController();
+					try {
+						updateController();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
+			
+			
 		});
 	}
 
 	/**
-	 * Key code to controller order.
+	 * Key code to controller order
 	 *
-	 * @param keyCode the key code
-	 * @return the controller order
+	 * @param keyCode The key code
+	 * @return The controller order
 	 */
 	protected static ControllerOrder keyCodeToControllerOrder(final int keyCode) {
 		switch (keyCode) {
@@ -107,44 +118,30 @@ public final class View implements IView, Runnable {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IView#printMessage(java.lang.String)
-	 */
-	public void printMessage(final String message) {
-		;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Runnable#run()
-	 */
 	public void run() {
 		this.viewFrame.setVisible(true);
 	}
 
 	/**
-	 * Sets the controller.
+	 * Sets the controller
 	 *
-	 * @param controller the new controller
+	 * @param controller The new controller
 	 */
 	public void setController(final IController controller) {
 		this.controller = controller;
 	}
-	
-	public void updateController() {
+
+	/**
+	 * Update the controller with a new level
+	 * @throws Exception 
+	 */
+	public void updateController() throws Exception {
 		if (this.getCurrentFrame() == 2) {
 			controller.setLevel(levelframe.getLevelpanel().getLevel());
 			this.viewFrame.setController(controller);
-			this.viewFrame.getModel().loadMap(1, Integer.toString(levelframe.getLevelpanel().getLevel()));
+			this.viewFrame.getModel().loadMap(1, Integer.toString(levelframe.getLevelpanel().getLevel() - 1));
 			this.viewFrame.getModel().getMap().running = false;
 		}
-	}
-
-	public void updateMap() {
-
 	}
 
 	@Override

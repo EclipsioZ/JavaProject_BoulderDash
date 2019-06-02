@@ -6,6 +6,12 @@ import model.elements.Mob1;
 import model.elements.Player;
 import model.elements.Rock;
 
+/**
+ * The Class Animation
+ *
+ * @author Florian Rossi
+ * @author Baptiste Miquel
+ */
 public class Animation implements Runnable {
 	
 	Map map;

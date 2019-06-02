@@ -9,4 +9,9 @@ public class Wall extends Block implements ElementStrategy {
 		this.figure = "2";
 	}
 
+	@Override
+	public void pop() {
+
+	}
+
 }

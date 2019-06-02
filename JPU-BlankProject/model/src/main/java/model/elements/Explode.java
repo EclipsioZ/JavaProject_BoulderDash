@@ -16,5 +16,10 @@ public class Explode extends Block implements ElementStrategy {
 	public Boolean handleCollision(Element element) {
 		return true;
 	}
+
+	@Override
+	public void pop() {
+
+	}
 	
 }

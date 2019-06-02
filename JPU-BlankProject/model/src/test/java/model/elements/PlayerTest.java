@@ -1,7 +1,5 @@
 package model.elements;
 
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,7 +7,7 @@ import model.Map;
 
 public class PlayerTest {
 
-	// These tests will check every possile collisions for the player and his ability to move
+	// These tests will check every possible collisions for the player and his ability to move
 	@Test
 	public void testCanMove() {
 		Map map = new Map();

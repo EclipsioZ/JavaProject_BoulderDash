@@ -2,21 +2,33 @@ package model.bdd;
 
 import java.sql.*;
 
+/**
+ * The Class BDDConnector
+ *
+ * @author Florian Rossi
+ * @author Baptiste Miquel
+ */
 public class BDDConnector {
 
-	// Databade configuration
+	/**
+	 * Database configuration
+	 */
 	private static String BDDNAME = "boulderdash";
 	private static String URL = "jdbc:mysql://localhost/" + BDDNAME
 			+ "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&autoReconnect=true&useSSL=false";
 	private static String USER = "root";
 	private static String PASSWORD = "";
-	
-	// The unique instance of BDDConnector
+
+	/** The unique instance of BDDConnector */
 	static BDDConnector INSTANCE;
-	
+
 	private Connection connection;
 
-	// Singleton BDDConnector
+	/**
+	 * Singleton BDDConnector
+	 * 
+	 * @return The instance of the BDDConnector
+	 */
 	public BDDConnector getInstance() {
 		if (INSTANCE != null) {
 			INSTANCE = new BDDConnector();
@@ -24,7 +36,9 @@ public class BDDConnector {
 		return INSTANCE;
 	}
 
-	// Open database with given parameters
+	/**
+	 * Open database with given parameters
+	 */
 	public void openBDD() {
 		try {
 			connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -34,6 +48,11 @@ public class BDDConnector {
 		}
 	}
 
+	/**
+	 * Get the connection
+	 * 
+	 * @return The connection to the database
+	 */
 	public Connection getConnection() {
 		return connection;
 	}

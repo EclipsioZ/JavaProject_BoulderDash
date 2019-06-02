@@ -17,10 +17,7 @@ public final class Controller implements IController {
 
 	/** The model. */
 	private IModel model;
-	
-	// State of the game: 0 = in menu, 1 = in game
-	private int state;
-	
+
 	ElementThread elementThread;
 
 	/**
@@ -32,29 +29,15 @@ public final class Controller implements IController {
 	public Controller(final IView view, final IModel model) {
 		this.setView(view);
 		this.setModel(model);
-		this.state = 1;
 
 		this.elementThread = new ElementThread(model, this);
 		Thread eThread = new Thread(this.elementThread);
 		eThread.start();
-		
+
 		Sound sound = new Sound();
 		sound.soundName = "LevelMusic";
 		Thread th = new Thread(sound);
 		th.start();
-	}
-
-	/**
-	 * Control.
-	 */
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IController#control()
-	 */
-	public void control() {
-		this.view.printMessage(
-				"Appuyer sur les touches 'E', 'F', 'D' ou 'I', pour afficher Hello world dans la langue d votre choix.");
 	}
 
 	/**
@@ -79,7 +62,7 @@ public final class Controller implements IController {
 	 * Order perform.
 	 *
 	 * @param controllerOrder the controller order
-	 * @throws InterruptedException 
+	 * @throws InterruptedException
 	 */
 	/*
 	 * (non-Javadoc)
@@ -87,31 +70,19 @@ public final class Controller implements IController {
 	 * @see contract.IController#orderPerform(contract.ControllerOrder)
 	 */
 	public void orderPerform(final ControllerOrder controllerOrder) {
-				
+
 		switch (controllerOrder) {
 		case UP:
-			if (this.state == 1) {
-				model.getMap().getPlayer().move(model.getMap().getPlayer().getX(),
-						model.getMap().getPlayer().getY() - 1);
-			}
+			model.getMap().getPlayer().move(model.getMap().getPlayer().getX(), model.getMap().getPlayer().getY() - 1);
 			break;
 		case DOWN:
-			if (this.state == 1) {
-				model.getMap().getPlayer().move(model.getMap().getPlayer().getX(),
-						model.getMap().getPlayer().getY() + 1);
-			}
+			model.getMap().getPlayer().move(model.getMap().getPlayer().getX(), model.getMap().getPlayer().getY() + 1);
 			break;
 		case LEFT:
-			if (this.state == 1) {
-				model.getMap().getPlayer().move(model.getMap().getPlayer().getX() - 1,
-						model.getMap().getPlayer().getY());
-			}
+			model.getMap().getPlayer().move(model.getMap().getPlayer().getX() - 1, model.getMap().getPlayer().getY());
 			break;
 		case RIGHT:
-			if (this.state == 1) {
-				model.getMap().getPlayer().move(model.getMap().getPlayer().getX() + 1,
-						model.getMap().getPlayer().getY());
-			}
+			model.getMap().getPlayer().move(model.getMap().getPlayer().getX() + 1, model.getMap().getPlayer().getY());
 			break;
 		case TEX1:
 			model.changeTexture(1);
@@ -141,17 +112,17 @@ public final class Controller implements IController {
 		}
 //		model.getMap().printConsole();
 		model.updateMap(model.getMap());
-		
+
 	}
 
 	@Override
 	public void setLevel(int level) {
 		this.model.setLevelId(level);
 	}
-	
+
 	public void returnToMenu() {
 		this.view.setCurrentFrame(1);
 		this.view.changeView();
 	}
-	
+
 }

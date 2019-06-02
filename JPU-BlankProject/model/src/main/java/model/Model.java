@@ -3,44 +3,45 @@ package model;
 import java.util.Observable;
 
 import model.IModel;
-import entity.HelloWorld;
 import model.bdd.BDDGetData;
-import model.elements.Air;
 
 /**
- * The Class Model.
+ * The Class Model
  *
- * @author Jean-Aymeric Diet
+ * @author Florian Rossi
+ * @author Baptiste Miquel
  */
 public final class Model extends Observable implements IModel {
 
-	/** The helloWorld. */
-	private HelloWorld helloWorld;
 	Map map;
 	BDDGetData bdd;
 	
+	AnimatedText animatedText;
+	
+	/** Current texture of the model */
+	Texture tex = new Texture();
+	
 	int levelId;
 
+	/**
+	 * Instantiates a new model
+	 * @throws Exception
+	 */
+	public Model() throws Exception {
+		this.setLevelId(levelId);
+		this.tex.getTexture(1);
+		this.map = new Map();
+		bdd = new BDDGetData();
+		bdd.loadLevel("1", map);
+		map.setModel(this);
+	}
+	
 	public int getLevelId() {
 		return levelId;
 	}
 
 	public void setLevelId(int levelId) {
 		this.levelId = levelId;
-	}
-
-	AnimatedText animatedText;
-	
-	Texture tex = new Texture();
-
-	public Model() throws Exception {
-		this.setLevelId(levelId);
-		this.tex.getTexture(1);
-		this.helloWorld = new HelloWorld();
-		this.map = new Map();
-		bdd = new BDDGetData();
-		bdd.loadLevel("1", map);
-		map.setModel(this);
 	}
 	
 	public void changeTexture(int id) {
@@ -54,10 +55,6 @@ public final class Model extends Observable implements IModel {
 	public void setAnimatedText(AnimatedText animatedText) {
 		this.animatedText = animatedText;
 	}
-	
-	public HelloWorld getHelloWorld() {
-		return this.helloWorld;
-	}
 
 	public void updateMap(Map map) {
 		this.getMap().setMapHasChanged(map.map);
@@ -65,12 +62,6 @@ public final class Model extends Observable implements IModel {
 
 	public Observable getObservable() {
 		return this;
-	}
-
-	@Override
-	public void loadHelloWorld(String code) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public Texture getInstanceTexture() {
@@ -82,7 +73,7 @@ public final class Model extends Observable implements IModel {
 		return this.map;
 	}
 
-	public void resetMap() {
+	public void resetMap() throws Exception {
 		tex.getTexture(tex.idTexture);
 		bdd.loadLevel(map.levelId, map);
 		map.setModel(this);
@@ -90,7 +81,7 @@ public final class Model extends Observable implements IModel {
 		map.levelEnded = false;
 	}
 	
-	public void loadMap(int idTexture, String mapId) {
+	public void loadMap(int idTexture, String mapId) throws Exception {
 		tex.getTexture(idTexture);
 		bdd.loadLevel(mapId, map);
 		map.setModel(this);

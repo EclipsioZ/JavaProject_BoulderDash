@@ -7,20 +7,20 @@ import java.util.UUID;
 import model.Map;
 
 public class Element {
-	
+
 	private ArrayList<Image> sprites;
 	private Map map;
 	private int x;
 	private int y;
-	
+
 	private int indexAnimation; // TODO: REMOVE
 	private int indexElementAnimation;
 	private int maxAnimations;
 
 	public UUID uuid;
-	
+
 	public String figure;
-	
+
 	public Boolean isAlive;
 
 	public int getX() {
@@ -39,6 +39,9 @@ public class Element {
 		this.y = y;
 	}
 
+	/**
+	 * Instantiates a new element
+	 */
 	Element() {
 		this.sprites = new ArrayList<Image>();
 		this.indexAnimation = 0;
@@ -47,7 +50,12 @@ public class Element {
 		this.isAlive = true;
 		this.maxAnimations = 4;
 	}
-	
+
+	/**
+	 * Instantiates a new element with a map
+	 * 
+	 * @param map The map
+	 */
 	Element(Map map) {
 		this.map = map;
 		this.sprites = new ArrayList<Image>();
@@ -57,7 +65,7 @@ public class Element {
 		this.isAlive = true;
 		this.maxAnimations = 4;
 	}
-	
+
 	public int getIndexAnimation() {
 		return indexAnimation;
 	}
@@ -65,6 +73,7 @@ public class Element {
 	public void setIndexAnimation(int indexAnimation) {
 		this.indexAnimation = indexAnimation;
 	}
+
 	public int getIndexElementAnimation() {
 		return indexElementAnimation;
 	}
@@ -74,16 +83,16 @@ public class Element {
 	}
 
 	public void move(int x, int y) {
-		if(this.canMove(x, y)) {
+		if (this.canMove(x, y)) {
 			map.setElementAt(this.getX(), this.getY(), new Air(map));
 			map.setElementAt(x, y, this);
 		}
 	}
-	
+
 	public Boolean handleCollision(Element element) {
 		return false;
 	}
-	
+
 	public Map getMap() {
 		return map;
 	}
@@ -103,21 +112,17 @@ public class Element {
 	public void setSprites(ArrayList<Image> sprites) {
 		this.sprites = sprites;
 	}
-	
-	public void pop() {
-		
-	}
-	
-	public void moveInLists() {
-		
-	}
 
 	public int getMaxAnimations() {
 		return this.maxAnimations;
 	}
-	
+
 	public void setMaxAnimations(int maxAnimations) {
 		this.maxAnimations = maxAnimations;
+	}
+
+	public void pop() {
+
 	}
 
 }

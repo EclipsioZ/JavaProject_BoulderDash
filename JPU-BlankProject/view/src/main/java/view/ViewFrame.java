@@ -10,25 +10,34 @@ import contract.IController;
 import model.IModel;
 
 /**
- * The Class ViewFrame.
+ * The Class ViewFrame
  *
- * @author Jean-Aymeric Diet
+ * @author Florian Rossi
+ * @author Baptiste Miquel
  */
 class ViewFrame extends JFrame implements KeyListener {
 
 	private IModel model;
-
 	private IController controller;
 	
+	/** Current time */
 	long lastShoot = System.currentTimeMillis();
+	
+	/** Time between each key press */
 	final long threshold = 80;
 
 	private static final long serialVersionUID = -697358409737458175L;
 
+	/**
+	 * Instantiates a new view frame
+	 * 
+	 * @param model The model
+	 * @param title The title of the window
+	 * @throws HeadlessException
+	 */
 	public ViewFrame(final IModel model, final String title) throws HeadlessException {
 		super(title);
 		this.setModel(model);
-//		this.buildViewFrame(model);
 	}
 
 	private IController getController() {
@@ -47,6 +56,9 @@ class ViewFrame extends JFrame implements KeyListener {
 		this.model = model;
 	}
 
+	/**
+	 * Build a view frame
+	 */
 	public void buildViewFrame() {
 		this.setModel(this.getModel());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,6 +92,12 @@ class ViewFrame extends JFrame implements KeyListener {
 		
 	}
 
+	/**
+	 * Send the key code to the controller
+	 * 
+	 * @param keyCode The key code
+	 * @throws InterruptedException
+	 */
 	public void applyOrderPerform(int keyCode) throws InterruptedException {
 		this.getController().orderPerform(View.keyCodeToControllerOrder(keyCode));
 	}

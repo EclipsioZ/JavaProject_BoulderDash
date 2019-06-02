@@ -13,4 +13,9 @@ public class Air extends Block implements ElementStrategy {
 		this.getMap().getAnimatedElements().add(this);
 	}
 
+	@Override
+	public void pop() {
+
+	}
+
 }

@@ -143,7 +143,11 @@ public class ElementThread implements Runnable {
 			} else {
 				map.resetAllElements();
 				map.running = true;
-				model.resetMap();
+				try {
+					model.resetMap();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
