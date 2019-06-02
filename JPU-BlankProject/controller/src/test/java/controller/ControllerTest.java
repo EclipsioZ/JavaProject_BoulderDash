@@ -9,6 +9,13 @@ import model.Model;
 import model.bdd.BDDGetData;
 import view.View;
 
+/**
+ * The test class for the controller
+ * 
+ * @author Florian Rossi
+ * @author Baptiste Miquel
+ *
+ */
 public class ControllerTest {
 	
 	private Model model;
@@ -16,6 +23,11 @@ public class ControllerTest {
 	private BDDGetData bddGetData;
 	private Controller controller;
 	
+	/**
+	 * Setting up a new map
+	 * 
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		this.model = new Model();
@@ -26,6 +38,9 @@ public class ControllerTest {
 	}
 
 
+	/**
+	 * When the key down is pressed
+	 */
 	@Test
 	public void testOrderPerformDown() {
 		int playerPrevPosY = this.model.getMap().getPlayer().getY();
@@ -35,6 +50,9 @@ public class ControllerTest {
 		Assert.assertEquals(playerPrevPosY, playerNewPosY - 1);
 	}
 	
+	/**
+	 * When the key up is pressed
+	 */
 	@Test
 	public void testOrderPerformUp() {
 		int playerPrevPosY = this.model.getMap().getPlayer().getY();
@@ -44,6 +62,9 @@ public class ControllerTest {
 		Assert.assertEquals(playerPrevPosY, playerNewPosY + 1);
 	}
 	
+	/**
+	 * When all the keys are pressed
+	 */
 	@Test
 	public void testOrderPerformMultipleMovement() {
 		int playerPrevPosX = this.model.getMap().getPlayer().getX();
