@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import contract.ControllerOrder;
 import model.Model;
-import model.bdd.BDDGetData;
+import model.db.DBGetData;
 import view.View;
 
 /**
@@ -20,7 +20,7 @@ public class ControllerTest {
 	
 	private Model model;
 	private View view;
-	private BDDGetData bddGetData;
+	private DBGetData bddGetData;
 	private Controller controller;
 	
 	/**
@@ -33,7 +33,7 @@ public class ControllerTest {
 		this.model = new Model();
 		this.view = new View(this.model);
 		this.controller = new Controller(view, model);
-		this.bddGetData = new BDDGetData();
+		this.bddGetData = new DBGetData();
 		this.bddGetData.loadLevel("1", this.model.getMap());
 	}
 

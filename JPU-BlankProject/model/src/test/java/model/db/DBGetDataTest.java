@@ -1,19 +1,32 @@
-package model.bdd;
+package model.db;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import model.Map;
+import model.db.DBGetData;
 
-public class BDDGetDataTest {
+/**
+ * The test class for the database
+ * 
+ * @author Florian Rossi
+ * @author Baptiste Miquel
+ *
+ */
+class DBGetDataTest {
 
 	private Map map;
-	private BDDGetData bddGetData;
+	private DBGetData bddGetData;
 
+	/**
+	 * Setting up a new map
+	 * 
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		this.map = new Map();
-		this.bddGetData = new BDDGetData();
+		this.bddGetData = new DBGetData();
 	}
 
 	/**

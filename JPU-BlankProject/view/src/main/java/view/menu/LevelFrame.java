@@ -9,7 +9,7 @@ import java.net.URISyntaxException;
 
 import javax.swing.JFrame;
 
-import model.bdd.BDDGetData;
+import model.db.DBGetData;
 
 public class LevelFrame {
 
@@ -87,7 +87,7 @@ public class LevelFrame {
 	}
 
 	public String getLevelName(int id) {
-		BDDGetData bdd = new BDDGetData();
+		DBGetData bdd = new DBGetData();
 		return bdd.getMapNameFromId(id);
 	}
 	

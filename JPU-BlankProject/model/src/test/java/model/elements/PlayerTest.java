@@ -5,9 +5,18 @@ import org.junit.Test;
 
 import model.Map;
 
+/**
+ * The test class for the player
+ * 
+ * @author Florian Rossi
+ * @author Baptiste Miquel
+ *
+ */
 public class PlayerTest {
 
-	// These tests will check every possible collisions for the player and his ability to move
+	/**
+	 * Check every possible collisions for the player and his ability to move
+	 */
 	@Test
 	public void testCanMove() {
 		Map map = new Map();
@@ -62,6 +71,9 @@ public class PlayerTest {
 		
 	}
 	
+	/**
+	 * Check player movement
+	 */
 	@Test
 	public void testMove() {
 		Map map = new Map();
@@ -90,6 +102,9 @@ public class PlayerTest {
 		
 	}
 	
+	/**
+	 * Check collision with rocks
+	 */
 	@Test
 	public void testMoveWithRocks() {
 		Map map = new Map();

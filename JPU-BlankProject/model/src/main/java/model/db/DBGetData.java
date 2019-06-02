@@ -1,4 +1,4 @@
-package model.bdd;
+package model.db;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -7,26 +7,26 @@ import java.sql.SQLException;
 import model.Map;
 
 /**
- * The Class BDDGetData
+ * The Class DBGetData
  *
  * @author Florian Rossi
  * @author Baptiste Miquel
  */
-public class BDDGetData {
+public class DBGetData {
 
-	private BDDConnector bddConnector;
+	private DBConnector bddConnector;
 	CallableStatement state;
 
 	/**
 	 * Instantiates a new BDDGetData
 	 */
-	public BDDGetData() {
-		this.bddConnector = new BDDConnector();
-		this.bddConnector.openBDD();
+	public DBGetData() {
+		this.bddConnector = new DBConnector();
+		this.bddConnector.openDB();
 	}
 
 	/**
-	 * Load a level from databse
+	 * Load a level from database
 	 * 
 	 * @param id  The id of the level
 	 * @param map The map that will load the content of the database

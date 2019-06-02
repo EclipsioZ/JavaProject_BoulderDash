@@ -25,26 +25,43 @@ import model.elements.Wall;
  * @author Baptiste Miquel
  */
 public class Map extends Observable {
-	
+
 	IModel model;
 
 	/** 2D Array corresponding the map */
 	public Element[][] map;
-	
+
 	public List<PhysicElement> physicElements;
 	public List<Element> animatedElements;
 	public List<Mob> mobs;
-	
+
 	public String levelId;
-	
+
 	/** State of the map */
 	public Boolean running;
-	
-	/**
-	 * Timer in ms
-	 */
+
+	/** Timer in ms */
 	private int timer;
 
+	/** Size of the map */
+	private int height;
+	private int width;
+
+	/** Position of the end block */
+	private int[] endblock;
+
+	/** The player element */
+	Player player;
+
+	/** Amount of diamonds required to finish the map */
+	private int requiredDiamonds;
+
+	/** Is the level ended */
+	public Boolean levelEnded;
+
+	/**
+	 * Instantiates a new map
+	 */
 	public Map() {
 		this.physicElements = Collections.synchronizedList(new ArrayList<PhysicElement>());
 		this.animatedElements = Collections.synchronizedList(new ArrayList<Element>());
@@ -53,7 +70,7 @@ public class Map extends Observable {
 		this.levelEnded = false;
 		this.timer = 120000;
 	}
-	
+
 	public int getTimer() {
 		return timer;
 	}
@@ -61,9 +78,6 @@ public class Map extends Observable {
 	public void setTimer(int timer) {
 		this.timer = timer;
 	}
-
-	// Size of the map
-	private int height;
 
 	public List<PhysicElement> getPhysicElements() {
 		return physicElements;
@@ -76,18 +90,6 @@ public class Map extends Observable {
 	public List<Mob> getMobs() {
 		return mobs;
 	}
-
-	private int width;
-
-	// Position of the end block
-	private int[] endblock;
-
-	// The player element
-	Player player;
-
-	private int requiredDiamonds;
-
-	public Boolean levelEnded;
 
 	public void map(Element[][] existingMap) {
 		this.height = 0;
@@ -102,6 +104,11 @@ public class Map extends Observable {
 		this.player = player;
 	}
 
+	/**
+	 * Create a new map from given content
+	 * 
+	 * @param Contents The content of the map read from the database
+	 */
 	public void setMapFromString(String Contents) {
 
 		// Setting size of the map
@@ -118,7 +125,6 @@ public class Map extends Observable {
 				int element = Character.getNumericValue(lineTable.toCharArray()[x]);
 
 				// Convert char to element
-				// TODO: factory: map[x][y] = Factory.createElement("air");
 				switch (element) {
 				case 0:
 					this.setElementAt(x, y, new Air(this));
@@ -156,6 +162,7 @@ public class Map extends Observable {
 			y++;
 		}
 
+		// Add the map object to elements
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
 				map[i][j].setMap(this);
@@ -166,11 +173,6 @@ public class Map extends Observable {
 
 	public Player getPlayer() {
 		return player;
-	}
-
-	private void setMap(Element[][] map) {
-		this.map = map;
-
 	}
 
 	public Element[][] getMap() {
@@ -201,6 +203,13 @@ public class Map extends Observable {
 		this.endblock = endblock;
 	}
 
+	/**
+	 * Get the element at given position
+	 * 
+	 * @param x The x coordinate
+	 * @param y The y coordinate
+	 * @return The element
+	 */
 	public Element getElementAt(int x, int y) {
 		// If the asked position is in the map
 		if (x >= 0 && x < this.width && y >= 0 && y < this.height) {
@@ -209,25 +218,35 @@ public class Map extends Observable {
 		return null;
 	}
 
+	/**
+	 * Set an element at at given position
+	 * 
+	 * @param x       The x coordinate
+	 * @param y       The y coordinate
+	 * @param element The element
+	 */
 	public void setElementAt(int x, int y, Element element) {
 		// If the asked position is in the map
 		if (x >= 0 && x <= this.width && y >= 0 && y <= this.height) {
-//			Element elementAt = this.getElementAt(x, y);
-//			if(elementAt != null) {
-//				elementAt.pop();
-//			}
 			element.setX(x);
 			element.setY(y);
 			element.setMap(this);
 			map[x][y] = element;
 		}
 	}
-	
+
+	/**
+	 * Check if the element exists in the map
+	 * 
+	 * @param element The element
+	 * @return True if the element is in the map, false if not
+	 */
 	public Boolean isInTheMap(Element element) {
 		Boolean ret = false;
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
-				if(map[i][j].uuid == element.uuid && map[i][j].getX() == element.getX() && map[i][j].getY() == element.getY()) {
+				if (map[i][j].uuid == element.uuid && map[i][j].getX() == element.getX()
+						&& map[i][j].getY() == element.getY()) {
 					ret = true;
 				}
 			}
@@ -235,6 +254,9 @@ public class Map extends Observable {
 		return ret;
 	}
 
+	/**
+	 * Print the map into the console
+	 */
 	public void printConsole() {
 		for (int i = 0; i < this.height; i++) {
 			for (int j = 0; j < this.width; j++) {
@@ -244,6 +266,11 @@ public class Map extends Observable {
 		}
 	}
 
+	/**
+	 * Notify observers when map has changed
+	 * 
+	 * @param map The map (array)
+	 */
 	public final void setMapHasChanged(Element[][] map) {
 		this.map = map;
 		this.setChanged();
@@ -261,7 +288,10 @@ public class Map extends Observable {
 	public IModel getModel() {
 		return model;
 	}
-	
+
+	/**
+	 * Remove all the elements in the map
+	 */
 	public void resetAllElements() {
 		this.getPhysicElements().clear();
 		this.getMobs().clear();
@@ -274,11 +304,16 @@ public class Map extends Observable {
 		}
 	}
 
+	/**
+	 * Set the required amount of diamonds. Must be between 0 and 100
+	 * 
+	 * @param reqDiamonds The number of diamonds
+	 */
 	public void setRequiredDiamonds(int reqDiamonds) {
-		if(reqDiamonds < 0) {
+		if (reqDiamonds < 0) {
 			reqDiamonds = 0;
 		}
-		if(reqDiamonds > 100) {
+		if (reqDiamonds > 100) {
 			reqDiamonds = 100;
 		}
 		this.requiredDiamonds = reqDiamonds;

@@ -3,7 +3,7 @@ package model;
 import java.util.Observable;
 
 import model.IModel;
-import model.bdd.BDDGetData;
+import model.db.DBGetData;
 
 /**
  * The Class Model
@@ -14,7 +14,7 @@ import model.bdd.BDDGetData;
 public final class Model extends Observable implements IModel {
 
 	Map map;
-	BDDGetData bdd;
+	DBGetData bdd;
 	
 	AnimatedText animatedText;
 	
@@ -31,7 +31,7 @@ public final class Model extends Observable implements IModel {
 		this.setLevelId(levelId);
 		this.tex.getTexture(1);
 		this.map = new Map();
-		bdd = new BDDGetData();
+		bdd = new DBGetData();
 		bdd.loadLevel("1", map);
 		map.setModel(this);
 	}

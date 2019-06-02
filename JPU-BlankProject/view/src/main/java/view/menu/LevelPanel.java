@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import model.Texture;
-import model.bdd.BDDGetData;
+import model.db.DBGetData;
 import model.elements.Element;
 
 public class LevelPanel extends JPanel{

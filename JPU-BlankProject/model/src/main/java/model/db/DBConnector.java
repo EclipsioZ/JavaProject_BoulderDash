@@ -1,14 +1,14 @@
-package model.bdd;
+package model.db;
 
 import java.sql.*;
 
 /**
- * The Class BDDConnector
+ * The Class DBConnector
  *
  * @author Florian Rossi
  * @author Baptiste Miquel
  */
-public class BDDConnector {
+public class DBConnector {
 
 	/**
 	 * Database configuration
@@ -20,18 +20,18 @@ public class BDDConnector {
 	private static String PASSWORD = "";
 
 	/** The unique instance of BDDConnector */
-	static BDDConnector INSTANCE;
+	static DBConnector INSTANCE;
 
 	private Connection connection;
 
 	/**
-	 * Singleton BDDConnector
+	 * Singleton DBConnector
 	 * 
 	 * @return The instance of the BDDConnector
 	 */
-	public BDDConnector getInstance() {
+	public DBConnector getInstance() {
 		if (INSTANCE != null) {
-			INSTANCE = new BDDConnector();
+			INSTANCE = new DBConnector();
 		}
 		return INSTANCE;
 	}
@@ -39,7 +39,7 @@ public class BDDConnector {
 	/**
 	 * Open database with given parameters
 	 */
-	public void openBDD() {
+	public void openDB() {
 		try {
 			connection = DriverManager.getConnection(URL, USER, PASSWORD);
 			System.out.println("Successfully connected to database " + BDDNAME);
