@@ -42,7 +42,7 @@ public class DBConnector {
 	public void openDB() {
 		try {
 			connection = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Successfully connected to database " + BDDNAME);
+//			System.out.println("Successfully connected to database " + BDDNAME);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

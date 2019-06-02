@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.Map;
-import model.db.DBGetData;
 
 /**
  * The test class for the database
@@ -13,7 +12,7 @@ import model.db.DBGetData;
  * @author Baptiste Miquel
  *
  */
-class DBGetDataTest {
+public class DBGetDataTest2 {
 
 	private Map map;
 	private DBGetData bddGetData;
@@ -38,5 +37,4 @@ class DBGetDataTest {
 	public void testApplyToMap() throws Exception {
 		this.bddGetData.loadLevel("0", this.map);
 	}
-
 }
