@@ -13,7 +13,6 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
-import model.Animation;
 import model.IModel;
 import model.Map;
 import model.Texture;
@@ -32,16 +31,10 @@ import model.elements.Wall;
 public class GraphicBuilder {
 
 	private Map map;
-	private Animation animation;
 	private IModel model;
 	private int camX;
 	private int camY;
 	private int spriteSize;
-
-	// TODO: Remove ?
-	public void setAnimation(Animation animation) {
-		this.animation = animation;
-	}
 
 	/**
 	 * Get the map element
@@ -247,25 +240,6 @@ public class GraphicBuilder {
 				camY + 48);
 	}
 
-	// TODO: Remove ?
-	public void loadAnimation() {
-		for (int y = 0; y < map.getHeight(); y++) {
-			for (int x = 0; x < map.getWidth(); x++) {
-				Element element = map.getElementAt(x, y);
-				if (element instanceof Rock) {
-					for (int j = 0; j < Texture.rock.length; j++) {
-						element.getSprites().add(Texture.rock[j]);
-					}
-				}
-				if (element instanceof Diamond) {
-					for (int j = 0; j < Texture.diamond.length; j++) {
-						element.getSprites().add(Texture.diamond[j]);
-					}
-				}
-			}
-		}
-	}
-
 	/**
 	 * Move the camera
 	 * 
@@ -314,30 +288,4 @@ public class GraphicBuilder {
 		return cam;
 	}
 
-	// TODO: Remove ?
-	public void graphicsAnimation(Graphics graphics) {
-
-		loadAnimation();
-//		while(true) {
-
-		int a = 0;
-
-		for (int y = 0; y < map.getHeight(); y++) {
-			for (int x = 0; x < map.getWidth(); x++) {
-
-				Element element = map.getElementAt(x, y);
-				if (element instanceof Rock) {
-					graphics.drawImage(Texture.background[0], x * 80, y * 80, 80, 80, null);
-					// Texture for Rock
-					graphics.drawImage(element.getSprites().get(a), x * 80, y * 80, 80, 80, null);
-
-				}
-			}
-		}
-		a++;
-		if (a > Texture.rock.length) {
-			a = 0;
-		}
-	}
-//	}
 }

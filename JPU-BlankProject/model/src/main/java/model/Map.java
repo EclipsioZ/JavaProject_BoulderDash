@@ -18,16 +18,26 @@ import model.elements.Player;
 import model.elements.Rock;
 import model.elements.Wall;
 
+/**
+ * The Class Map
+ *
+ * @author Florian Rossi
+ * @author Baptiste Miquel
+ */
 public class Map extends Observable {
 	
 	IModel model;
 
+	/** 2D Array corresponding the map */
 	public Element[][] map;
+	
 	public List<PhysicElement> physicElements;
 	public List<Element> animatedElements;
 	public List<Mob> mobs;
 	
 	public String levelId;
+	
+	/** State of the map */
 	public Boolean running;
 	
 	/**
