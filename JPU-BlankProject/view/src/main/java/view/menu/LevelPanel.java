@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
-import java.awt.Toolkit;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -14,15 +13,14 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import model.Texture;
-import model.db.DBGetData;
-import model.elements.Element;
+
 /**
  * The Class LevelPanel
  *
  * @author Florian Rossi
  * @author Baptiste Miquel
  */
-public class LevelPanel extends JPanel{
+public class LevelPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	Image image;
@@ -43,8 +41,6 @@ public class LevelPanel extends JPanel{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-//		this.image = Toolkit.getDefaultToolkit()
-//				.createImage(getClass().getClassLoader().getResource("MapLevel.png").getFile());
 		this.levelName = "";
 	}
 	/**

@@ -2,6 +2,7 @@ package controller;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import contract.ControllerOrder;
@@ -22,6 +23,14 @@ public class ControllerTest {
 	private View view;
 	private DBGetData bddGetData;
 	private Controller controller;
+	
+	/**
+	 * Alert that the test will be executed
+	 */
+	@BeforeClass
+	public static void setUpBeforeClass() {
+		System.out.println("Testing the controller");
+	}
 	
 	/**
 	 * Setting up a new map
