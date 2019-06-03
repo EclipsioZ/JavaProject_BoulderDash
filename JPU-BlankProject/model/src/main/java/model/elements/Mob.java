@@ -114,6 +114,7 @@ public abstract class Mob extends Element implements ElementStrategy {
 	@Override
 	public Boolean handleCollision(Element element) {
 		if (element instanceof PhysicElement) {
+			this.getMap().getPlayer().getSound().changeSound("Explode");
 			this.explode();
 		}
 		return true;

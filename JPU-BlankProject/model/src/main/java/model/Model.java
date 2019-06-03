@@ -4,6 +4,7 @@ import java.util.Observable;
 
 import model.IModel;
 import model.db.DBGetData;
+import model.elements.SoundEffect;
 
 /**
  * The Class Model

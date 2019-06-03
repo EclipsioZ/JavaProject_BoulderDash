@@ -26,7 +26,6 @@ public class LevelPanel extends JPanel {
 	Image image;
 	int level = 2;	
 	int[][] coordlevel;
-	int i;
 	private String levelName;
 	
 	/**

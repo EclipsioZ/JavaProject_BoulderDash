@@ -69,15 +69,23 @@ public final class Controller implements IController {
 		switch (controllerOrder) {
 		case UP:
 			model.getMap().getPlayer().move(model.getMap().getPlayer().getX(), model.getMap().getPlayer().getY() - 1);
+			model.getMap().getPlayer().setDirection("UP");
+			model.getMap().getPlayer().setMaxAnimations(3);
 			break;
 		case DOWN:
 			model.getMap().getPlayer().move(model.getMap().getPlayer().getX(), model.getMap().getPlayer().getY() + 1);
+			model.getMap().getPlayer().setDirection("DOWN");
+			model.getMap().getPlayer().setMaxAnimations(3);
 			break;
 		case LEFT:
 			model.getMap().getPlayer().move(model.getMap().getPlayer().getX() - 1, model.getMap().getPlayer().getY());
+			model.getMap().getPlayer().setDirection("LEFT");
+			model.getMap().getPlayer().setMaxAnimations(3);
 			break;
 		case RIGHT:
 			model.getMap().getPlayer().move(model.getMap().getPlayer().getX() + 1, model.getMap().getPlayer().getY());
+			model.getMap().getPlayer().setDirection("RIGHT");
+			model.getMap().getPlayer().setMaxAnimations(3);
 			break;
 		case TEX1:
 			model.changeTexture(1);

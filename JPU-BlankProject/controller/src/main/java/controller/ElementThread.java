@@ -15,6 +15,7 @@ import model.elements.Explode;
 import model.elements.Mob;
 import model.elements.PhysicElement;
 import model.elements.Player;
+import model.elements.SoundEffect;
 
 /**
  * The Class ElementThread
@@ -142,6 +143,16 @@ public class ElementThread implements Runnable {
 					this.updateTimer();
 					this.checkReturnToMenu();
 
+					if (map.getPlayer().restIndex >= 1) {
+						map.getPlayer().restIndex += 1;
+					}
+					
+					if (map.getPlayer().restIndex > 3) {
+						map.getPlayer().restIndex = 0;
+						model.getMap().getPlayer().setMaxAnimations(2);
+						map.getPlayer().setDirection("REST");
+					}
+
 					// Update the map
 					map.setMapHasChanged(this.map.getMap());
 
@@ -160,6 +171,8 @@ public class ElementThread implements Runnable {
 	 */
 	private void checkLastDiamond() {
 		if (map.getPlayer().getDiamonds() >= map.getRequiredDiamonds() && !map.levelEnded) {
+			SoundEffect sound = new SoundEffect();
+			map.getPlayer().getSound().setSoundName("DiamondReach");
 			map.levelEnded = true;
 			map.setElementAt(map.getPosEndblock()[0], map.getPosEndblock()[1], new EndBlock(map));
 			model.setAnimatedText(new AnimatedText());

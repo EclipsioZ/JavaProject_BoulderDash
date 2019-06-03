@@ -11,12 +11,12 @@ import javax.swing.JFrame;
 
 import model.db.DBGetData;
 /**
- * The Class LevelFrame
+ * The Class L
  *
  * @author Florian Rossi
  * @author Baptiste Miquel
  */
-public class LevelFrame {
+public class LevelFrame extends JFrame{
 
 	private MenuFrame menuframe;
 	MenuFrame menuframe2 = new MenuFrame();

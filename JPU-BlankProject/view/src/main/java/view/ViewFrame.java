@@ -89,7 +89,8 @@ class ViewFrame extends JFrame implements KeyListener {
 	}
 
 	public void keyReleased(final KeyEvent e) {
-		
+//		model.getMap().getPlayer().setMaxAnimations(0);
+		getModel().getMap().getPlayer().restIndex = 1;
 	}
 
 	/**

@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import view.IView;
 import view.View;
 /**
- * The Class MenuFrame
+ * The Class MenuFrameM
  *
  * @author Florian Rossi
  * @author Baptiste Miquel

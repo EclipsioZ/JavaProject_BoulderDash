@@ -103,12 +103,47 @@ public class GraphicBuilder {
 				Element element = map.getElementAt(x, y);
 
 				if (element instanceof Player) {
-					// Background
-					graphics.drawImage(Texture.background[element.getIndexElementAnimation()], x * spriteSize,
-							y * spriteSize, spriteSize, spriteSize, null);
-					// Texture for Player
-					graphics.drawImage(Texture.playerrest[element.getIndexElementAnimation()], x * spriteSize,
-							y * spriteSize, spriteSize, spriteSize, null);
+					
+					if(getMap().getPlayer().getDirection() == "REST") {
+						// Background
+						graphics.drawImage(Texture.background[element.getIndexElementAnimation()], x * spriteSize,
+								y * spriteSize, spriteSize, spriteSize, null);
+						// Texture for Player
+						graphics.drawImage(Texture.playerrest[element.getIndexElementAnimation()%2], x * spriteSize,
+								y * spriteSize, spriteSize, spriteSize, null);
+					}
+					else if(getMap().getPlayer().getDirection() == "UP") {
+						// Background
+						graphics.drawImage(Texture.background[element.getIndexElementAnimation()], x * spriteSize,
+								y * spriteSize, spriteSize, spriteSize, null);
+						// Texture for Player
+						graphics.drawImage(Texture.playerup[element.getIndexElementAnimation()], x * spriteSize,
+								y * spriteSize, spriteSize, spriteSize, null);
+					}
+					else if(getMap().getPlayer().getDirection() == "DOWN") {
+						// Background
+						graphics.drawImage(Texture.background[element.getIndexElementAnimation()], x * spriteSize,
+								y * spriteSize, spriteSize, spriteSize, null);
+						// Texture for Player
+						graphics.drawImage(Texture.playerlowers[element.getIndexElementAnimation()], x * spriteSize,
+								y * spriteSize, spriteSize, spriteSize, null);
+					}
+					else if(getMap().getPlayer().getDirection() == "LEFT") {
+						// Background
+						graphics.drawImage(Texture.background[element.getIndexElementAnimation()], x * spriteSize,
+								y * spriteSize, spriteSize, spriteSize, null);
+						// Texture for Player
+						graphics.drawImage(Texture.playerleft[element.getIndexElementAnimation()], x * spriteSize,
+								y * spriteSize, spriteSize, spriteSize, null);
+					}
+					else if(getMap().getPlayer().getDirection() == "RIGHT") {
+						// Background
+						graphics.drawImage(Texture.background[element.getIndexElementAnimation()], x * spriteSize,
+								y * spriteSize, spriteSize, spriteSize, null);
+						// Texture for Player
+						graphics.drawImage(Texture.playerright[element.getIndexElementAnimation()], x * spriteSize,
+								y * spriteSize, spriteSize, spriteSize, null);
+					}
 				}
 
 				if (element instanceof Rock) {
