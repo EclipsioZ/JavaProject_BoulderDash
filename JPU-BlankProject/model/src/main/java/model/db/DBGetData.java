@@ -14,15 +14,15 @@ import model.Map;
  */
 public class DBGetData {
 
-	private DBConnector bddConnector;
+	private DBConnector dbConnector;
 	CallableStatement state;
 
 	/**
 	 * Instantiates a new BDDGetData
 	 */
 	public DBGetData() {
-		this.bddConnector = new DBConnector();
-		this.bddConnector.openDB();
+		this.dbConnector = new DBConnector();
+		this.dbConnector.openDB();
 	}
 
 	/**
@@ -35,7 +35,7 @@ public class DBGetData {
 	public void loadLevel(String id, Map map) throws Exception {
 		try {
 			/** Call the procedure */
-			CallableStatement state = bddConnector.getConnection().prepareCall("{call GET_MAP_FROM_ID(?)}");
+			CallableStatement state = dbConnector.getConnection().prepareCall("{call GET_MAP_FROM_ID(?)}");
 
 			/** Set argument for the procedure */
 			state.setString(1, id);
@@ -93,7 +93,7 @@ public class DBGetData {
 		try {
 			String id = Integer.toString(idInt);
 
-			CallableStatement state = bddConnector.getConnection().prepareCall("{call GET_MAP_FROM_ID(?)}");
+			CallableStatement state = dbConnector.getConnection().prepareCall("{call GET_MAP_FROM_ID(?)}");
 
 			state.setString(1, id);
 			state.execute();
