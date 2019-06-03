@@ -88,5 +88,4 @@ public class ControllerTest {
 		Assert.assertEquals(true, playerPrevPosX == playerNewPosX);
 		Assert.assertEquals(true, playerPrevPosY == playerNewPosY);
 	}
-
 }
